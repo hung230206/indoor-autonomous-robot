@@ -1,0 +1,14 @@
+{
+  "scenario": "corridor",
+  "mode": "kinematic_2d",
+  "expected": "GOAL_REACHED",
+  "state": "GOAL_REACHED",
+  "passed": true,
+  "time_s": 21.568,
+  "distance_m": 2.2569,
+  "plans": 1,
+  "collision": false,
+  "inflated_grid_violation": false,
+  "goal_error_m": 0.04309095155340126,
+  "max_planning_ms": 0.17840000145952217
+}

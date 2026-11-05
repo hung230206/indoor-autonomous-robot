@@ -1,0 +1,97 @@
+[
+  {
+    "time_s": 0,
+    "state": "LOCALIZING",
+    "reason": "start"
+  },
+  {
+    "time_s": 0.0,
+    "state": "PLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 0.0,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 2.0480000000000014,
+    "state": "OBSTACLE_STOP",
+    "reason": "path_blocked"
+  },
+  {
+    "time_s": 2.0800000000000014,
+    "state": "REPLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 2.0800000000000014,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 2.2080000000000015,
+    "state": "OBSTACLE_STOP",
+    "reason": "path_blocked"
+  },
+  {
+    "time_s": 2.2400000000000015,
+    "state": "REPLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 2.2400000000000015,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 2.912000000000002,
+    "state": "OBSTACLE_STOP",
+    "reason": "path_blocked"
+  },
+  {
+    "time_s": 2.944000000000002,
+    "state": "REPLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 2.944000000000002,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 7.744000000000006,
+    "state": "OBSTACLE_STOP",
+    "reason": "path_blocked"
+  },
+  {
+    "time_s": 7.776000000000006,
+    "state": "REPLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 7.776000000000006,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 8.448000000000006,
+    "state": "OBSTACLE_STOP",
+    "reason": "path_blocked"
+  },
+  {
+    "time_s": 8.480000000000006,
+    "state": "REPLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 8.480000000000006,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 31.968000000000025,
+    "state": "GOAL_REACHED",
+    "reason": "goal_tolerance"
+  }
+]

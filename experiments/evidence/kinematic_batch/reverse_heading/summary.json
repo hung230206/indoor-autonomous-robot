@@ -1,0 +1,14 @@
+{
+  "scenario": "reverse_heading",
+  "mode": "kinematic_2d",
+  "expected": "GOAL_REACHED",
+  "state": "GOAL_REACHED",
+  "passed": true,
+  "time_s": 28.96,
+  "distance_m": 2.8385,
+  "plans": 1,
+  "collision": false,
+  "inflated_grid_violation": false,
+  "goal_error_m": 0.04349835087968782,
+  "max_planning_ms": 0.7881999990786426
+}

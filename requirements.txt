@@ -1,0 +1,4 @@
+# Only needed for the 2D viewer and PNG/GIF export. Core and Webots use stdlib.
+matplotlib>=3.8
+Pillow>=10
+imageio-ffmpeg>=0.6

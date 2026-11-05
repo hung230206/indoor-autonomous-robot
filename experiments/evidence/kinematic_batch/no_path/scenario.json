@@ -1,0 +1,22 @@
+{
+  "name": "no_path",
+  "description": "Known wall completely splits map",
+  "start": [
+    0.35,
+    1.05,
+    0
+  ],
+  "goal": [
+    2.65,
+    1.05
+  ],
+  "obstacles": [
+    [
+      1.3,
+      0,
+      1.5,
+      2.0
+    ]
+  ],
+  "expected": "NO_PATH"
+}

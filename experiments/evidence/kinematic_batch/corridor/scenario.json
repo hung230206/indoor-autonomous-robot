@@ -1,0 +1,28 @@
+{
+  "name": "corridor",
+  "description": "Pass through a known wide doorway",
+  "start": [
+    0.35,
+    1.05,
+    0
+  ],
+  "goal": [
+    2.65,
+    1.05
+  ],
+  "obstacles": [
+    [
+      1.3,
+      0,
+      1.5,
+      0.6
+    ],
+    [
+      1.3,
+      1.5,
+      1.5,
+      2.0
+    ]
+  ],
+  "expected": "GOAL_REACHED"
+}

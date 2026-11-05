@@ -1,0 +1,14 @@
+{
+  "scenario": "s_curve",
+  "mode": "kinematic_2d",
+  "expected": "GOAL_REACHED",
+  "state": "GOAL_REACHED",
+  "passed": true,
+  "time_s": 40.576,
+  "distance_m": 4.0496,
+  "plans": 2,
+  "collision": false,
+  "inflated_grid_violation": false,
+  "goal_error_m": 0.043561354565181405,
+  "max_planning_ms": 0.9754999991855584
+}

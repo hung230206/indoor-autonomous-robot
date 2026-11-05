@@ -1,0 +1,22 @@
+{
+  "name": "box",
+  "description": "Route around a known central box",
+  "start": [
+    0.35,
+    1.05,
+    0
+  ],
+  "goal": [
+    2.65,
+    1.05
+  ],
+  "obstacles": [
+    [
+      1.25,
+      0.65,
+      1.65,
+      1.35
+    ]
+  ],
+  "expected": "GOAL_REACHED"
+}

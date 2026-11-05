@@ -1,0 +1,14 @@
+{
+  "scenario": "legs",
+  "mode": "kinematic_2d",
+  "expected": "GOAL_REACHED",
+  "state": "GOAL_REACHED",
+  "passed": true,
+  "time_s": 25.92,
+  "distance_m": 2.7896,
+  "plans": 1,
+  "collision": false,
+  "inflated_grid_violation": false,
+  "goal_error_m": 0.04349841425389626,
+  "max_planning_ms": 0.4917999995086575
+}

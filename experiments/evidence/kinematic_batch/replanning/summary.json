@@ -1,0 +1,14 @@
+{
+  "scenario": "replanning",
+  "mode": "kinematic_2d",
+  "expected": "GOAL_REACHED",
+  "state": "GOAL_REACHED",
+  "passed": true,
+  "time_s": 28.928,
+  "distance_m": 2.6764,
+  "plans": 4,
+  "collision": false,
+  "inflated_grid_violation": false,
+  "goal_error_m": 0.043500579079404016,
+  "max_planning_ms": 0.8077000002231216
+}

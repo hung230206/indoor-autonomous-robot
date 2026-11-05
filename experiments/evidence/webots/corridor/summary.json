@@ -1,0 +1,15 @@
+{
+  "scenario": "corridor",
+  "mode": "webots",
+  "expected": "GOAL_REACHED",
+  "state": "GOAL_REACHED",
+  "passed": true,
+  "time_s": 21.568,
+  "distance_m": 2.2568734604081855,
+  "plans": 1,
+  "collision": false,
+  "inflated_grid_violation": false,
+  "goal_error_m": 0.04308873491559595,
+  "max_planning_ms": 0.21070000002509914,
+  "webots_version": "R2025a"
+}

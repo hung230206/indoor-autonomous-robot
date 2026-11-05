@@ -1,0 +1,15 @@
+{
+  "scenario": "s_curve",
+  "mode": "webots",
+  "expected": "GOAL_REACHED",
+  "state": "GOAL_REACHED",
+  "passed": true,
+  "time_s": 41.12,
+  "distance_m": 4.05400928518458,
+  "plans": 2,
+  "collision": false,
+  "inflated_grid_violation": false,
+  "goal_error_m": 0.043539477169969566,
+  "max_planning_ms": 1.0566999990260229,
+  "webots_version": "R2025a"
+}

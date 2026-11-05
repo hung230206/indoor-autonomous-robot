@@ -1,0 +1,2 @@
+scenario,mode,expected,state,passed,time_s,distance_m,plans,collision,inflated_grid_violation,goal_error_m,max_planning_ms,webots_version
+replanning,webots,GOAL_REACHED,GOAL_REACHED,True,30.112000000000002,2.743239122537896,4,False,False,0.04349794633674169,2.349000000322121,R2025a

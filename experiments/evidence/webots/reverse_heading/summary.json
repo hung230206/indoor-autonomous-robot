@@ -1,0 +1,15 @@
+{
+  "scenario": "reverse_heading",
+  "mode": "webots",
+  "expected": "GOAL_REACHED",
+  "state": "GOAL_REACHED",
+  "passed": true,
+  "time_s": 28.928,
+  "distance_m": 2.8433300108745416,
+  "plans": 1,
+  "collision": false,
+  "inflated_grid_violation": false,
+  "goal_error_m": 0.04349575621004381,
+  "max_planning_ms": 0.8576999989600154,
+  "webots_version": "R2025a"
+}

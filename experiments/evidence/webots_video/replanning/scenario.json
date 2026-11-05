@@ -1,0 +1,27 @@
+{
+  "name": "replanning",
+  "description": "Unknown box appears on the initial route after 3 s",
+  "start": [
+    0.35,
+    1.05,
+    0
+  ],
+  "goal": [
+    2.65,
+    1.05
+  ],
+  "obstacles": [],
+  "spawn": [
+    {
+      "at_s": 3.0,
+      "rect": [
+        1.3,
+        0.85,
+        1.6,
+        1.25
+      ]
+    }
+  ],
+  "expected": "GOAL_REACHED",
+  "require_replan": true
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "name": "dynamic_no_path",
+    "description": "Extra safety case: a new box closes the only known doorway",
+    "start": [0.35, 1.05, 0],
+    "goal": [2.65, 1.05],
+    "obstacles": [[1.3, 0, 1.5, 0.8], [1.3, 1.3, 1.5, 2.0]],
+    "spawn": [{"at_s": 3.0, "rect": [1.3, 0.8, 1.5, 1.3]}],
+    "expected": "NO_PATH",
+    "require_replan": true
+  }
+]

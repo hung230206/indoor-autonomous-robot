@@ -1,0 +1,2 @@
+timestamp_s,mode,robot_x_m,robot_y_m,theta_rad,pose_valid,front_m,left_m,right_m,goal_x_m,goal_y_m,planned_path_id,command_left_m_s,command_right_m_s,state,stop_reason,collision_flag
+0.03200000000000003,webots,0.3500380239944824,1.0499999367449881,8.528168086874979e-09,True,0.8,0.8,0.8,2.65,1.05,1,0.0,0.0,NO_PATH,start_or_goal_blocked_or_disconnected,False

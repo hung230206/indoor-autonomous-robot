@@ -1,0 +1,19 @@
+test_astar_matches_independent_dijkstra_random_maps (test_navigation.PlanningTests.test_astar_matches_independent_dijkstra_random_maps) ... ok
+test_bounds_and_blocked_goal (test_navigation.PlanningTests.test_bounds_and_blocked_goal) ... ok
+test_empty_optimal_cost_and_endpoints (test_navigation.PlanningTests.test_empty_optimal_cost_and_endpoints) ... ok
+test_inflation_and_narrow_gap (test_navigation.PlanningTests.test_inflation_and_narrow_gap) ... ok
+test_no_diagonal_corner_cutting (test_navigation.PlanningTests.test_no_diagonal_corner_cutting) ... ok
+test_dynamic_confirmation_and_expiry (test_navigation.SafetyTests.test_dynamic_confirmation_and_expiry) ... ok
+test_emergency_and_user_stop_are_latched (test_navigation.SafetyTests.test_emergency_and_user_stop_are_latched) ... ok
+test_invalid_config (test_navigation.SafetyTests.test_invalid_config) ... ok
+test_missing_hit_resets_confirmation (test_navigation.SafetyTests.test_missing_hit_resets_confirmation) ... ok
+test_stale_and_invalid_data_stop (test_navigation.SafetyTests.test_stale_and_invalid_data_stop) ... ok
+test_all_ten_scenarios_and_replanning_stop (test_navigation.ScenarioTests.test_all_ten_scenarios_and_replanning_stop) ... ok
+test_new_obstacle_closes_only_door_and_stops_no_path (test_navigation.ScenarioTests.test_new_obstacle_closes_only_door_and_stops_no_path) ... ok
+test_sensor_raycast_geometry (test_navigation.ScenarioTests.test_sensor_raycast_geometry) ... ok
+test_mouse_controls_goal_unknown_obstacle_and_stop (test_viewer.ViewerTests.test_mouse_controls_goal_unknown_obstacle_and_stop) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 1.192s
+
+OK

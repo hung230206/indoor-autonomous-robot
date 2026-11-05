@@ -1,0 +1,14 @@
+{
+  "scenario": "box",
+  "mode": "kinematic_2d",
+  "expected": "GOAL_REACHED",
+  "state": "GOAL_REACHED",
+  "passed": true,
+  "time_s": 25.6,
+  "distance_m": 2.7451,
+  "plans": 1,
+  "collision": false,
+  "inflated_grid_violation": false,
+  "goal_error_m": 0.04349875791186185,
+  "max_planning_ms": 0.720500000170432
+}

@@ -1,0 +1,15 @@
+{
+  "scenario": "new_barrier",
+  "mode": "webots",
+  "expected": "GOAL_REACHED",
+  "state": "GOAL_REACHED",
+  "passed": true,
+  "time_s": 32.48,
+  "distance_m": 2.8302537795249645,
+  "plans": 6,
+  "collision": false,
+  "inflated_grid_violation": false,
+  "goal_error_m": 0.043496160995360286,
+  "max_planning_ms": 1.3507000003301073,
+  "webots_version": "R2025a"
+}

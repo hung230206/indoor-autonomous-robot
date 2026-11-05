@@ -1,0 +1,22 @@
+{
+  "width_m": 3.0,
+  "height_m": 2.0,
+  "resolution_m": 0.1,
+  "body_length_m": 0.18,
+  "body_width_m": 0.15,
+  "wheel_radius_m": 0.0325,
+  "axle_length_m": 0.12,
+  "safety_margin_m": 0.04,
+  "max_speed_m_s": 0.16,
+  "max_angular_rad_s": 1.8,
+  "max_wheel_m_s": 0.24,
+  "waypoint_tolerance_m": 0.012,
+  "goal_tolerance_m": 0.045,
+  "data_timeout_s": 0.25,
+  "stop_range_m": 0.10,
+  "sensor_max_m": 0.8,
+  "dynamic_ttl_s": 120.0,
+  "confirmation_frames": 2,
+  "dt_s": 0.032,
+  "max_time_s": 120.0
+}

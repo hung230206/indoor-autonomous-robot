@@ -1,0 +1,2 @@
+scenario,mode,expected,state,passed,time_s,distance_m,plans,collision,inflated_grid_violation,goal_error_m,max_planning_ms,webots_version
+dynamic_no_path,webots,NO_PATH,NO_PATH,True,3.104,0.32116691352838245,2,False,False,1.978795281795399,0.7826000000932254,R2025a

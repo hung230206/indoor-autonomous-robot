@@ -1,0 +1,10 @@
+* text=auto eol=lf
+*.cmd text eol=crlf
+
+# Preserve exact evidence bytes so retained SHA-256 hashes survive a clone.
+experiments/evidence/** -text whitespace=cr-at-eol
+*.docx binary
+*.png binary
+*.jpg binary
+*.gif binary
+*.mp4 binary

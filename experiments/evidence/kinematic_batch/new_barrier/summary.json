@@ -1,0 +1,14 @@
+{
+  "scenario": "new_barrier",
+  "mode": "kinematic_2d",
+  "expected": "GOAL_REACHED",
+  "state": "GOAL_REACHED",
+  "passed": true,
+  "time_s": 32.0,
+  "distance_m": 2.8077,
+  "plans": 6,
+  "collision": false,
+  "inflated_grid_violation": false,
+  "goal_error_m": 0.043498757901682394,
+  "max_planning_ms": 0.8674000000610249
+}

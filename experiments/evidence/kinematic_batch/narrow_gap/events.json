@@ -1,0 +1,17 @@
+[
+  {
+    "time_s": 0,
+    "state": "LOCALIZING",
+    "reason": "start"
+  },
+  {
+    "time_s": 0.0,
+    "state": "PLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 0.0,
+    "state": "NO_PATH",
+    "reason": "start_or_goal_blocked_or_disconnected"
+  }
+]

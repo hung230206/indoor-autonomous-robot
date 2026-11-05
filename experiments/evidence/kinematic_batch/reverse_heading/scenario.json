@@ -1,0 +1,22 @@
+{
+  "name": "reverse_heading",
+  "description": "Start facing away from goal",
+  "start": [
+    0.35,
+    0.35,
+    3.141592653589793
+  ],
+  "goal": [
+    2.65,
+    1.65
+  ],
+  "obstacles": [
+    [
+      1.3,
+      0.8,
+      1.6,
+      1.1
+    ]
+  ],
+  "expected": "GOAL_REACHED"
+}

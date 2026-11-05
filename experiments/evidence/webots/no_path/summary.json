@@ -1,0 +1,15 @@
+{
+  "scenario": "no_path",
+  "mode": "webots",
+  "expected": "NO_PATH",
+  "state": "NO_PATH",
+  "passed": true,
+  "time_s": 0.03200000000000003,
+  "distance_m": 2.1886825239169544e-07,
+  "plans": 1,
+  "collision": false,
+  "inflated_grid_violation": false,
+  "goal_error_m": 2.2999619760055183,
+  "max_planning_ms": 0.9468000007473165,
+  "webots_version": "R2025a"
+}

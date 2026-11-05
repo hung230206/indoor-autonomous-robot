@@ -1,0 +1,14 @@
+{
+  "scenario": "dynamic_no_path",
+  "mode": "kinematic_2d",
+  "expected": "NO_PATH",
+  "state": "NO_PATH",
+  "passed": true,
+  "time_s": 3.104,
+  "distance_m": 0.3194,
+  "plans": 2,
+  "collision": false,
+  "inflated_grid_violation": false,
+  "goal_error_m": 1.9806224246712525,
+  "max_planning_ms": 0.781700000516139
+}
