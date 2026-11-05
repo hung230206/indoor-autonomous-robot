@@ -1,0 +1,16 @@
+{
+  "name": "yolo_camera_loss",
+  "description": "Camera packets intentionally stop after 2 simulation seconds",
+  "start": [
+    0.35,
+    1.05,
+    0
+  ],
+  "goal": [
+    2.65,
+    1.05
+  ],
+  "obstacles": [],
+  "expected": "SAFE_STOP",
+  "vision_dropout_after_s": 2.0
+}

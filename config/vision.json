@@ -1,0 +1,17 @@
+{
+  "model": "models/yolo_box/best.pt",
+  "class_name": "box",
+  "confidence": 0.5,
+  "image_size": 320,
+  "camera_width": 640,
+  "camera_height": 480,
+  "camera_z_m": 3.4,
+  "horizontal_fov_rad": 1.0,
+  "sample_steps": 8,
+  "confirmation_frames": 2,
+  "obstacle_ttl_s": 2.0,
+  "frame_timeout_s": 0.65,
+  "startup_grace_s": 1.0,
+  "bbox_padding_m": 0.03,
+  "channel": 12
+}

@@ -1,0 +1,2 @@
+scenario,mode,expected,state,passed,time_s,distance_m,plans,collision,inflated_grid_violation,goal_error_m,max_planning_ms,webots_version
+yolo_far_box,webots,GOAL_REACHED,GOAL_REACHED,True,30.848,2.8334648451361724,7,False,False,0.0436674676449597,1.2096000009478303,R2025a

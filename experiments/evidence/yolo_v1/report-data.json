@@ -1,0 +1,154 @@
+{
+  "date": "2026-11-06",
+  "dataset": {
+    "source": "Native Webots RGB camera with procedural 3D boxes",
+    "images": 240,
+    "unique_sha256": 240,
+    "splits": {
+      "train": {
+        "images": 160,
+        "instances": 260
+      },
+      "val": {
+        "images": 40,
+        "instances": 69
+      },
+      "test": {
+        "images": 40,
+        "instances": 70
+      }
+    }
+  },
+  "model": {
+    "model": "YOLO11n, COCO initialized, fine-tuned on procedural Webots box images",
+    "dataset": "C:\\Users\\hungt\\Documents\\ChatGPT\\Niên luận cơ sở\\experiments\\runs\\yolo_dataset",
+    "epochs_requested": 30,
+    "training_dir": "C:\\Users\\hungt\\Documents\\ChatGPT\\Niên luận cơ sở\\experiments\\runs\\yolo_training\\box_v1",
+    "evaluation_split": "test",
+    "metrics": {
+      "metrics/precision(B)": 0.9991009012751527,
+      "metrics/recall(B)": 1.0,
+      "metrics/mAP50(B)": 0.995,
+      "metrics/mAP50-95(B)": 0.9497050156385154,
+      "fitness": 0.9497050156385154
+    },
+    "scope": "Synthetic fixed-camera box detection only; not validated on real images or arbitrary obstacles"
+  },
+  "weights_sha256": "02b471b633158613277097738da8c90efdfc6c780ad4c37cbe3c872cb11f6e5a",
+  "navigation": [
+    {
+      "scenario": "yolo_far_box",
+      "mode": "webots_yolo",
+      "expected": "GOAL_REACHED",
+      "state": "GOAL_REACHED",
+      "passed": true,
+      "time_s": 27.424,
+      "distance_m": 2.7747108967930623,
+      "plans": 2,
+      "collision": false,
+      "inflated_grid_violation": false,
+      "goal_error_m": 0.044605044713508554,
+      "max_planning_ms": 2.203899999585701,
+      "webots_version": "R2025a",
+      "vision_packets": 109,
+      "visual_occupied_cells": 30,
+      "range_mapping_enabled": false,
+      "first_obstacle_stop_s": 1.344
+    },
+    {
+      "scenario": "replanning",
+      "mode": "webots_yolo",
+      "expected": "GOAL_REACHED",
+      "state": "GOAL_REACHED",
+      "passed": true,
+      "time_s": 26.752,
+      "distance_m": 2.7170944865523556,
+      "plans": 2,
+      "collision": false,
+      "inflated_grid_violation": false,
+      "goal_error_m": 0.04349794683288328,
+      "max_planning_ms": 0.802500000645523,
+      "webots_version": "R2025a",
+      "vision_packets": 107,
+      "visual_occupied_cells": 30,
+      "range_mapping_enabled": false,
+      "first_obstacle_stop_s": 3.392
+    },
+    {
+      "scenario": "open",
+      "mode": "webots_yolo",
+      "expected": "GOAL_REACHED",
+      "state": "GOAL_REACHED",
+      "passed": true,
+      "time_s": 26.016000000000002,
+      "distance_m": 2.787754894976767,
+      "plans": 1,
+      "collision": false,
+      "inflated_grid_violation": false,
+      "goal_error_m": 0.04349574115510442,
+      "max_planning_ms": 1.5916000011202414,
+      "webots_version": "R2025a",
+      "vision_packets": 104,
+      "visual_occupied_cells": 0,
+      "range_mapping_enabled": false,
+      "first_obstacle_stop_s": null
+    },
+    {
+      "scenario": "yolo_camera_loss",
+      "mode": "webots_yolo",
+      "expected": "SAFE_STOP",
+      "state": "SAFE_STOP",
+      "passed": true,
+      "time_s": 2.496,
+      "distance_m": 0.2691178584800099,
+      "plans": 1,
+      "collision": false,
+      "inflated_grid_violation": false,
+      "goal_error_m": 2.0308443368437716,
+      "max_planning_ms": 0.45030000001133885,
+      "webots_version": "R2025a",
+      "vision_packets": 10,
+      "visual_occupied_cells": 0,
+      "range_mapping_enabled": false,
+      "first_obstacle_stop_s": null
+    }
+  ],
+  "range_reference": {
+    "scenario": "yolo_far_box",
+    "mode": "webots",
+    "expected": "GOAL_REACHED",
+    "state": "GOAL_REACHED",
+    "passed": true,
+    "time_s": 30.848,
+    "distance_m": 2.8334648451361724,
+    "plans": 7,
+    "collision": false,
+    "inflated_grid_violation": false,
+    "goal_error_m": 0.0436674676449597,
+    "max_planning_ms": 1.2096000009478303,
+    "webots_version": "R2025a",
+    "first_obstacle_stop_s": 6.304
+  },
+  "baseline_regression_passed": 10,
+  "inference_wall_time_ms": {
+    "first_call": 7128.9713999995,
+    "median_after_first": 147.17770000061137,
+    "max_including_warmup": 7128.9713999995,
+    "calls": 110
+  },
+  "environment": {
+    "python": "3.14.4",
+    "torch": "2.14.0+cpu",
+    "ultralytics": "8.4.202",
+    "opencv": "5.0.0",
+    "training_device": "CPU"
+  },
+  "limitations": [
+    "Synthetic fixed overhead camera only",
+    "One learned class: box",
+    "Ideal Supervisor robot pose",
+    "Range sensors retained for emergency stop",
+    "Synchronous simulation is not a physical real-time safety proof",
+    "No real-camera training/validation and no ESP32 firmware"
+  ]
+}

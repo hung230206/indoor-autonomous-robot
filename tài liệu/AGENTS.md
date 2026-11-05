@@ -2,10 +2,10 @@
 project: indoor-autonomous-robot
 artifact_type: agent-handoff
 language: vi
-version: 1.3
+version: 1.4
 updated: 2026-11-06
-status: stage2-hardware-design-prepared-not-built
-project_phase: 2
+status: stage1-yolo-prototype-validated-hardware-not-built
+project_phase: 1
 hardware_status: selected-per-word-not-purchased
 owner_goal: Nien luan co so nganh Khoa hoc may tinh
 ---
@@ -17,6 +17,8 @@ owner_goal: Nien luan co so nganh Khoa hoc may tinh
 **Cập nhật triển khai 06/11/2026:** đã có mã nguồn giai đoạn 1 tại thư mục gốc project. `README.md` hướng dẫn chạy, `docs/stage1-results.md` ghi số đo và `experiments/evidence/` chứa bằng chứng. Bộ 10 ca 2D và Webots đều đúng kỳ vọng (8 đến đích, 2 `NO_PATH`), thêm ca cản mới đóng cửa dừng `NO_PATH`; 14 test qua. Chỉ xác nhận mô phỏng, chưa có xe thật. Bản đầu dùng waypoint controller, tốc độ/ngưỡng và giao diện bánh m/s theo `config/robot.json`; đây chưa phải thông số cho xe thật. Các phần kế hoạch bên dưới giữ vai trò định hướng; kết quả đo mới nằm trong báo cáo.
 
 **Chuẩn bị M6–M7:** người dùng yêu cầu thiết kế đấu nối và xác nhận chưa mua linh kiện. Đã có `docs/hardware/wiring.md`, sơ đồ nguồn/tín hiệu và bảng GPIO theo `config/hardware_v1.json`. BMS/hộp/cell cụ thể và dòng kẹt motor còn cần xác minh. Chưa có firmware M7, chưa mua/lắp hoặc thử điện; không coi trạng thái phase 2 là đã hoàn thành nghiệm thu giai đoạn 2.
+
+**Mở rộng thị giác theo yêu cầu mới:** đã dùng YOLO11n fine-tune lớp box từ 240 ảnh RGB Webots (160/40/40). Chỉ số test 40 ảnh tổng hợp: mAP50–95 khoảng 94,97%; 4 ca tích hợp đúng kỳ vọng, 23 test qua. Xem `docs/yolo.md`, `reports/Bao_cao_giai_doan_1_YOLO.docx`, `experiments/evidence/yolo_v1/`. Chưa có ảnh camera thật; không lấy kết quả này thay số liệu xe thật. Phần YOLO nay được người dùng yêu cầu; các giới hạn ban đầu dưới đây là lịch sử kế hoạch, không hủy yêu cầu mới này.
 
 ## 0. Quy tắc sử dụng tài liệu
 

@@ -1,0 +1,27 @@
+{
+  "name": "yolo_far_box",
+  "description": "Box appears beyond initial range-sensor reach; camera sees full floor",
+  "start": [
+    0.35,
+    1.05,
+    0
+  ],
+  "goal": [
+    2.65,
+    1.05
+  ],
+  "obstacles": [],
+  "spawn": [
+    {
+      "at_s": 1.0,
+      "rect": [
+        1.9,
+        0.85,
+        2.2,
+        1.25
+      ]
+    }
+  ],
+  "expected": "GOAL_REACHED",
+  "require_replan": true
+}

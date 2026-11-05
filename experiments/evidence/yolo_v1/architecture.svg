@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1510" height="410" viewBox="0 0 1510 410">
+<rect width="1510" height="410" fill="#f8fafc"/><style>text{font-family:Arial,sans-serif;fill:#203047}</style>
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="#2860a7"/></marker></defs>
+<text x="35" y="55" font-size="36" font-weight="bold">Kiến trúc điều hướng có nhận diện thị giác</text>
+<rect x="25" y="110" width="185" height="130" rx="12" fill="#edf3ff" stroke="#8da7c4"/>
+<text x="117" y="163" font-size="23" text-anchor="middle" font-weight="bold">Camera RGB</text>
+<text x="117" y="204" font-size="23" text-anchor="middle">640 × 480</text>
+<path d="M210 175H235" stroke="#2860a7" stroke-width="3" marker-end="url(#a)"/>
+<rect x="237" y="110" width="185" height="130" rx="12" fill="#e7f4ee" stroke="#8da7c4"/>
+<text x="329" y="163" font-size="23" text-anchor="middle" font-weight="bold">YOLO11n</text>
+<text x="329" y="204" font-size="23" text-anchor="middle">nhãn box</text>
+<path d="M422 175H447" stroke="#2860a7" stroke-width="3" marker-end="url(#a)"/>
+<rect x="449" y="110" width="185" height="130" rx="12" fill="#edf3ff" stroke="#8da7c4"/>
+<text x="541" y="163" font-size="23" text-anchor="middle" font-weight="bold">Ảnh → mét</text>
+<text x="541" y="204" font-size="23" text-anchor="middle">hiệu chuẩn</text>
+<path d="M634 175H659" stroke="#2860a7" stroke-width="3" marker-end="url(#a)"/>
+<rect x="661" y="110" width="185" height="130" rx="12" fill="#e7f4ee" stroke="#8da7c4"/>
+<text x="753" y="163" font-size="23" text-anchor="middle" font-weight="bold">Grid + inflate</text>
+<text x="753" y="204" font-size="23" text-anchor="middle">vật cản</text>
+<path d="M846 175H871" stroke="#2860a7" stroke-width="3" marker-end="url(#a)"/>
+<rect x="873" y="110" width="185" height="130" rx="12" fill="#edf3ff" stroke="#8da7c4"/>
+<text x="965" y="163" font-size="23" text-anchor="middle" font-weight="bold">A*</text>
+<text x="965" y="204" font-size="23" text-anchor="middle">tìm đường</text>
+<path d="M1058 175H1083" stroke="#2860a7" stroke-width="3" marker-end="url(#a)"/>
+<rect x="1085" y="110" width="185" height="130" rx="12" fill="#edf3ff" stroke="#8da7c4"/>
+<text x="1177" y="163" font-size="23" text-anchor="middle" font-weight="bold">FSM + lái</text>
+<text x="1177" y="204" font-size="23" text-anchor="middle">waypoint</text>
+<path d="M1270 175H1295" stroke="#2860a7" stroke-width="3" marker-end="url(#a)"/>
+<rect x="1297" y="110" width="185" height="130" rx="12" fill="#edf3ff" stroke="#8da7c4"/>
+<text x="1389" y="163" font-size="23" text-anchor="middle" font-weight="bold">Hai motor</text>
+<text x="1389" y="204" font-size="23" text-anchor="middle">Webots</text>
+<text x="35" y="306" font-size="25">Pose xe: Supervisor lý tưởng. Hiệu chuẩn camera: hình học cố định đã biết.</text>
+<text x="35" y="355" font-size="25">Trong chế độ YOLO, cảm biến khoảng cách chỉ tham gia dừng nguy hiểm, không dựng bản đồ.</text>
+</svg>

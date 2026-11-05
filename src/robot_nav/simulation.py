@@ -13,6 +13,7 @@ def scenarios():
 
 def get_scenario(name):
     extra = json.loads((ROOT / "config/safety_scenarios.json").read_text(encoding="utf-8"))
+    extra += json.loads((ROOT / "config/vision_scenarios.json").read_text(encoding="utf-8"))
     for item in scenarios() + extra:
         if item["name"] == name:
             return item

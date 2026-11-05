@@ -1,0 +1,18 @@
+{
+  "scenario": "yolo_camera_loss",
+  "mode": "webots_yolo",
+  "expected": "SAFE_STOP",
+  "state": "SAFE_STOP",
+  "passed": true,
+  "time_s": 2.496,
+  "distance_m": 0.2691178584800099,
+  "plans": 1,
+  "collision": false,
+  "inflated_grid_violation": false,
+  "goal_error_m": 2.0308443368437716,
+  "max_planning_ms": 0.45030000001133885,
+  "webots_version": "R2025a",
+  "vision_packets": 10,
+  "visual_occupied_cells": 0,
+  "range_mapping_enabled": false
+}

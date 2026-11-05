@@ -1,0 +1,18 @@
+{
+  "scenario": "replanning",
+  "mode": "webots_yolo",
+  "expected": "GOAL_REACHED",
+  "state": "GOAL_REACHED",
+  "passed": true,
+  "time_s": 26.752,
+  "distance_m": 2.7170944865523556,
+  "plans": 2,
+  "collision": false,
+  "inflated_grid_violation": false,
+  "goal_error_m": 0.04349794683288328,
+  "max_planning_ms": 0.802500000645523,
+  "webots_version": "R2025a",
+  "vision_packets": 107,
+  "visual_occupied_cells": 30,
+  "range_mapping_enabled": false
+}

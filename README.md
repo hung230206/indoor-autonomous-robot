@@ -1,6 +1,8 @@
 # Robot tự hành trong nhà — giai đoạn 1
 
-Robot 2WD đi từ A đến B trên bản đồ có sẵn, phát hiện vật cản mới bằng cảm biến mô phỏng, dừng, cập nhật occupancy grid và lập lại đường A*. Mã nguồn dùng chung cho mô phỏng 2D và Webots. Chưa có phần xe thật, ArUco hay ESP32.
+Robot 2WD đi từ A đến B trên bản đồ có sẵn, phát hiện vật cản mới bằng cảm biến mô phỏng hoặc lớp thị giác YOLO, dừng, cập nhật occupancy grid và lập lại đường A*. Mã nguồn dùng chung cho mô phỏng 2D và Webots. Chưa có phần xe thật, ArUco hay ESP32.
+
+Đã bổ sung [YOLO11n nhận diện hộp từ camera Webots](docs/yolo.md), checkpoint và dữ liệu kiểm chứng tổng hợp. [Báo cáo Word 6 trang và kết quả](reports/README.md) giải thích kỹ thuật, FSM, huấn luyện, so sánh và giới hạn. Chế độ mặc định vẫn là bản dùng cảm biến; chạy YOLO bằng môi trường riêng và cờ `--yolo`.
 
 Phần cứng cho các giai đoạn sau đã được người dùng chốt theo bản Word ngày 06/11/2026; xem [cấu hình đã chốt](docs/hardware-decision.md). Chưa có xác nhận đã mua hoặc lắp xe.
 

@@ -44,6 +44,16 @@ def run():
     adapter = WebotsAdapter(robot,c)
     grid = Grid(c,scenario["obstacles"])
     nav = Navigator(grid,scenario["goal"])
+    visual=None
+    receiver=None
+    vision_packets=0
+    if metadata.get('perception')=='yolo':
+        from .vision import FloorProjection, VisualObstacleLayer, Detection, vision_config
+        v=vision_config()
+        visual=VisualObstacleLayer(grid,FloorProjection(v['camera_width'],v['camera_height'],v['camera_z_m'],
+            v['horizontal_fov_rad'],c.width_m/2,c.height_m/2),v)
+        receiver=robot.getDevice('vision_receiver')
+        receiver.enable(round(c.dt_s*1000))
     frames, spawned = [], set()
     obstacles = list(scenario["obstacles"])
     output = Path(os.environ.get("ROBOT_OUTPUT", str(ROOT / "experiments/runs/webots" / scenario["name"])))
@@ -73,13 +83,30 @@ def run():
                     obstacles.append(event["rect"])
             pose = adapter.pose(now)
             ranges = adapter.ranges(pose,now)
+            if receiver:
+                while receiver.getQueueLength():
+                    try:
+                        packet=json.loads(receiver.getString())
+                        detections=[Detection(tuple(d['xyxy']),d['confidence'],d['label']) for d in packet['detections']]
+                        visual.update(detections,packet['timestamp']-start,now)
+                        vision_packets+=1
+                    except (ValueError,KeyError,TypeError):
+                        nav.transition('SAFE_STOP','invalid_vision_packet',now)
+                    finally:
+                        receiver.nextPacket()
             distance += math.dist((pose.x,pose.y),(previous.x,previous.y))
             previous = pose
             # Conservative footprint check independent of the planner.
             collision |= min(pose.x,pose.y,c.width_m-pose.x,c.height_m-pose.y) < c.radius_m-0.002
             collision |= any(rect_distance(pose.x,pose.y,r) < c.radius_m-0.002 for r in obstacles)
             violation |= not grid.free(grid.cell(pose.x,pose.y))
-            cmd = nav.tick(pose,ranges,now)
+            if visual and not visual.fresh(now):
+                cmd=Command()
+                if elapsed>v['startup_grace_s']:
+                    nav.transition('SAFE_STOP','vision_missing_or_stale',now)
+            else:
+                # In YOLO mode, ranges remain an emergency stop, not a mapper.
+                cmd = nav.tick(pose,ranges,now,update_ranges=visual is None)
             if nav.path_id != shown_path_id:
                 root_children = robot.getRoot().getField("children")
                 old_route = robot.getFromDef("CURRENT_ROUTE")
@@ -125,6 +152,9 @@ def run():
                    "inflated_grid_violation":violation,"goal_error_m":math.dist((previous.x,previous.y),nav.goal),
                    "max_planning_ms":max((p["duration_ms"] for p in nav.plans),default=0),
                    "webots_version":(Path(os.environ["WEBOTS_HOME"])/"resources/version.txt").read_text().strip()}
+        if visual:
+            summary.update({'mode':'webots_yolo','vision_packets':vision_packets,
+                            'visual_occupied_cells':len(grid.vision),'range_mapping_enabled':False})
         write_run(output,c,scenario,frames,nav,summary)
         print(json.dumps(summary),flush=True)
         if movie:

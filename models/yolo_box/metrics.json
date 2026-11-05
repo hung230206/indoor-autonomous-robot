@@ -1,0 +1,15 @@
+{
+  "model": "YOLO11n, COCO initialized, fine-tuned on procedural Webots box images",
+  "dataset": "C:\\Users\\hungt\\Documents\\ChatGPT\\Ni\u00ean lu\u1eadn c\u01a1 s\u1edf\\experiments\\runs\\yolo_dataset",
+  "epochs_requested": 30,
+  "training_dir": "C:\\Users\\hungt\\Documents\\ChatGPT\\Ni\u00ean lu\u1eadn c\u01a1 s\u1edf\\experiments\\runs\\yolo_training\\box_v1",
+  "evaluation_split": "test",
+  "metrics": {
+    "metrics/precision(B)": 0.9991009012751527,
+    "metrics/recall(B)": 1.0,
+    "metrics/mAP50(B)": 0.995,
+    "metrics/mAP50-95(B)": 0.9497050156385154,
+    "fitness": 0.9497050156385154
+  },
+  "scope": "Synthetic fixed-camera box detection only; not validated on real images or arbitrary obstacles"
+}

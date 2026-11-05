@@ -15,10 +15,12 @@ def solid_box(name, rect, height=.28, color="0.22 0.29 0.37"):
 }}'''
 
 
-def generate_world(c, scenario, path):
+def generate_world(c, scenario, path, vision=False):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     metadata = {"scenario":scenario, "config":c.__dict__}
+    if vision:
+        metadata['perception']='yolo'
     # Controller reads exact config from customData, so map and world cannot drift.
     encoded = json.dumps(json.dumps(metadata))
     pieces = ['#VRML_SIM R2025a utf8', f'''WorldInfo {{
@@ -76,6 +78,22 @@ Solid {{
       name "{name}" type "generic" numberOfRays 1 aperture 0.001
       lookupTable [ 0 0 0, {c.sensor_max_m} {c.sensor_max_m} 0 ]
     }}''')
+    if vision:
+        from .vision import vision_config
+        v=vision_config()
+        children.append(f'Receiver {{ name "vision_receiver" channel {v["channel"]} }}')
+        pieces.append(f'''Robot {{
+  translation {c.width_m/2} {c.height_m/2} {v['camera_z_m']}
+  children [
+    Camera {{ name "overhead" rotation -0.577350269 0.577350269 0.577350269 2.094395102
+      width {v['camera_width']} height {v['camera_height']} fieldOfView {v['horizontal_fov_rad']} }}
+    Emitter {{ name "vision_emitter" channel {v['channel']} }}
+  ]
+  name "fixed_overhead_camera"
+  controller "vision_camera"
+  supervisor TRUE
+  customData {json.dumps(json.dumps({'vision':v,'width_m':c.width_m,'height_m':c.height_m}))}
+}}''')
     pieces.append(f'''DEF NAV_ROBOT Robot {{
   translation {sx} {sy} 0.055
   rotation 0 0 1 {theta}

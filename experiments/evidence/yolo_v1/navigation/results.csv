@@ -1,0 +1,5 @@
+scenario,mode,expected,state,passed,time_s,distance_m,plans,collision,inflated_grid_violation,goal_error_m,max_planning_ms,webots_version,vision_packets,visual_occupied_cells,range_mapping_enabled
+yolo_far_box,webots_yolo,GOAL_REACHED,GOAL_REACHED,True,27.424,2.7747108967930623,2,False,False,0.044605044713508554,2.203899999585701,R2025a,109,30,False
+replanning,webots_yolo,GOAL_REACHED,GOAL_REACHED,True,26.752,2.7170944865523556,2,False,False,0.04349794683288328,0.802500000645523,R2025a,107,30,False
+open,webots_yolo,GOAL_REACHED,GOAL_REACHED,True,26.016000000000002,2.787754894976767,1,False,False,0.04349574115510442,1.5916000011202414,R2025a,104,0,False
+yolo_camera_loss,webots_yolo,SAFE_STOP,SAFE_STOP,True,2.496,0.2691178584800099,1,False,False,2.0308443368437716,0.45030000001133885,R2025a,10,0,False

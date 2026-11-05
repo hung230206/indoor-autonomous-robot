@@ -61,14 +61,15 @@ class Navigator:
                 return "invalid_range"
         return ""
 
-    def tick(self, pose, ranges, now):
+    def tick(self, pose, ranges, now, update_ranges=True):
         if self.state in TERMINAL or self.state == "IDLE":
             return Command()
         error = self._valid_data(pose, ranges, now)
         if error:
             self.transition("SAFE_STOP", error, now)
             return Command()
-        self.grid.observe(pose, ranges, now)
+        if update_ranges:
+            self.grid.observe(pose, ranges, now)
         if min(ranges.front, ranges.left, ranges.right) < self.config.stop_range_m:
             self.transition("SAFE_STOP", "range_danger", now)
             return Command()

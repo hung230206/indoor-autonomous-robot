@@ -11,6 +11,7 @@ class Grid:
         self.rows = round(config.height_m / self.resolution)
         self.static = set()
         self.dynamic = {}  # cell -> expiration in the caller's monotonic timebase
+        self.vision = {}  # independent visual layer; range updates never erase it
         self.confirmations = {}
         for rect in rectangles:
             self.static.update(self.cells_in_rect(rect))
@@ -39,7 +40,7 @@ class Grid:
 
     def inflate(self):
         r, size = self.config.clearance_m, self.resolution
-        occupied = self.static | self.dynamic.keys()
+        occupied = self.static | self.dynamic.keys() | self.vision.keys()
         blocked = set()
         reach = math.ceil(r / size + 0.5)
         for ox, oy in occupied:

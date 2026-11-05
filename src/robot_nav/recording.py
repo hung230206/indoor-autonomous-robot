@@ -30,6 +30,7 @@ def write_run(directory, config, scenario, frames, navigator, summary):
         (directory / name).write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
     # CSV layers are integer occupancy (rows indexed from bottom / +y).
     for name, cells in (("static", navigator.grid.static), ("dynamic", navigator.grid.dynamic),
+                        ("vision", navigator.grid.vision),
                         ("inflated", navigator.grid.blocked)):
         with (directory / f"map_{name}.csv").open("w", newline="", encoding="utf-8") as stream:
             csv.writer(stream).writerows([int((x, y) in cells) for x in range(navigator.grid.cols)]

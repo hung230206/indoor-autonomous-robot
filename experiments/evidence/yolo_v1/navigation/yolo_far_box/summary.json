@@ -1,0 +1,18 @@
+{
+  "scenario": "yolo_far_box",
+  "mode": "webots_yolo",
+  "expected": "GOAL_REACHED",
+  "state": "GOAL_REACHED",
+  "passed": true,
+  "time_s": 27.424,
+  "distance_m": 2.7747108967930623,
+  "plans": 2,
+  "collision": false,
+  "inflated_grid_violation": false,
+  "goal_error_m": 0.044605044713508554,
+  "max_planning_ms": 2.203899999585701,
+  "webots_version": "R2025a",
+  "vision_packets": 109,
+  "visual_occupied_cells": 30,
+  "range_mapping_enabled": false
+}

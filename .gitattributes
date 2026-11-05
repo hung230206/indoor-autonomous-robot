@@ -8,3 +8,4 @@ experiments/evidence/** -text whitespace=cr-at-eol
 *.jpg binary
 *.gif binary
 *.mp4 binary
+*.pt binary

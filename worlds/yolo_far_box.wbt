@@ -1,0 +1,111 @@
+#VRML_SIM R2025a utf8
+
+WorldInfo {
+  basicTimeStep 32
+  coordinateSystem "ENU"
+  contactProperties [
+    ContactProperties { material1 "wheel" material2 "floor" coulombFriction [ 1 ] }
+    ContactProperties { material1 "caster" material2 "floor" coulombFriction [ 0.005 ] }
+  ]
+}
+Viewpoint { orientation -0.577350269 0.577350269 0.577350269 2.094395102 position 1.5 1.0 5.5 }
+Background { skyColor [ 0.94 0.96 0.98 ] }
+DirectionalLight { direction -0.3 -0.5 -1 intensity 1 }
+Solid {
+  translation 1.5 1.0 -0.025
+  children [ Shape { appearance PBRAppearance { baseColor 0.88 0.90 0.93 roughness 1 metalness 0 } geometry Box { size 3.0 2.0 0.05 } } ]
+  name "floor" contactMaterial "floor"
+  boundingObject Box { size 3.0 2.0 0.05 }
+}
+
+DEF WALL_0 Solid {
+  translation -0.025 0.9999999999999999 0.14
+  children [ Shape { appearance PBRAppearance { baseColor 0.22 0.29 0.37 roughness 1 metalness 0 } geometry Box { size 0.05 2.0999999999999996 0.28 } } ]
+  name "WALL_0"
+  boundingObject Box { size 0.05 2.0999999999999996 0.28 }
+}
+
+DEF WALL_1 Solid {
+  translation 3.025 0.9999999999999999 0.14
+  children [ Shape { appearance PBRAppearance { baseColor 0.22 0.29 0.37 roughness 1 metalness 0 } geometry Box { size 0.04999999999999982 2.0999999999999996 0.28 } } ]
+  name "WALL_1"
+  boundingObject Box { size 0.04999999999999982 2.0999999999999996 0.28 }
+}
+
+DEF WALL_2 Solid {
+  translation 1.5 -0.025 0.14
+  children [ Shape { appearance PBRAppearance { baseColor 0.22 0.29 0.37 roughness 1 metalness 0 } geometry Box { size 3.0 0.05 0.28 } } ]
+  name "WALL_2"
+  boundingObject Box { size 3.0 0.05 0.28 }
+}
+
+DEF WALL_3 Solid {
+  translation 1.5 2.025 0.14
+  children [ Shape { appearance PBRAppearance { baseColor 0.22 0.29 0.37 roughness 1 metalness 0 } geometry Box { size 3.0 0.04999999999999982 0.28 } } ]
+  name "WALL_3"
+  boundingObject Box { size 3.0 0.04999999999999982 0.28 }
+}
+
+Transform { translation 2.65 1.05 0.002 children [ Shape { appearance PBRAppearance { baseColor 0.85 0.12 0.3 roughness 1 metalness 0 } geometry Cylinder { radius 0.045 height 0.003 } } ] }
+
+DEF NAV_ROBOT Robot {
+  translation 0.35 1.05 0.055
+  rotation 0 0 1 0
+  children [ Shape { appearance PBRAppearance { baseColor 0.06 0.58 0.47 roughness 0.6 metalness 0 } geometry Box { size 0.18 0.09999999999999999 0.035 } }
+      Transform { translation 0.065 0 0.022 children [ Shape { appearance PBRAppearance { baseColor 0.95 0.55 0.2 } geometry Box { size 0.025 0.07 0.009 } } ] }
+HingeJoint {
+      jointParameters HingeJointParameters { axis 0 1 0 anchor 0 0.06 -0.0225 dampingConstant 0.0001 }
+      device [ RotationalMotor { name "left_motor" maxVelocity 20 maxTorque 0.2 } ]
+      endPoint Solid {
+        translation 0 0.06 -0.0225
+        rotation 1 0 0 1.57079632679
+        children [ Shape { appearance PBRAppearance { baseColor 0.07 0.09 0.12 roughness 1 metalness 0 } geometry Cylinder { radius 0.0325 height 0.02 } } ]
+        name "left_wheel" contactMaterial "wheel"
+        boundingObject Cylinder { radius 0.0325 height 0.02 }
+        physics Physics { density -1 mass 0.035 }
+      }
+    }
+HingeJoint {
+      jointParameters HingeJointParameters { axis 0 1 0 anchor 0 -0.06 -0.0225 dampingConstant 0.0001 }
+      device [ RotationalMotor { name "right_motor" maxVelocity 20 maxTorque 0.2 } ]
+      endPoint Solid {
+        translation 0 -0.06 -0.0225
+        rotation 1 0 0 1.57079632679
+        children [ Shape { appearance PBRAppearance { baseColor 0.07 0.09 0.12 roughness 1 metalness 0 } geometry Cylinder { radius 0.0325 height 0.02 } } ]
+        name "right_wheel" contactMaterial "wheel"
+        boundingObject Cylinder { radius 0.0325 height 0.02 }
+        physics Physics { density -1 mass 0.035 }
+      }
+    }
+Solid {
+      translation -0.065 0 -0.040
+      children [ Shape { appearance PBRAppearance { baseColor 0.4 0.4 0.4 } geometry Sphere { radius 0.015 } } ]
+      name "caster" contactMaterial "caster"
+      boundingObject Sphere { radius 0.015 }
+      physics Physics { density -1 mass 0.01 }
+    }
+DistanceSensor {
+      translation 0.092 0.0 0
+      rotation 0 0 1 0.0
+      name "front" type "generic" numberOfRays 1 aperture 0.001
+      lookupTable [ 0 0 0, 0.8 0.8 0 ]
+    }
+DistanceSensor {
+      translation 0.0 0.077 0
+      rotation 0 0 1 1.5707963267948966
+      name "left" type "generic" numberOfRays 1 aperture 0.001
+      lookupTable [ 0 0 0, 0.8 0.8 0 ]
+    }
+DistanceSensor {
+      translation 0.0 -0.077 0
+      rotation 0 0 1 -1.5707963267948966
+      name "right" type "generic" numberOfRays 1 aperture 0.001
+      lookupTable [ 0 0 0, 0.8 0.8 0 ]
+    } ]
+  name "mini_2wd"
+  controller "stage1"
+  customData "{\"scenario\": {\"name\": \"yolo_far_box\", \"description\": \"Box appears beyond initial range-sensor reach; camera sees full floor\", \"start\": [0.35, 1.05, 0], \"goal\": [2.65, 1.05], \"obstacles\": [], \"spawn\": [{\"at_s\": 1.0, \"rect\": [1.9, 0.85, 2.2, 1.25]}], \"expected\": \"GOAL_REACHED\", \"require_replan\": true}, \"config\": {\"width_m\": 3.0, \"height_m\": 2.0, \"resolution_m\": 0.1, \"body_length_m\": 0.18, \"body_width_m\": 0.15, \"wheel_radius_m\": 0.0325, \"axle_length_m\": 0.12, \"safety_margin_m\": 0.04, \"max_speed_m_s\": 0.16, \"max_angular_rad_s\": 1.8, \"max_wheel_m_s\": 0.24, \"waypoint_tolerance_m\": 0.012, \"goal_tolerance_m\": 0.045, \"data_timeout_s\": 0.25, \"stop_range_m\": 0.1, \"sensor_max_m\": 0.8, \"dynamic_ttl_s\": 120.0, \"confirmation_frames\": 2, \"dt_s\": 0.032, \"max_time_s\": 120.0}}"
+  supervisor TRUE
+  boundingObject Box { size 0.18 0.09999999999999999 0.035 }
+  physics Physics { density -1 mass 0.35 centerOfMass [ -0.01 0 0 ] }
+}
