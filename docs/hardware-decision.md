@@ -2,7 +2,7 @@
 
 Ngày xác nhận: **06/11/2026**. Người dùng chốt cấu hình theo `tài liệu/Ke_hoach_robot_tu_hanh_kem_so_do_kien_truc.docx`.
 
-Trạng thái: **đã chọn cấu hình**, chưa có xác nhận đã mua, lắp hoặc kiểm tra linh kiện thật. Quyết định này không thay thế kết quả kiểm thử mô phỏng hoặc thông số điện của từng sản phẩm.
+Trạng thái: **đã chọn cấu hình**; người dùng xác nhận **chưa mua linh kiện** ngày 06/11/2026. Quyết định này không thay thế kết quả kiểm thử mô phỏng hoặc thông số điện của từng sản phẩm.
 
 ## Kiến trúc
 
@@ -44,4 +44,6 @@ Giữ cấu hình trên làm cơ sở thiết kế. Sơ đồ nguồn, điện �
 
 Kích thước thân xe, khoảng cách bánh, vận tốc và các ngưỡng trong mô phỏng vẫn là giả định; phải đo và hiệu chỉnh theo xe sau khi lắp.
 
-Bước chuẩn bị tiếp theo: lập sơ đồ đấu nối và bảng GPIO cho ESP32, driver, motor và nguồn theo cấu hình đã chốt.
+Đã chuẩn bị [sơ đồ đấu nối, bảng GPIO và hướng dẫn lắp thử](hardware/wiring.md), theo `config/hardware_v1.json`. Giữ hai LM2596; nguồn logic và motor tách riêng, cùng đặt 5 V ban đầu; VCC driver lấy 3V3 ESP32. Các phụ kiện nguồn, điện trở/tụ và phương án đệm TRIG giai đoạn 3 được liệt kê riêng, chưa có báo giá.
+
+Việc tiếp theo: xác minh model BMS/hộp pin/cell và dòng motor, sau đó triển khai firmware M7 để thử theo checklist. Chưa có firmware điều khiển xe thật trong lần bàn giao sơ đồ.

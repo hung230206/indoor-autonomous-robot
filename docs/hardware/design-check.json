@@ -1,0 +1,20 @@
+{
+  "scope": "Static consistency and divider calculation only; no electrical test or motor simulation",
+  "pin_count_including_reservations": 16,
+  "unique_pins": true,
+  "output_capabilities_and_boot_pin_exclusion": true,
+  "gpio_csv_matches_config": true,
+  "ahct125_dip_pinout_matches_reference": true,
+  "svg_xml_valid": true,
+  "echo_gpio_nominal_v": 3.0,
+  "echo_gpio_corner_min_v": 2.827154,
+  "echo_gpio_corner_max_v": 3.17515,
+  "measurement_or_hardware_claim": false,
+  "open_items": [
+    "Exact BMS/holder/cell and charger model",
+    "Motor stall/start/load and thermal budget",
+    "Fuse/switch/wire ratings",
+    "Loaded buck performance and voltage transients",
+    "Firmware M7 not implemented"
+  ]
+}

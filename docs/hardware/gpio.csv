@@ -1,0 +1,17 @@
+﻿phase,group,signal,gpio,direction,from,to,level,pull,notes
+2,left,PWMA,25,OUTPUT,ESP32 GPIO25,TB6612 PWMA,3.3 V,10k to GND,LOW at boot
+2,left,AIN1,26,OUTPUT,ESP32 GPIO26,TB6612 AIN1,3.3 V,10k to GND,LOW at boot
+2,left,AIN2,27,OUTPUT,ESP32 GPIO27,TB6612 AIN2,3.3 V,10k to GND,LOW at boot
+2,right,PWMB,14,OUTPUT,ESP32 GPIO14,TB6612 PWMB,3.3 V,10k to GND,LOW at boot
+2,right,BIN1,16,OUTPUT,ESP32 GPIO16,TB6612 BIN1,3.3 V,10k to GND,LOW at boot
+2,right,BIN2,17,OUTPUT,ESP32 GPIO17,TB6612 BIN2,3.3 V,10k to GND,LOW at boot
+2,enable,STBY,23,OUTPUT,ESP32 GPIO23,TB6612 STBY,3.3 V,10k to GND,LOW at boot
+3,front,TRIG,18,OUTPUT,ESP32 GPIO18,AHCT125 input -> front TRIG,3.3 V -> 5 V,10k to GND,Buffer as shown in wiring.md
+3,front,ECHO,34,INPUT,front ECHO -> 10k/15k divider,ESP32 GPIO34,5 V -> 3.0 V nominal,15k divider bottom to GND,Never connect ECHO directly
+3,left,TRIG,19,OUTPUT,ESP32 GPIO19,AHCT125 input -> left TRIG,3.3 V -> 5 V,10k to GND,Buffer as shown in wiring.md
+3,left,ECHO,35,INPUT,left ECHO -> 10k/15k divider,ESP32 GPIO35,5 V -> 3.0 V nominal,15k divider bottom to GND,Never connect ECHO directly
+3,right,TRIG,21,OUTPUT,ESP32 GPIO21,AHCT125 input -> right TRIG,3.3 V -> 5 V,10k to GND,Buffer as shown in wiring.md
+3,right,ECHO,32,INPUT,right ECHO -> 10k/15k divider,ESP32 GPIO32,5 V -> 3.0 V nominal,15k divider bottom to GND,Never connect ECHO directly
+future,physical_stop_future,RESERVED,33,NOT_CONNECTED,,,,,No circuit implemented
+future,battery_adc1_future,RESERVED,36,NOT_CONNECTED,,,,,No circuit implemented
+future,spare,RESERVED,22,NOT_CONNECTED,,,,,No circuit implemented

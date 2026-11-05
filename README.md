@@ -4,6 +4,8 @@ Robot 2WD đi từ A đến B trên bản đồ có sẵn, phát hiện vật c�
 
 Phần cứng cho các giai đoạn sau đã được người dùng chốt theo bản Word ngày 06/11/2026; xem [cấu hình đã chốt](docs/hardware-decision.md). Chưa có xác nhận đã mua hoặc lắp xe.
 
+Đã chuẩn bị [sơ đồ nguồn, bảng GPIO và hướng dẫn lắp M6–M7](docs/hardware/wiring.md), gồm hình SVG/PNG, checklist và mẫu nhật ký đo. Cấu hình chân nằm trong `config/hardware_v1.json`; chạy `python tools/check_hardware_design.py` để kiểm tra nhất quán chân và tính bộ chia Echo. Đây là thiết kế chưa thử điện; chưa có firmware ESP32.
+
 ## Chạy nhanh trên máy hiện tại
 
 Mở PowerShell trong thư mục project:

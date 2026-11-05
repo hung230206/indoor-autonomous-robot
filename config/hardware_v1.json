@@ -1,0 +1,67 @@
+{
+  "revision": "1.0",
+  "status": "design_only_not_built_or_electrically_verified",
+  "board": "Ai-Thinker NodeMCU-32S CH340, classic ESP32-S, 38-pin",
+  "battery": {
+    "chemistry": "2S Li-ion, 4.2 V maximum per cell; verify purchased cells",
+    "max_pack_v": 8.4,
+    "bms_model": null,
+    "holder_requires_midpoint_lead": true,
+    "charging": "Remove cells; charge separately with the selected compatible two-slot charger"
+  },
+  "power": {
+    "logic_buck": "LM2596 #1",
+    "logic_target_v": 5.0,
+    "motor_buck": "LM2596 #2",
+    "motor_target_v": 5.0,
+    "tb6612_vcc_v": 3.3,
+    "logic_accept_min_v": 4.75,
+    "logic_accept_max_v": 5.25,
+    "motor_initial_target_tolerance_v": 0.1,
+    "provisional_min_pack_under_load_v": 7.0,
+    "ground_reference": "BMS P- protected output, never an extra connection to B-",
+    "esp32_power_entry": "Micro-USB via power-only cable from logic buck; disconnect before PC USB",
+    "fuse_current_a": null,
+    "motor_stall_current_a": null,
+    "normal_motor_current_design_target_a_per_channel": 0.6
+  },
+  "motor_control": {
+    "stby": 23,
+    "left": {"pwma": 25, "ain1": 26, "ain2": 27},
+    "right": {"pwmb": 14, "bin1": 16, "bin2": 17},
+    "outputs": {"left": ["AO1", "AO2"], "right": ["BO1", "BO2"]},
+    "external_pulldown_ohm": 10000,
+    "safe_boot": "All seven control lines LOW; STBY remains LOW until explicitly armed",
+    "stop": "PWM=0; STBY=0; high-impedance coast, not an instantaneous mechanical brake"
+  },
+  "sensors_phase3": {
+    "front": {"trig": 18, "echo": 34},
+    "left": {"trig": 19, "echo": 35},
+    "right": {"trig": 21, "echo": 32},
+    "echo_divider": {
+      "top_ohm": 10000,
+      "bottom_ohm": 15000,
+      "resistor_tolerance_fraction": 0.01,
+      "echo_design_high_v": 5.0,
+      "echo_design_high_max_v": 5.25
+    },
+    "trigger_buffer": {
+      "part": "SN74AHCT125N PDIP-14, optional phase-3 accessory for guaranteed 3.3V-to-5V TRIG",
+      "vcc_pin": 14,
+      "gnd_pin": 7,
+      "front": {"oe": 1, "a": 2, "y": 3},
+      "left": {"oe": 4, "a": 5, "y": 6},
+      "right": {"oe": 10, "a": 9, "y": 8},
+      "unused": {"oe_to_vcc": 13, "a_to_gnd": 12, "y_unconnected": 11},
+      "active_oe_connection": "GND",
+      "input_external_pulldown_ohm": 10000
+    }
+  },
+  "reserved_gpio": {"physical_stop_future": 33, "battery_adc1_future": 36, "spare": 22},
+  "firmware_requirements_proposed": {
+    "watchdog_ms": 250,
+    "command_period_ms": 50,
+    "initial_bench_pwm_fraction": 0.1,
+    "implemented": false
+  }
+}

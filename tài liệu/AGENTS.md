@@ -2,10 +2,10 @@
 project: indoor-autonomous-robot
 artifact_type: agent-handoff
 language: vi
-version: 1.2
+version: 1.3
 updated: 2026-11-06
-status: stage1-simulation-validated
-project_phase: 1
+status: stage2-hardware-design-prepared-not-built
+project_phase: 2
 hardware_status: selected-per-word-not-purchased
 owner_goal: Nien luan co so nganh Khoa hoc may tinh
 ---
@@ -15,6 +15,8 @@ owner_goal: Nien luan co so nganh Khoa hoc may tinh
 > **Dành cho coding/research agent.** Đọc file này trước khi thiết kế, tạo mã nguồn hoặc đề xuất mua linh kiện. Đây là **đặc tả kế hoạch**, không phải mô tả một hệ thống đã triển khai. Toàn bộ kết quả, ngân sách và ngưỡng nghiệm thu dưới đây là **dự kiến**, trừ khi có bằng chứng kiểm thử thực tế được bổ sung.
 
 **Cập nhật triển khai 06/11/2026:** đã có mã nguồn giai đoạn 1 tại thư mục gốc project. `README.md` hướng dẫn chạy, `docs/stage1-results.md` ghi số đo và `experiments/evidence/` chứa bằng chứng. Bộ 10 ca 2D và Webots đều đúng kỳ vọng (8 đến đích, 2 `NO_PATH`), thêm ca cản mới đóng cửa dừng `NO_PATH`; 14 test qua. Chỉ xác nhận mô phỏng, chưa có xe thật. Bản đầu dùng waypoint controller, tốc độ/ngưỡng và giao diện bánh m/s theo `config/robot.json`; đây chưa phải thông số cho xe thật. Các phần kế hoạch bên dưới giữ vai trò định hướng; kết quả đo mới nằm trong báo cáo.
+
+**Chuẩn bị M6–M7:** người dùng yêu cầu thiết kế đấu nối và xác nhận chưa mua linh kiện. Đã có `docs/hardware/wiring.md`, sơ đồ nguồn/tín hiệu và bảng GPIO theo `config/hardware_v1.json`. BMS/hộp/cell cụ thể và dòng kẹt motor còn cần xác minh. Chưa có firmware M7, chưa mua/lắp hoặc thử điện; không coi trạng thái phase 2 là đã hoàn thành nghiệm thu giai đoạn 2.
 
 ## 0. Quy tắc sử dụng tài liệu
 
