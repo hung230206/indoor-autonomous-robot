@@ -1,0 +1,65 @@
+[
+  {
+    "time_s": 0,
+    "state": "LOCALIZING",
+    "reason": "start"
+  },
+  {
+    "time_s": 0.03200000000000003,
+    "state": "PLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 0.03200000000000003,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 2.528,
+    "state": "REPLANNING",
+    "reason": "goal_changed",
+    "goal_m": [
+      0.55,
+      1.55
+    ]
+  },
+  {
+    "time_s": 2.528,
+    "state": "REPLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 2.528,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 13.088,
+    "state": "GOAL_REACHED",
+    "reason": "goal_tolerance"
+  },
+  {
+    "time_s": 13.152,
+    "state": "REPLANNING",
+    "reason": "goal_changed",
+    "goal_m": [
+      1.55,
+      1.55
+    ]
+  },
+  {
+    "time_s": 13.152,
+    "state": "REPLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 13.152,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 23.488,
+    "state": "GOAL_REACHED",
+    "reason": "goal_tolerance"
+  }
+]

@@ -22,7 +22,7 @@ def write_run(directory, config, scenario, frames, navigator, summary):
     with (directory / "trajectory.csv").open("w", newline="", encoding="utf-8") as stream:
         writer = csv.writer(stream)
         writer.writerow(FIELDS)
-        writer.writerows(frame_row(f, navigator.goal, summary["mode"]) for f in frames)
+        writer.writerows(frame_row(f, f.goal if f.goal is not None else navigator.goal, summary["mode"]) for f in frames)
     for name, data in (("summary.json", summary), ("paths.json", navigator.plans),
                        ("events.json", navigator.events), ("scenario.json", scenario),
                        ("config.json", asdict(config)),

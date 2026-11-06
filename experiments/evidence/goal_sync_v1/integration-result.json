@@ -1,0 +1,124 @@
+{
+  "passed": true,
+  "startup": {
+    "known_start": [
+      0.35,
+      0.35,
+      0
+    ],
+    "removed_transient_nodes": [],
+    "policy": "reset_scripted_episode_to_A_before_sensor_baselines",
+    "configured_goal_m": [
+      2.65,
+      1.65
+    ],
+    "scene_goal_m": [
+      0.35,
+      1.45
+    ],
+    "goal_source": "GOAL_MARKER",
+    "initial_encoders_rad": [
+      -2.5142554704871145e-10,
+      -2.384048514159076e-10
+    ],
+    "initial_imu_yaw_rad": 7.917077437748735e-09,
+    "simulation_start_s": 0.512
+  },
+  "missions": [
+    {
+      "scenario": "open",
+      "mode": "webots_ego_yolo",
+      "expected": "GOAL_REACHED",
+      "state": "GOAL_REACHED",
+      "passed": true,
+      "time_s": 13.088,
+      "distance_m": 1.234106340439937,
+      "plans": 2,
+      "collision": false,
+      "inflated_grid_violation": false,
+      "goal_error_m": 0.04357684185221107,
+      "max_planning_ms": 0.4079000000274391,
+      "webots_version": "R2025a",
+      "vision_packets": 52,
+      "visual_occupied_cells": 0,
+      "range_mapping_enabled": true,
+      "pose_source": "encoder_imu_odometry",
+      "camera_mount": "onboard_front",
+      "max_odometry_error_m": 0.004888026806197258,
+      "true_goal_error_m": 0.03875207717678126,
+      "goal_m": [
+        0.55,
+        1.55
+      ],
+      "goal_source": "GOAL_MARKER",
+      "goal_changes": [
+        {
+          "time_s": 0,
+          "goal_m": [
+            0.35,
+            1.45
+          ]
+        },
+        {
+          "time_s": 2.528,
+          "goal_m": [
+            0.55,
+            1.55
+          ]
+        }
+      ],
+      "goal_elapsed_s": 10.559999999999999
+    },
+    {
+      "scenario": "open",
+      "mode": "webots_ego_yolo",
+      "expected": "GOAL_REACHED",
+      "state": "GOAL_REACHED",
+      "passed": true,
+      "time_s": 23.488,
+      "distance_m": 2.2241783659420022,
+      "plans": 3,
+      "collision": false,
+      "inflated_grid_violation": false,
+      "goal_error_m": 0.04316467067872926,
+      "max_planning_ms": 0.4079000000274391,
+      "webots_version": "R2025a",
+      "vision_packets": 92,
+      "visual_occupied_cells": 0,
+      "range_mapping_enabled": true,
+      "pose_source": "encoder_imu_odometry",
+      "camera_mount": "onboard_front",
+      "max_odometry_error_m": 0.006104576542091466,
+      "true_goal_error_m": 0.04025490358423175,
+      "goal_m": [
+        1.55,
+        1.55
+      ],
+      "goal_source": "GOAL_MARKER",
+      "goal_changes": [
+        {
+          "time_s": 0,
+          "goal_m": [
+            0.35,
+            1.45
+          ]
+        },
+        {
+          "time_s": 2.528,
+          "goal_m": [
+            0.55,
+            1.55
+          ]
+        },
+        {
+          "time_s": 13.152,
+          "goal_m": [
+            1.55,
+            1.55
+          ]
+        }
+      ],
+      "goal_elapsed_s": 10.336
+    }
+  ]
+}

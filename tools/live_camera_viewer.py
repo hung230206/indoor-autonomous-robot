@@ -31,7 +31,7 @@ def main():
     navigation_text=tk.StringVar(value='FSM: waiting')
     tk.Label(root,textvariable=camera_text,fg='#67e8f9',bg='#111827',font=('Segoe UI',11)).pack(pady=3)
     tk.Label(root,textvariable=navigation_text,fg='white',bg='#111827',font=('Segoe UI',11)).pack()
-    tk.Label(root,text='Reload World trong Webots de chay lai. Dong cua so nay khong dung robot.',fg='#94a3b8',bg='#111827',font=('Segoe UI',10)).pack(pady=6)
+    tk.Label(root,text='Dời chấm đỏ để đổi đích; nếu đang Pause, bấm Real-time. Reload World về A / xóa SAFE_STOP.',fg='#94a3b8',bg='#111827',font=('Segoe UI',10)).pack(pady=6)
     versions={}
 
     def refresh():
@@ -57,7 +57,9 @@ def main():
             pass
         try:
             nav=json.loads((args.output/'live-navigation.json').read_text(encoding='utf-8'))
-            navigation_text.set(f"FSM: {nav['state']} | A*: {nav['plans']} | Vision cells: {nav['vision_cells']} | Pose: ({nav['x']:.2f}, {nav['y']:.2f}) m | {nav['reason']}")
+            goal=nav.get('goal_m')
+            target=f" | Đích: ({goal[0]:.2f}, {goal[1]:.2f}) | Còn: {nav['goal_distance_m']:.2f} m" if goal else ''
+            navigation_text.set(f"FSM: {nav['state']} | A*: {nav['plans']} | Pose: ({nav['x']:.2f}, {nav['y']:.2f}) m"+target)
         except (OSError,ValueError,KeyError):
             pass
         root.after(150,refresh)

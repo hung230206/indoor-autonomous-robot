@@ -47,7 +47,7 @@ Solid {{
     for i, rect in enumerate(scenario["obstacles"]):
         pieces.append(solid_box(f"STATIC_{i}",rect))
     gx, gy = scenario["goal"]
-    pieces.append(f'''Transform {{ translation {gx} {gy} 0.002 children [ Shape {{ appearance PBRAppearance {{ baseColor 0.85 0.12 0.3 roughness 1 metalness 0 }} geometry Cylinder {{ radius 0.045 height 0.003 }} }} ] }}''')
+    pieces.append(f'''DEF GOAL_MARKER Transform {{ translation {gx} {gy} 0.002 children [ Shape {{ appearance PBRAppearance {{ baseColor 0.85 0.12 0.3 roughness 1 metalness 0 }} geometry Cylinder {{ radius 0.045 height 0.003 }} }} ] }}''')
     sx, sy, theta = scenario["start"]
     children = [f'''Shape {{ appearance PBRAppearance {{ baseColor 0.06 0.58 0.47 roughness 0.6 metalness 0 }} geometry Box {{ size {c.body_length_m} {c.body_width_m-.05} 0.035 }} }}
       Transform {{ translation 0.065 0 0.022 children [ Shape {{ appearance PBRAppearance {{ baseColor 0.95 0.55 0.2 }} geometry Box {{ size 0.025 0.07 0.009 }} }} ] }}''']

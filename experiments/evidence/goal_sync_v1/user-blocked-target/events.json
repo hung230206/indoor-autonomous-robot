@@ -1,0 +1,137 @@
+[
+  {
+    "time_s": 0,
+    "state": "LOCALIZING",
+    "reason": "start"
+  },
+  {
+    "time_s": 0.03200000000000003,
+    "state": "PLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 0.03200000000000003,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 1.312,
+    "state": "OBSTACLE_STOP",
+    "reason": "path_blocked"
+  },
+  {
+    "time_s": 1.344,
+    "state": "REPLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 1.344,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 1.568,
+    "state": "OBSTACLE_STOP",
+    "reason": "path_blocked"
+  },
+  {
+    "time_s": 1.6,
+    "state": "REPLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 1.6,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 1.7280000000000002,
+    "state": "OBSTACLE_STOP",
+    "reason": "path_blocked"
+  },
+  {
+    "time_s": 1.7600000000000002,
+    "state": "REPLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 1.7600000000000002,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 1.8239999999999998,
+    "state": "OBSTACLE_STOP",
+    "reason": "path_blocked"
+  },
+  {
+    "time_s": 1.8559999999999999,
+    "state": "REPLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 1.8559999999999999,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 11.968,
+    "state": "OBSTACLE_STOP",
+    "reason": "path_blocked"
+  },
+  {
+    "time_s": 12.0,
+    "state": "REPLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 12.0,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 12.064,
+    "state": "OBSTACLE_STOP",
+    "reason": "path_blocked"
+  },
+  {
+    "time_s": 12.096,
+    "state": "REPLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 12.096,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 16.224,
+    "state": "OBSTACLE_STOP",
+    "reason": "path_blocked"
+  },
+  {
+    "time_s": 16.256,
+    "state": "REPLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 16.256,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 24.352,
+    "state": "OBSTACLE_STOP",
+    "reason": "path_blocked"
+  },
+  {
+    "time_s": 24.384,
+    "state": "REPLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 24.384,
+    "state": "NO_PATH",
+    "reason": "start_or_goal_blocked_or_disconnected"
+  }
+]

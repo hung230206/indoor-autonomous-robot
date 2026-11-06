@@ -21,8 +21,11 @@ def main():
     parser.add_argument('--scenario',default='yolo_many_boxes')
     parser.add_argument('--paused',action='store_true')
     parser.add_argument('--overhead',action='store_true',help='Legacy overhead-camera experiment')
+    parser.add_argument('--goal',nargs=2,type=float,metavar=('X','Y'),help='Initial scene goal in metres')
     args=parser.parse_args()
     scenario=get_scenario(args.scenario)
+    if args.goal is not None:
+        scenario.update(goal=args.goal,expected='GOAL_REACHED',require_replan=False)
     configure_camera_runtime('vision_camera' if args.overhead else 'stage1')
     output=ROOT/'experiments/runs'/('live_'+('overhead_' if args.overhead else 'ego_')+args.scenario+'_'+datetime.now().strftime('%Y%m%d_%H%M%S_%f'))
     output.mkdir(parents=True)

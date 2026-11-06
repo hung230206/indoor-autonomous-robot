@@ -49,7 +49,7 @@ python run.py world --scenario replanning
 & "$env:LOCALAPPDATA\Programs\Webots\msys64\mingw64\bin\webots.exe" --mode=pause "$PWD\worlds\stage1.wbt"
 ```
 
-Nhấn nút chạy trong Webots. Robot dùng hai motor vật lý, bánh đỡ ma sát thấp và ba DistanceSensor. Hộp màu cam xuất hiện sau 3 giây. Đường ban đầu màu xám, đường đang dùng màu xanh. Kết thúc, controller dừng motor, ghi log và chuyển Webots sang pause. Để chạy lại từ đầu, chọn **Simulation → Reset**.
+Nhấn nút chạy trong Webots. Robot dùng hai motor vật lý, bánh đỡ ma sát thấp và ba DistanceSensor. Hộp màu cam xuất hiện sau 3 giây. Đường ban đầu màu xám, đường đang dùng màu xanh. Đến đích, controller dừng motor, ghi log và tiếp tục chờ đích mới. Dời chấm đỏ để đổi đích; nếu đang Pause thì bấm Real-time. **Reload World** bắt đầu lại từ A. SAFE_STOP vẫn có chốt và cần Reload để khởi động lại.
 
 Lấy pose lý tưởng từ Supervisor là lựa chọn có chủ đích của giai đoạn 1. Đây không phải kết quả định vị bằng camera. World được tạo từ cùng JSON với thuật toán, không tải PROTO từ Internet. Đổi `config/robot.json` hoặc `config/scenarios.json` thì cần chạy lại lệnh tạo world.
 

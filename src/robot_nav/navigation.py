@@ -31,6 +31,21 @@ class Navigator:
     def stop(self, now=0):
         self.transition("SAFE_STOP", "user_stop", now)
 
+    def set_goal(self,goal,now):
+        if len(goal)!=2 or not all(math.isfinite(v) for v in goal):
+            self.transition('SAFE_STOP','invalid_goal',now)
+            return False
+        goal=tuple(goal)
+        if goal==self.goal or self.state in ('SAFE_STOP','TIMEOUT'):
+            return False
+        self.goal=goal
+        self.path=[]
+        self.waypoints=[]
+        self.index=0
+        self.transition('REPLANNING','goal_changed',now)
+        self.events[-1]['goal_m']=list(goal)
+        return True
+
     def _plan(self, pose, now):
         self.transition("PLANNING" if self.path_id == 0 else "REPLANNING", "plan", now)
         started = time.perf_counter()
@@ -73,7 +88,7 @@ class Navigator:
         if min(ranges.front, ranges.left, ranges.right) < self.config.stop_range_m:
             self.transition("SAFE_STOP", "range_danger", now)
             return Command()
-        if self.state == "LOCALIZING" or self.state == "OBSTACLE_STOP":
+        if self.state in ("LOCALIZING","OBSTACLE_STOP","REPLANNING"):
             self._plan(pose, now)
             return Command()  # Planning never issues motion in the same cycle.
         remaining = [(pose.x, pose.y)] + self.waypoints[self.index:]

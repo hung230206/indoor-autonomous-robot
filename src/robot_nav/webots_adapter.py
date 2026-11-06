@@ -9,6 +9,7 @@ from .simulation import Frame, rect_distance
 from .recording import write_run
 from .webots_world import solid_box
 from .webots_episode import reset_episode, archive_previous_run
+from .webots_goal import SceneGoal
 
 
 class WebotsAdapter:
@@ -50,7 +51,14 @@ def run():
         return
     metadata = json.loads(robot.getCustomData())
     c, scenario = Config(**metadata["config"]), metadata["scenario"]
+    marker=SceneGoal(robot)
+    configured_goal=tuple(scenario['goal'])
+    scenario['goal']=list(marker.read())
+    custom_goal=math.dist(configured_goal,scenario['goal'])>1e-4
+    if custom_goal:
+        scenario.update(expected='GOAL_REACHED',require_replan=False)
     startup=reset_episode(robot,scenario)
+    startup.update({'configured_goal_m':configured_goal,'scene_goal_m':scenario['goal'],'goal_source':marker.source})
     adapter = WebotsAdapter(robot,c)
     grid = Grid(c,scenario["obstacles"])
     nav = Navigator(grid,scenario["goal"])
@@ -111,10 +119,70 @@ def run():
     collision = violation = False
     max_pose_error=0.0
     evaluations=[]
+    truth=adapter.pose(0)
+    terminal_saved=False
+    goal_started_s=0.0
+    goal_changes=[{'time_s':0,'goal_m':list(nav.goal)}]
+    batch=os.environ.get('ROBOT_BATCH')=='1'
+    def publish_live_navigation(pose,now):
+        if os.environ.get('ROBOT_LIVE')!='1': return
+        temporary=output/'live-navigation.tmp.json'
+        temporary.write_text(json.dumps({'timestamp':now,'state':nav.state,'reason':nav.reason,
+            'plans':nav.path_id,'vision_cells':len(grid.vision),'x':pose.x,'y':pose.y,
+            'goal_m':list(nav.goal),'goal_distance_m':math.dist((pose.x,pose.y),nav.goal)}),encoding='utf-8')
+        try:
+            os.replace(temporary,output/'live-navigation.json')
+        except PermissionError:
+            pass
+
+    def save_result():
+        passed = (nav.state == scenario["expected"] and not collision and not violation and
+                  (not scenario.get("require_replan") or nav.path_id > 1))
+        summary = {"scenario":scenario["name"],"mode":"webots", "expected":scenario["expected"],
+                   "state":nav.state,"passed":passed,"time_s":frames[-1].time if frames else 0,
+                   "distance_m":distance,"plans":nav.path_id,"collision":collision,
+                   "inflated_grid_violation":violation,"goal_error_m":math.dist((previous.x,previous.y),nav.goal),
+                   "max_planning_ms":max((p["duration_ms"] for p in nav.plans),default=0),
+                   "webots_version":(Path(os.environ["WEBOTS_HOME"])/"resources/version.txt").read_text().strip()}
+        if visual:
+            summary.update({'mode':'webots_yolo','vision_packets':vision_packets,
+                            'visual_occupied_cells':len(grid.vision),'range_mapping_enabled':False})
+        if ego:
+            summary.update({'mode':'webots_ego_yolo','range_mapping_enabled':True,
+                'pose_source':'encoder_imu_odometry','camera_mount':'onboard_front',
+                'max_odometry_error_m':max_pose_error,
+                'true_goal_error_m':math.dist((truth.x,truth.y),nav.goal)})
+            if nav.state=='GOAL_REACHED':
+                summary['passed']=passed and summary['true_goal_error_m']<=c.goal_tolerance_m
+            (output/'pose-evaluation.json').write_text(json.dumps(evaluations),encoding='utf-8')
+        summary.update({'goal_m':list(nav.goal),'goal_source':marker.source,'goal_changes':goal_changes,
+                        'goal_elapsed_s':(frames[-1].time if frames else 0)-goal_started_s})
+        print('[NAV] state='+nav.state+' | task_passed='+str(summary['passed'])+' | goal_m='+str(list(nav.goal)),flush=True)
+        print(json.dumps(summary),flush=True)
+        if movie:
+            robot.exportImage(str(output / "scene.jpg"),95)
+        write_run(output,c,scenario,frames,nav,summary)
+        return summary
+
     try:
         while robot.step(round(c.dt_s*1000)) != -1:
             now = robot.getTime()-start
             elapsed = now
+            try:
+                requested_goal=marker.read()
+            except ValueError:
+                if nav.state!='SAFE_STOP' or nav.reason!='invalid_goal_marker':
+                    terminal_saved=False
+                nav.transition('SAFE_STOP','invalid_goal_marker',now)
+                requested_goal=nav.goal
+            if math.dist(requested_goal,nav.goal)>1e-4 and nav.set_goal(requested_goal,now):
+                archive_previous_run(output)
+                scenario.update(goal=list(nav.goal),expected='GOAL_REACHED',require_replan=False)
+                goal_changes.append({'time_s':now,'goal_m':list(nav.goal)})
+                goal_started_s=now
+                terminal_saved=False
+                print('[NAV] New scene goal: '+str(list(nav.goal)),flush=True)
+            waiting=terminal_saved and nav.state in TERMINAL
             for i,event in enumerate(scenario.get("spawn",[])):
                 if i not in spawned and elapsed >= event["at_s"]:
                     robot.getRoot().getField("children").importMFNodeFromString(-1,solid_box(f"DYNAMIC_{i}",event["rect"],color="0.93 0.48 0.23"))
@@ -127,7 +195,7 @@ def run():
             else:
                 pose=truth
             max_pose_error=max(max_pose_error,math.dist((pose.x,pose.y),(truth.x,truth.y)))
-            if ego:
+            if ego and not waiting:
                 evaluations.append({'time_s':now,'odometry':[pose.x,pose.y,pose.theta],
                     'ground_truth':[truth.x,truth.y,truth.theta],
                     'encoders':[sensor.getValue() for sensor in encoders]})
@@ -146,6 +214,12 @@ def run():
                         nav.transition('SAFE_STOP','invalid_vision_packet',now)
                     finally:
                         receiver.nextPacket()
+            if waiting:
+                adapter.command(Command())
+                if round(now/c.dt_s)%8==0:
+                    publish_live_navigation(pose,now)
+                previous=pose
+                continue
             distance += math.dist((pose.x,pose.y),(previous.x,previous.y))
             previous = pose
             # Conservative footprint check independent of the planner.
@@ -182,53 +256,28 @@ def run():
             if collision or violation:
                 nav.transition("SAFE_STOP","collision_or_inflated_grid_violation",now)
                 cmd = Command()
-            if elapsed >= c.max_time_s and nav.state not in TERMINAL:
+            if elapsed-goal_started_s >= c.max_time_s and nav.state not in TERMINAL:
                 nav.transition("TIMEOUT","scenario_time_limit",now)
                 cmd = Command()
             adapter.command(cmd)
             if os.environ.get('ROBOT_LIVE')=='1' and (len(frames)%8==0 or nav.state in TERMINAL):
-                temporary=output/'live-navigation.tmp.json'
-                temporary.write_text(json.dumps({'timestamp':now,'state':nav.state,'reason':nav.reason,
-                    'plans':nav.path_id,'vision_cells':len(grid.vision),'x':pose.x,'y':pose.y}),encoding='utf-8')
-                try:
-                    os.replace(temporary,output/'live-navigation.json')
-                except PermissionError:
-                    pass  # Read-only monitor may briefly hold the previous snapshot.
-            frames.append(Frame(elapsed,pose,ranges,cmd,nav.state,nav.reason,nav.path_id,collision))
+                publish_live_navigation(pose,now)
+            frames.append(Frame(elapsed,pose,ranges,cmd,nav.state,nav.reason,nav.path_id,collision,nav.goal))
             if movie and (len(frames) % 4 == 1 or nav.state in TERMINAL):
                 robot.exportImage(str(output / "frames" / f"frame-{captured:05d}.jpg"),85)
                 captured += 1
             if nav.state in TERMINAL:
-                break
+                if batch:
+                    break
+                summary=save_result()
+                terminal_saved=True
     finally:
         adapter.command(Command())
         # Allow one physics step to consume the final zero command.
         robot.step(round(c.dt_s*1000))
-        passed = (nav.state == scenario["expected"] and not collision and not violation and
-                  (not scenario.get("require_replan") or nav.path_id > 1))
-        summary = {"scenario":scenario["name"],"mode":"webots", "expected":scenario["expected"],
-                   "state":nav.state,"passed":passed,"time_s":frames[-1].time if frames else 0,
-                   "distance_m":distance,"plans":nav.path_id,"collision":collision,
-                   "inflated_grid_violation":violation,"goal_error_m":math.dist((previous.x,previous.y),nav.goal),
-                   "max_planning_ms":max((p["duration_ms"] for p in nav.plans),default=0),
-                   "webots_version":(Path(os.environ["WEBOTS_HOME"])/"resources/version.txt").read_text().strip()}
-        if visual:
-            summary.update({'mode':'webots_yolo','vision_packets':vision_packets,
-                            'visual_occupied_cells':len(grid.vision),'range_mapping_enabled':False})
+        if not terminal_saved:
+            summary=save_result()
         if ego:
-            summary.update({'mode':'webots_ego_yolo','range_mapping_enabled':True,
-                'pose_source':'encoder_imu_odometry','camera_mount':'onboard_front',
-                'max_odometry_error_m':max_pose_error,
-                'true_goal_error_m':math.dist((truth.x,truth.y),nav.goal)})
-            if nav.state=='GOAL_REACHED':
-                summary['passed']=passed and summary['true_goal_error_m']<=c.goal_tolerance_m
             ego.log.close()
-            (output/'pose-evaluation.json').write_text(json.dumps(evaluations),encoding='utf-8')
-        write_run(output,c,scenario,frames,nav,summary)
-        print(json.dumps(summary),flush=True)
-        if movie:
-            robot.exportImage(str(output / "scene.jpg"),95)
-        if os.environ.get("ROBOT_BATCH") == "1":
+        if batch:
             robot.simulationQuit(0 if summary['passed'] else 1)
-        else:
-            robot.simulationSetMode(Supervisor.SIMULATION_MODE_PAUSE)

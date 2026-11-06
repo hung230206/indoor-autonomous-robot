@@ -105,6 +105,7 @@ class Frame:
     reason: str
     path_id: int
     collision: bool
+    goal: tuple | None = None
 
 
 class Simulation:

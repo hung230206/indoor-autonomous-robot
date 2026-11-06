@@ -14,7 +14,13 @@ Mặc định mở ca `yolo_many_boxes`: 5 hộp xuất hiện sau một giây. 
 
 Ca một hộp: `--scenario yolo_far_box`. Bản trên cao cũ chỉ mở khi chọn `--overhead`; không dùng nó thay cho góc nhìn từ xe.
 
-**Chạy lại sau khi đã lưu world:** controller đưa xe về A và dọn các node `DYNAMIC_i`/`CURRENT_ROUTE` do kịch bản tạo, trước khi lấy mốc encoder/IMU. Đây là đặt điều kiện đầu của bài mô phỏng, không lấy pose thật để sửa odometry khi xe chạy. Encoder có thể còn góc khác 0; góc ban đầu được trừ làm offset. Dùng **Reload World** để bắt đầu lượt mới. Chỉ bấm Play sau khi controller đã kết thúc sẽ không khởi động lại controller.
+**Chạy lại sau khi đã lưu world:** controller đưa xe về A và dọn các node `DYNAMIC_i`/`CURRENT_ROUTE` do kịch bản tạo, trước khi lấy mốc encoder/IMU. Đây là đặt điều kiện đầu của bài mô phỏng, không lấy pose thật để sửa odometry khi xe chạy. Encoder có thể còn góc khác 0; góc ban đầu được trừ làm offset. Dùng **Reload World** để bắt đầu lượt mới từ A.
+
+**Dời đích:** chấm đỏ `DEF GOAL_MARKER` là nguồn tọa độ đích của bộ điều hướng. Dời nó trong Webots thì xe dừng lệnh hiện tại, lập lại đường từ pose đang ước lượng và đi tới đích mới. World cũ chưa có DEF vẫn được nhận diện qua hình chấm đỏ. Giao diện hiện tọa độ đích và khoảng cách còn lại; log ghi đích của từng khung, không sửa toàn bộ lịch sử thành đích cuối.
+
+Sau `GOAL_REACHED` hoặc `NO_PATH`, controller tương tác vẫn chạy với lệnh bánh bằng 0 và chờ đích mới; không tự thoát hay tự pause. Nếu bạn đang Pause, bấm Real-time sau khi dời đích. `SAFE_STOP`/`TIMEOUT` vẫn có chốt, đổi đích không xóa lỗi an toàn; Reload World để bắt đầu lại. Cửa sổ Webots đã mở bằng controller cũ cần nạp lại mã mới một lần. Có thể mở thẳng một đích bằng `tools/run_live_demo.py --goal 2.1 1.4`.
+
+`[NAV] state=GOAL_REACHED | task_passed=True | goal_m=[...]` là thông báo kết quả nhiệm vụ. Dòng Webots `controller exited successfully` chỉ nói tiến trình kết thúc bình thường. Ngưỡng đến đích hiện là 4,5 cm theo pose điều hướng; bảng kết quả còn đối chiếu sai số vị trí thật trong simulator. Đích ngoài map hoặc bị chặn không được kẹp về một điểm khác để báo thành công.
 
 Launcher tạo `worlds/runtime_*.wbt` riêng cho từng lượt và lưu bản sao `world.wbt` trong output; không ghi đè world bạn đã chỉnh/lưu. Nếu chạy lại controller trong cùng thư mục output, kết quả cũ được giữ dưới `history/`. Tệp `startup.json` ghi điểm A, các hộp cũ đã dọn và mốc encoder/IMU để kiểm tra lỗi khởi động.
 

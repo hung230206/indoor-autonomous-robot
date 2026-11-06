@@ -1,0 +1,22 @@
+{
+  "baseline-results.csv": "30a67866bc86d1413ae77c9db78e22f95ca12c8b6f07933a8b85bfc1938ad4b7",
+  "camera-calibration.json": "c94510cc3dc01af43e62aaddb7a5c012f912629937c6bad81e3c63a3848851e7",
+  "events.json": "38a91c4e5b22d13f88ccfe2ab896716739147dbc567f3080fb6ff53392fe289d",
+  "integration-result.json": "2a24ae0d185d208b4c9d97321cb85ab6f79071fe3fac56270e18b3188e5dcabc",
+  "integration-world.wbt": "1de414e9a1a9b22713754b1d50ddf2a571a47c83b58866474c9296d128dfd284",
+  "pose-evaluation.json": "23a545bf1a3a347380672473cd95c7f8545e7f6fa6849048c3695cdd98a5bae5",
+  "README.md": "44501a032ec6aaa3d0cb34035c8ed54dd619e1777e10900a2444f5139d93dd05",
+  "scenario.json": "4c0d1519184143f5064315a87b14f9f1f064070345ed55ed2ee8e8e0be39bfc0",
+  "startup.json": "e1668aa33aa9441ab5236ee213bcf67d25fec96bba5a7716ece54d775645ed71",
+  "summary.json": "4d33063546f7e3dfa9e94ac058a3e89c87dd918d372df77d859f26d4ff870d2e",
+  "tests.txt": "8d30c96217d3c110e93c7e3be0abd18d1fce7ee6700b27cf450ed8c02dd7a77e",
+  "trajectory.csv": "376343b85b193a334427cb81e428f208c2507616e68b2ce082098929c5e213b2",
+  "legacy-marker/events.json": "3549576e50b2bbbd843d3f4ef1dcb93f171c17939f32d3187103b218c4c01e35",
+  "legacy-marker/map_inflated.csv": "ddf7cd65240166544a94c31359a8a00c4cf6cc0b64954167b89550b28091d9df",
+  "legacy-marker/startup.json": "8f31dc067d952a6d9a01d4d699a4ee67c1527a4231e33d8e1f4cf5cf9d2444eb",
+  "legacy-marker/summary.json": "95df55f24fff880f5756b08464cb3e563e85e7b03eeeeae2dacc70d28051384b",
+  "user-blocked-target/events.json": "f5271bdedd4d616096303b640822e75577558db23273085a27e35591d95e55bf",
+  "user-blocked-target/map_inflated.csv": "491c62f1b8e02377702ca1c4f18b697535fbded6c6c63a3d08659fa24c7fb562",
+  "user-blocked-target/startup.json": "46cf4a2a1373e1a5e712a5b42cb9899df44eaa271fbaa860da17cdfc40e6a20b",
+  "user-blocked-target/summary.json": "e4a7ee3132ccc462901c23fb5be307043d6899178d7078a18ef7e633b780e199"
+}
