@@ -33,7 +33,7 @@ def locate_webots():
 
 def run_one(binary,config,scenario,output,record=False,timeout=180,vision=False):
     output=output.resolve()
-    world=ROOT/"worlds"/(scenario["name"]+('_yolo' if vision else '')+".wbt")
+    world=ROOT/"worlds"/(scenario["name"]+('_ego' if vision=='ego' else '_yolo' if vision else '')+".wbt")
     generate_world(config,scenario,world,vision=vision)
     output.mkdir(parents=True,exist_ok=True)
     # A failed run cannot be mistaken for a previous successful result.
@@ -45,11 +45,11 @@ def run_one(binary,config,scenario,output,record=False,timeout=180,vision=False)
                 "PYTHONIOENCODING":"utf-8"})
     if vision:
         from robot_nav.vision import configure_camera_runtime
-        configure_camera_runtime()
+        configure_camera_runtime('stage1' if vision=='ego' else 'vision_camera')
         env.update({'PATH':str(Path(sys.executable).parent)+os.pathsep+env['PATH'],
                     'YOLO_CONFIG_DIR':str(ROOT/'.cache/ultralytics'),'MPLBACKEND':'Agg'})
         if 'vision_dropout_after_s' in scenario:
-            env['ROBOT_VISION_DROP_AFTER_S']=str(scenario['vision_dropout_after_s']+16*config.dt_s)
+            env['ROBOT_EGO_DROP_AFTER_S' if vision=='ego' else 'ROBOT_VISION_DROP_AFTER_S']=str(scenario['vision_dropout_after_s']+(0 if vision=='ego' else 16*config.dt_s))
     args=[str(binary),"--batch","--mode=fast","--minimize","--stdout","--stderr"]
     if not record and not vision:
         args.append("--no-rendering")
@@ -89,7 +89,11 @@ def run_one(binary,config,scenario,output,record=False,timeout=180,vision=False)
         (output/"frames").rmdir()
         if vision and (output/'camera-frames').exists():
             from robot_nav.vision import vision_config
-            fps=1/(vision_config()['sample_steps']*config.dt_s)
+            if vision=='ego':
+                from robot_nav.onboard import ego_config
+                fps=1/(ego_config()['sample_steps']*config.dt_s)
+            else:
+                fps=1/(vision_config()['sample_steps']*config.dt_s)
             subprocess.run([str(ffmpeg),'-y','-hide_banner','-loglevel','error','-framerate',str(fps),
                 '-i',str(output/'camera-frames/frame-%05d.jpg'),'-c:v','libx264','-pix_fmt','yuv420p',
                 '-movflags','+faststart',str(output/'yolo-camera.mp4')],check=True,timeout=120,capture_output=True)
@@ -106,13 +110,14 @@ def main():
     parser.add_argument("--all",action="store_true")
     parser.add_argument("--record",action="store_true")
     parser.add_argument("--yolo",action="store_true",help="Use fixed RGB camera and trained YOLO box detector")
+    parser.add_argument('--ego',action='store_true',help='Onboard front RGB + YOLO + wheel encoder odometry')
     parser.add_argument("--timeout",type=int,default=180)
     parser.add_argument("--output",type=Path,default=ROOT/"experiments/runs/webots")
     args=parser.parse_args()
     selected=scenarios() if args.all else [get_scenario(args.scenario)]
     results=[]
     for scenario in selected:
-        results.append(run_one(locate_webots(),Config.load(),scenario,args.output/scenario['name'],args.record,args.timeout,args.yolo))
+        results.append(run_one(locate_webots(),Config.load(),scenario,args.output/scenario['name'],args.record,args.timeout,'ego' if args.ego else args.yolo))
     write_batch(args.output,results)
     if not all(r['passed'] for r in results):
         raise SystemExit(1)

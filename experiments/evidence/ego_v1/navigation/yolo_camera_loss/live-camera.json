@@ -1,0 +1,1 @@
+{"timestamp": 1.8239999999999998, "detections": [], "latency_ms": 17.679900000075577, "mode": "onboard_rgb", "pose_source": "encoder_imu_odometry", "capture_pose": {"x": 0.5354556956266544, "y": 1.049999999951574, "theta": 2.932393883270379e-09, "timestamp": 1.8239999999999998, "valid": true}, "mapped_rects": []}

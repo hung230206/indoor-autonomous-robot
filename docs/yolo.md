@@ -1,5 +1,7 @@
 # YOLO nhận diện hộp cản trong Webots
 
+**Bản camera trên cao (lịch sử).** Yêu cầu mới chuyển camera lên xe đã có [thiết kế và cách chạy riêng](ego-vision.md). `run_live_demo.py` hiện mặc định camera trên xe; thêm `--overhead` để chạy lại thí nghiệm trên cao mô tả ở trang này. Các chỉ số `yolo_v1` không áp dụng cho model ego.
+
 Phần mở rộng giai đoạn 1 theo yêu cầu ngày 06/11/2026: bổ sung thành phần máy học vào hệ thống điều hướng. Bản đầu nhận diện **một lớp `box`** từ ảnh RGB của camera cố định trên cao. Chưa nhận diện mọi loại vật cản và chưa kiểm chứng với điện thoại thật.
 
 ## Kiến trúc
@@ -48,6 +50,18 @@ Chỉ nhận nhãn `box` với confidence ≥0,5; mỗi ô cần quan sát ở *
 Không có ảnh mới quá 0,65 giây mô phỏng dẫn đến `SAFE_STOP`; trước ảnh hợp lệ đầu tiên xe giữ đứng yên, tối đa có 1 giây chờ khởi động. Webots đồng bộ các controller nên inference chậm làm mô phỏng chạy chậm theo đồng hồ thực; bài thử này **không chứng minh watchdog an toàn cho một xe vật lý khi chương trình laptop bị treo**. Xe thật vẫn cần watchdog độc lập trên ESP32.
 
 ## Cài và chạy
+
+### Xem trực tiếp camera và nhiều vật cản
+
+```powershell
+.\.venv-yolo\Scripts\python.exe tools/run_live_demo.py --overhead
+```
+
+Lệnh mở Webots và cửa sổ **Robot vision - Camera RGB + YOLO live**. Kịch bản `yolo_many_boxes` thêm 5 hộp sau 1 giây mô phỏng, chưa đưa chúng vào bản đồ ban đầu. Cửa sổ bên trái là ảnh RGB camera trên cao; bên phải là cùng nguồn ảnh có khung `box` và confidence do YOLO dự đoán. Phía dưới có thời điểm camera, thời gian suy luận, số hộp, trạng thái FSM, số lần A* và số ô thị giác. Đây là camera cố định bên ngoài xe theo thiết kế, chưa có camera gắn trên xe.
+
+Viewer đọc các snapshot `live-raw.jpg`, `live-yolo.jpg`, `live-camera.json` và `live-navigation.json` trong thư mục lượt chạy. Snapshot được thay nguyên tệp để tránh đọc ảnh đang ghi dở, xuất cả khung không có detection. Viewer không gửi lệnh hoặc dữ liệu vào bộ điều hướng; đóng viewer không dừng robot. Khi camera không cập nhật hơn 3 giây đồng hồ thực, viewer ghi khung cũ/mô phỏng tạm dừng. Đây là chỉ báo hiển thị, độc lập với luật freshness theo thời gian mô phỏng của FSM.
+
+Dùng `--paused` để mở ở trạng thái tạm dừng rồi bấm **Real-time** trong Webots; **Reload World** để chạy lại. `--scenario yolo_far_box` chọn ca một hộp. Lượt chạy được lưu riêng dưới `experiments/runs/live_*`, không ghi đè bằng chứng báo cáo trước.
 
 Lõi mô phỏng không bắt buộc cài YOLO. Môi trường thử hiện tại dùng Python 3.14.4 và `.venv-yolo` riêng:
 

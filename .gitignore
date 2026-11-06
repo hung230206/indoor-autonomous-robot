@@ -5,6 +5,7 @@ __pycache__/
 .cache/
 models/downloads/
 controllers/vision_camera/runtime.ini
+controllers/stage1/runtime.ini
 *.egg-info/
 .pytest_cache/
 experiments/runs/

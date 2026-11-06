@@ -20,7 +20,8 @@ def generate_world(c, scenario, path, vision=False):
     path.parent.mkdir(parents=True, exist_ok=True)
     metadata = {"scenario":scenario, "config":c.__dict__}
     if vision:
-        metadata['perception']='yolo'
+        metadata['perception']='ego_yolo' if vision=='ego' else 'yolo'
+    ego=vision=='ego'
     # Controller reads exact config from customData, so map and world cannot drift.
     encoded = json.dumps(json.dumps(metadata))
     pieces = ['#VRML_SIM R2025a utf8', f'''WorldInfo {{
@@ -52,9 +53,10 @@ Solid {{
       Transform {{ translation 0.065 0 0.022 children [ Shape {{ appearance PBRAppearance {{ baseColor 0.95 0.55 0.2 }} geometry Box {{ size 0.025 0.07 0.009 }} }} ] }}''']
     for side, sign in (("left",1),("right",-1)):
         y = sign*c.axle_length_m/2
+        encoder_device=(' PositionSensor { name "'+side+'_encoder" }') if ego else ''
         children.append(f'''HingeJoint {{
       jointParameters HingeJointParameters {{ axis 0 1 0 anchor 0 {y} -0.0225 dampingConstant 0.0001 }}
-      device [ RotationalMotor {{ name "{side}_motor" maxVelocity 20 maxTorque 0.2 }} ]
+      device [ RotationalMotor {{ name "{side}_motor" maxVelocity 20 maxTorque 0.2 }}{encoder_device} ]
       endPoint Solid {{
         translation 0 {y} -0.0225
         rotation 1 0 0 1.57079632679
@@ -78,7 +80,19 @@ Solid {{
       name "{name}" type "generic" numberOfRays 1 aperture 0.001
       lookupTable [ 0 0 0, {c.sensor_max_m} {c.sensor_max_m} 0 ]
     }}''')
-    if vision:
+    if ego:
+        from .onboard import ego_config, camera_rotation
+        v=ego_config()
+        children.append('InertialUnit { name "imu" }')
+        axis,angle=camera_rotation(v['pitch_down_rad'])
+        children.append(f'''Camera {{ name "front_camera" translation {v['offset_x_m']} 0 {v['camera_height_m']-.055}
+          rotation {' '.join(map(str,axis))} {angle}
+          width {v['camera_width']} height {v['camera_height']} fieldOfView {v['horizontal_fov_rad']}
+          recognition Recognition {{ segmentation TRUE frameThickness 0 occlusion 2 }}
+        }}''')
+        children.append(f'''Transform {{ translation {v['offset_x_m']} 0 {v['camera_height_m']-.055}
+          children [ Shape {{ appearance PBRAppearance {{ baseColor 0.08 0.1 0.15 }} geometry Box {{ size .025 .07 .04 }} }} ] }}''')
+    elif vision:
         from .vision import vision_config
         v=vision_config()
         children.append(f'Receiver {{ name "vision_receiver" channel {v["channel"]} }}')

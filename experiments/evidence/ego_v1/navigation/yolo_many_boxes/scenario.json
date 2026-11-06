@@ -1,0 +1,63 @@
+{
+  "name": "yolo_many_boxes",
+  "description": "Five boxes appear; use either the onboard or legacy overhead camera experiment",
+  "start": [
+    0.35,
+    1.05,
+    0
+  ],
+  "goal": [
+    2.65,
+    1.05
+  ],
+  "obstacles": [],
+  "spawn": [
+    {
+      "at_s": 1.0,
+      "rect": [
+        1.1,
+        0.9,
+        1.35,
+        1.18
+      ]
+    },
+    {
+      "at_s": 1.0,
+      "rect": [
+        1.85,
+        0.9,
+        2.1,
+        1.18
+      ]
+    },
+    {
+      "at_s": 1.0,
+      "rect": [
+        0.65,
+        1.55,
+        0.92,
+        1.8
+      ]
+    },
+    {
+      "at_s": 1.0,
+      "rect": [
+        1.5,
+        1.5,
+        1.78,
+        1.78
+      ]
+    },
+    {
+      "at_s": 1.0,
+      "rect": [
+        2.3,
+        1.55,
+        2.55,
+        1.78
+      ]
+    }
+  ],
+  "expected": "GOAL_REACHED",
+  "require_replan": true
+}

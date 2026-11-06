@@ -11,9 +11,9 @@ def vision_config():
     return json.loads((ROOT/'config/vision.json').read_text(encoding='utf-8'))
 
 
-def configure_camera_runtime():
+def configure_camera_runtime(controller='vision_camera'):
     """Webots preferences can override PATH; explicitly select this interpreter."""
-    runtime=ROOT/'controllers/vision_camera/runtime.ini'
+    runtime=ROOT/'controllers'/controller/'runtime.ini'
     runtime.write_text('; Generated local interpreter selection; ignored by Git.\n[python]\nCOMMAND = "'+
                        str(sys.executable).replace('\\','/')+'"\n',encoding='utf-8')
 

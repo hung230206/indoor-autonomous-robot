@@ -1,0 +1,22 @@
+{
+  "scenario": "yolo_camera_loss",
+  "mode": "webots_ego_yolo",
+  "expected": "SAFE_STOP",
+  "state": "SAFE_STOP",
+  "passed": true,
+  "time_s": 2.496,
+  "distance_m": 0.26913494885916067,
+  "plans": 1,
+  "collision": false,
+  "inflated_grid_violation": false,
+  "goal_error_m": 2.0309028569114815,
+  "max_planning_ms": 0.36709999994855025,
+  "webots_version": "R2025a",
+  "vision_packets": 8,
+  "visual_occupied_cells": 0,
+  "range_mapping_enabled": true,
+  "pose_source": "encoder_imu_odometry",
+  "camera_mount": "onboard_front",
+  "max_odometry_error_m": 0.0002804496728397877,
+  "true_goal_error_m": 2.0306224325777253
+}

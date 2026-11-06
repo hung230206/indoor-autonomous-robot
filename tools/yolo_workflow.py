@@ -20,15 +20,15 @@ from run_webots import locate_webots
 
 def collect(args):
     from robot_nav.vision import configure_camera_runtime
-    configure_camera_runtime()
+    configure_camera_runtime('stage1' if args.ego else 'vision_camera')
     output=args.output.resolve()
     if (output/'manifest.json').exists():
         raise SystemExit('Dataset exists; choose a new output directory to preserve its split/provenance')
     output.mkdir(parents=True,exist_ok=True)
-    world=ROOT/'worlds/yolo_dataset.wbt'
-    generate_world(Config.load(),get_scenario('open'),world,vision=True)
+    world=ROOT/'worlds'/('ego_dataset.wbt' if args.ego else 'yolo_dataset.wbt')
+    generate_world(Config.load(),get_scenario('open'),world,vision='ego' if args.ego else True)
     env=os.environ.copy()
-    env.update({'ROBOT_VISION_DATASET':str(output),'ROBOT_DATASET_COUNT':str(args.count),
+    env.update({('ROBOT_EGO_DATASET' if args.ego else 'ROBOT_VISION_DATASET'):str(output),'ROBOT_DATASET_COUNT':str(args.count),
                 'PYTHONIOENCODING':'utf-8','PATH':str(Path(sys.executable).parent)+os.pathsep+env['PATH']})
     with (output/'collection.log').open('w',encoding='utf-8') as log:
         process=subprocess.Popen([str(locate_webots()),'--batch','--minimize','--mode=fast','--stdout','--stderr',str(world)],
@@ -60,7 +60,7 @@ def train(args):
     result=model.train(data=str(args.dataset.resolve()/'dataset.yaml'),epochs=args.epochs,imgsz=320,batch=8,
         device='cpu',workers=0,project=str(ROOT/'experiments/runs/yolo_training'),name=args.name,
         exist_ok=False,seed=42,deterministic=True,freeze=10,patience=15,plots=True,
-        degrees=10,translate=.05,scale=.15,fliplr=.5,flipud=.5,mosaic=.3,close_mosaic=5,
+        degrees=0 if args.ego else 10,translate=.05,scale=.15,fliplr=.5,flipud=0 if args.ego else .5,mosaic=.3,close_mosaic=5,
         hsv_h=.015,hsv_s=.3,hsv_v=.2,cache=True)
     best=Path(model.trainer.best)
     shutil.copy2(best,output/'best.pt')
@@ -70,7 +70,7 @@ def train(args):
             'dataset':str(args.dataset.resolve()),'epochs_requested':args.epochs,
             'training_dir':str(model.trainer.save_dir),'evaluation_split':'test',
             'metrics':{str(k):float(v) for k,v in evaluated.results_dict.items()},
-            'scope':'Synthetic fixed-camera box detection only; not validated on real images or arbitrary obstacles'}
+            'scope':('Synthetic onboard-camera' if args.ego else 'Synthetic fixed-camera')+' box detection only; not validated on real images or arbitrary obstacles'}
     (output/'metrics.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
     shutil.copy2(model.trainer.save_dir/'args.yaml',output/'training-args.yaml')
     shutil.copy2(model.trainer.save_dir/'results.csv',output/'training-results.csv')
@@ -81,8 +81,10 @@ def main():
     parser=argparse.ArgumentParser()
     sub=parser.add_subparsers(dest='action',required=True)
     c=sub.add_parser('collect'); c.add_argument('--count',type=int,default=240)
+    c.add_argument('--ego',action='store_true')
     c.add_argument('--output',type=Path,default=ROOT/'experiments/runs/yolo_dataset')
     t=sub.add_parser('train'); t.add_argument('--epochs',type=int,default=30)
+    t.add_argument('--ego',action='store_true')
     t.add_argument('--dataset',type=Path,default=ROOT/'experiments/runs/yolo_dataset')
     t.add_argument('--output',type=Path,default=ROOT/'models/yolo_box')
     t.add_argument('--name',default='box_v1')

@@ -12,6 +12,8 @@ owner_goal: Nien luan co so nganh Khoa hoc may tinh
 
 # AGENTS.md — Ngữ cảnh dự án robot tự hành mini
 
+**Yêu cầu thay đổi sau kế hoạch gốc (06/11/2026):** người dùng yêu cầu camera trước gắn trên xe và đã cho triển khai. Kiến trúc camera trên cao/ArUco trong kế hoạch bên dưới nay là lịch sử. Mã ego mới tại `src/robot_nav/onboard.py`, `webots_ego.py`; cấu hình `config/vision_ego.json`, hướng dẫn `docs/ego-vision.md`. Mô phỏng dùng odometry encoder + IMU và pose đầu biết trước, chưa có SLAM; phần cứng TT ban đầu chưa có encoder/IMU nên cần chọn nguồn pose thật trước khi mua. Báo cáo Word và bằng chứng `yolo_v1` vẫn là kết quả camera trên cao.
+
 > **Dành cho coding/research agent.** Đọc file này trước khi thiết kế, tạo mã nguồn hoặc đề xuất mua linh kiện. Đây là **đặc tả kế hoạch**, không phải mô tả một hệ thống đã triển khai. Toàn bộ kết quả, ngân sách và ngưỡng nghiệm thu dưới đây là **dự kiến**, trừ khi có bằng chứng kiểm thử thực tế được bổ sung.
 
 **Cập nhật triển khai 06/11/2026:** đã có mã nguồn giai đoạn 1 tại thư mục gốc project. `README.md` hướng dẫn chạy, `docs/stage1-results.md` ghi số đo và `experiments/evidence/` chứa bằng chứng. Bộ 10 ca 2D và Webots đều đúng kỳ vọng (8 đến đích, 2 `NO_PATH`), thêm ca cản mới đóng cửa dừng `NO_PATH`; 14 test qua. Chỉ xác nhận mô phỏng, chưa có xe thật. Bản đầu dùng waypoint controller, tốc độ/ngưỡng và giao diện bánh m/s theo `config/robot.json`; đây chưa phải thông số cho xe thật. Các phần kế hoạch bên dưới giữ vai trò định hướng; kết quả đo mới nằm trong báo cáo.

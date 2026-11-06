@@ -1,5 +1,7 @@
 # Cấu hình phần cứng đã chốt
 
+**Điều chỉnh yêu cầu sau bản Word (06/11/2026):** người dùng yêu cầu camera trước gắn trên xe. Điện thoại cố định trên cao trong quyết định ban đầu bên dưới nay là kiến trúc cũ. Bản mô phỏng mới dùng camera trên xe và odometry từ encoder + IMU; danh mục TT chưa có encoder/IMU nên cần chọn thêm nguồn định vị/encoder và cập nhật giá/chân trước khi mua. Xem [camera trên xe](ego-vision.md). Chưa tự thay linh kiện hoặc sơ đồ điện khi chưa chọn sản phẩm cụ thể.
+
 Ngày xác nhận: **06/11/2026**. Người dùng chốt cấu hình theo `tài liệu/Ke_hoach_robot_tu_hanh_kem_so_do_kien_truc.docx`.
 
 Trạng thái: **đã chọn cấu hình**; người dùng xác nhận **chưa mua linh kiện** ngày 06/11/2026. Quyết định này không thay thế kết quả kiểm thử mô phỏng hoặc thông số điện của từng sản phẩm.

@@ -1,5 +1,9 @@
 # Báo cáo giai đoạn 1 có YOLO
 
+Kết quả kiến trúc mới được lưu riêng trong [báo cáo Markdown camera trên xe](../docs/ego-results.md), có video và bằng chứng ego.
+
+**Phạm vi lịch sử:** Word này ghi camera trên cao. Yêu cầu mới chuyển camera lên xe được mô tả riêng ở [camera trên xe](../docs/ego-vision.md); không dùng các chỉ số của báo cáo cũ cho góc nhìn mới.
+
 [Tải bản Word 6 trang](Bao_cao_giai_doan_1_YOLO.docx).
 
 Ngày kiểm chứng: 06/11/2026. Phần mở rộng kết hợp camera Webots, YOLO11n fine-tune lớp `box`, phép chiếu ảnh sang mặt sàn, occupancy grid, A* và FSM. Đây là báo cáo kết quả mô phỏng, chưa có xe thật hoặc camera điện thoại thực nghiệm.

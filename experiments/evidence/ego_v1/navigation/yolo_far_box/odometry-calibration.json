@@ -1,0 +1,47 @@
+{
+  "wheel_radius_m": 0.03252145693044779,
+  "axle_length_m": 0.13979424784751132,
+  "source": "Offline dedicated straight/turn Webots calibration using encoder and measured GT motion, not navigation/test trajectories",
+  "phases": [
+    {
+      "commands_m_s": [
+        0.08,
+        0.08
+      ],
+      "steps": 80,
+      "distance_m": 0.20482934712661435,
+      "true_angle_rad": 9.077139928592715e-09,
+      "encoder_deltas_rad": [
+        6.298283239982449,
+        6.298283240090929
+      ]
+    },
+    {
+      "commands_m_s": [
+        -0.06,
+        0.06
+      ],
+      "steps": 100,
+      "distance_m": 0.0003287895178498246,
+      "true_angle_rad": 2.7484138590506757,
+      "encoder_deltas_rad": [
+        -5.905873026590054,
+        5.90587391717074
+      ]
+    },
+    {
+      "commands_m_s": [
+        0.06,
+        -0.06
+      ],
+      "steps": 100,
+      "distance_m": 0.0002606197055570481,
+      "true_angle_rad": -2.7473131902681156,
+      "encoder_deltas_rad": [
+        5.905896184195516,
+        -5.905867957346916
+      ]
+    }
+  ],
+  "scope": "This Webots contact model only; real robot must be calibrated separately"
+}

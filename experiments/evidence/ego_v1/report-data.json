@@ -1,0 +1,125 @@
+{
+  "camera": "onboard_front_rgb",
+  "pose": "encoder + IMU odometry, known initial pose; no Supervisor pose correction",
+  "weights_sha256": "c9e087456d1b6afffadca4abab8be3636f0d019516c1615e4f0c7efbc48e5c26",
+  "dataset": {
+    "train": {
+      "images": 240,
+      "boxes": 127
+    },
+    "val": {
+      "images": 60,
+      "boxes": 38
+    },
+    "test": {
+      "images": 60,
+      "boxes": 37
+    }
+  },
+  "metrics": {
+    "model": "YOLO11n, COCO initialized, fine-tuned on procedural Webots box images",
+    "dataset": "C:\\Users\\hungt\\Documents\\ChatGPT\\Niên luận cơ sở\\experiments\\runs\\ego_dataset_v2",
+    "epochs_requested": 30,
+    "training_dir": "C:\\Users\\hungt\\Documents\\ChatGPT\\Niên luận cơ sở\\experiments\\runs\\yolo_training\\ego_box_v1",
+    "evaluation_split": "test",
+    "metrics": {
+      "metrics/precision(B)": 0.9983437633044702,
+      "metrics/recall(B)": 0.972972972972973,
+      "metrics/mAP50(B)": 0.975,
+      "metrics/mAP50-95(B)": 0.9492712418300654,
+      "fitness": 0.9492712418300654
+    },
+    "scope": "Synthetic onboard-camera box detection only; not validated on real images or arbitrary obstacles"
+  },
+  "navigation": [
+    {
+      "scenario": "open",
+      "mode": "webots_ego_yolo",
+      "expected": "GOAL_REACHED",
+      "state": "GOAL_REACHED",
+      "passed": true,
+      "time_s": 26.016000000000002,
+      "distance_m": 2.786669207926578,
+      "plans": 1,
+      "collision": false,
+      "inflated_grid_violation": false,
+      "goal_error_m": 0.04362355029373709,
+      "max_planning_ms": 1.6896000001906941,
+      "webots_version": "R2025a",
+      "vision_packets": 102,
+      "visual_occupied_cells": 0,
+      "range_mapping_enabled": true,
+      "pose_source": "encoder_imu_odometry",
+      "camera_mount": "onboard_front",
+      "max_odometry_error_m": 0.006003284845079447,
+      "true_goal_error_m": 0.037904505301195615
+    },
+    {
+      "scenario": "yolo_far_box",
+      "mode": "webots_ego_yolo",
+      "expected": "GOAL_REACHED",
+      "state": "GOAL_REACHED",
+      "passed": true,
+      "time_s": 30.624,
+      "distance_m": 2.781531426684654,
+      "plans": 3,
+      "collision": false,
+      "inflated_grid_violation": false,
+      "goal_error_m": 0.04397587803566721,
+      "max_planning_ms": 1.6556999999011168,
+      "webots_version": "R2025a",
+      "vision_packets": 120,
+      "visual_occupied_cells": 18,
+      "range_mapping_enabled": true,
+      "pose_source": "encoder_imu_odometry",
+      "camera_mount": "onboard_front",
+      "max_odometry_error_m": 0.005800192554090199,
+      "true_goal_error_m": 0.03890473810208651
+    },
+    {
+      "scenario": "yolo_many_boxes",
+      "mode": "webots_ego_yolo",
+      "expected": "GOAL_REACHED",
+      "state": "GOAL_REACHED",
+      "passed": true,
+      "time_s": 29.6,
+      "distance_m": 2.7941554451115183,
+      "plans": 4,
+      "collision": false,
+      "inflated_grid_violation": false,
+      "goal_error_m": 0.04362397968106989,
+      "max_planning_ms": 3.076599999985774,
+      "webots_version": "R2025a",
+      "vision_packets": 116,
+      "visual_occupied_cells": 40,
+      "range_mapping_enabled": true,
+      "pose_source": "encoder_imu_odometry",
+      "camera_mount": "onboard_front",
+      "max_odometry_error_m": 0.006290934137313845,
+      "true_goal_error_m": 0.0416187275336027
+    },
+    {
+      "scenario": "yolo_camera_loss",
+      "mode": "webots_ego_yolo",
+      "expected": "SAFE_STOP",
+      "state": "SAFE_STOP",
+      "passed": true,
+      "time_s": 2.496,
+      "distance_m": 0.26913494885916067,
+      "plans": 1,
+      "collision": false,
+      "inflated_grid_violation": false,
+      "goal_error_m": 2.0309028569114815,
+      "max_planning_ms": 0.36709999994855025,
+      "webots_version": "R2025a",
+      "vision_packets": 8,
+      "visual_occupied_cells": 0,
+      "range_mapping_enabled": true,
+      "pose_source": "encoder_imu_odometry",
+      "camera_mount": "onboard_front",
+      "max_odometry_error_m": 0.0002804496728397877,
+      "true_goal_error_m": 2.0306224325777253
+    }
+  ],
+  "limits": "Synthetic images only; monocular ground-contact assumptions; simulated encoders absent from original hardware BOM; not real-time or real-robot validation"
+}

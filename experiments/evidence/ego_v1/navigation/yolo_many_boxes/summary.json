@@ -1,0 +1,22 @@
+{
+  "scenario": "yolo_many_boxes",
+  "mode": "webots_ego_yolo",
+  "expected": "GOAL_REACHED",
+  "state": "GOAL_REACHED",
+  "passed": true,
+  "time_s": 29.6,
+  "distance_m": 2.7941554451115183,
+  "plans": 4,
+  "collision": false,
+  "inflated_grid_violation": false,
+  "goal_error_m": 0.04362397968106989,
+  "max_planning_ms": 3.076599999985774,
+  "webots_version": "R2025a",
+  "vision_packets": 116,
+  "visual_occupied_cells": 40,
+  "range_mapping_enabled": true,
+  "pose_source": "encoder_imu_odometry",
+  "camera_mount": "onboard_front",
+  "max_odometry_error_m": 0.006290934137313845,
+  "true_goal_error_m": 0.0416187275336027
+}

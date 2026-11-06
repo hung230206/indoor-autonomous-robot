@@ -1,5 +1,9 @@
 # Robot tự hành trong nhà — giai đoạn 1
 
+[Kết quả camera trên xe](docs/ego-results.md): 29 test qua, 4 ca ego đúng kỳ vọng (3 đến đích, 1 SAFE_STOP); kèm video góc nhìn trước có YOLO.
+
+**Yêu cầu mới: camera trước trên xe.** Chạy `.\.venv-yolo\Scripts\python.exe tools/run_live_demo.py` để mở Webots 5 hộp và màn hình RGB/YOLO trực tiếp. Xem [kiến trúc camera trên xe](docs/ego-vision.md). Chế độ mới dùng odometry encoder + IMU mô phỏng, phép chiếu chân vật thể và cảm biến cự ly; phần cứng thực chưa có encoder/IMU. Chạy lại bằng cách mở `demo_camera_tren_xe.cmd`. Báo cáo Word và `yolo_v1` bên dưới là kết quả lịch sử của camera trên cao.
+
 Robot 2WD đi từ A đến B trên bản đồ có sẵn, phát hiện vật cản mới bằng cảm biến mô phỏng hoặc lớp thị giác YOLO, dừng, cập nhật occupancy grid và lập lại đường A*. Mã nguồn dùng chung cho mô phỏng 2D và Webots. Chưa có phần xe thật, ArUco hay ESP32.
 
 Đã bổ sung [YOLO11n nhận diện hộp từ camera Webots](docs/yolo.md), checkpoint và dữ liệu kiểm chứng tổng hợp. [Báo cáo Word 6 trang và kết quả](reports/README.md) giải thích kỹ thuật, FSM, huấn luyện, so sánh và giới hạn. Chế độ mặc định vẫn là bản dùng cảm biến; chạy YOLO bằng môi trường riêng và cờ `--yolo`.

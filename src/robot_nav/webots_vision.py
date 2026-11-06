@@ -30,6 +30,18 @@ def save_image(path,bgr):
     path.write_bytes(encoded.tobytes())
 
 
+def publish_live_frame(output, bgr, annotated, packet):
+    """Atomic snapshots for a separate viewer; never feeds navigation."""
+    for name, pixels in (('live-raw.jpg', bgr), ('live-yolo.jpg', annotated)):
+        target=output/name
+        temporary=output/(target.stem+'.tmp.jpg')
+        save_image(temporary,pixels)
+        os.replace(temporary,target)
+    temporary=output/'live-camera.tmp.json'
+    temporary.write_text(json.dumps(packet),encoding='utf-8')
+    os.replace(temporary,output/'live-camera.json')
+
+
 def collect_dataset(robot,camera,metadata,timestep):
     """Synthetic labels from box geometry for supervised training/evaluation only."""
     import cv2
@@ -136,6 +148,13 @@ def _run(robot):
                 packet={'timestamp':robot.getTime(),'detections':[asdict(d) for d in detections],'latency_ms':latency}
                 emitter.send(json.dumps(packet).encode('utf-8'))
                 log.write(json.dumps(packet)+'\n'); log.flush()
+                if os.environ.get('ROBOT_LIVE')=='1':
+                    try:
+                        publish_live_frame(output,bgr,result.plot(),packet)
+                    except PermissionError:
+                        # Windows may briefly hold a snapshot open in the viewer.
+                        # Skip this display update; perception/navigation must continue.
+                        pass
                 if os.environ.get('ROBOT_RECORD')=='1':
                     save_image(output/'camera-frames'/f'frame-{camera_frames:05d}.jpg',result.plot())
                     camera_frames+=1
