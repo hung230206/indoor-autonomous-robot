@@ -73,5 +73,15 @@ class OnboardTests(unittest.TestCase):
         self.assertAlmostEqual(p.x,1.5*c.wheel_radius_m)
         self.assertFalse(odom.update(1,2,2,heading=float('nan')).valid)
 
+    def test_saved_encoder_offsets_do_not_count_as_travel(self):
+        c=Config()
+        left,right=78.86063507639223,105.17980753683723
+        start=(.35,1.05,0)
+        odom=WheelOdometry(c,start,left,right)
+        p=odom.update(left,right,.032,heading=start[2])
+        self.assertEqual((p.x,p.y,p.theta),start)
+        p=odom.update(left+.1,right+.1,.064,heading=0)
+        self.assertAlmostEqual(p.x,start[0]+.1*c.wheel_radius_m)
+
 
 if __name__=='__main__': unittest.main()

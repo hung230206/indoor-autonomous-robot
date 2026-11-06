@@ -14,6 +14,10 @@ Mặc định mở ca `yolo_many_boxes`: 5 hộp xuất hiện sau một giây. 
 
 Ca một hộp: `--scenario yolo_far_box`. Bản trên cao cũ chỉ mở khi chọn `--overhead`; không dùng nó thay cho góc nhìn từ xe.
 
+**Chạy lại sau khi đã lưu world:** controller đưa xe về A và dọn các node `DYNAMIC_i`/`CURRENT_ROUTE` do kịch bản tạo, trước khi lấy mốc encoder/IMU. Đây là đặt điều kiện đầu của bài mô phỏng, không lấy pose thật để sửa odometry khi xe chạy. Encoder có thể còn góc khác 0; góc ban đầu được trừ làm offset. Dùng **Reload World** để bắt đầu lượt mới. Chỉ bấm Play sau khi controller đã kết thúc sẽ không khởi động lại controller.
+
+Launcher tạo `worlds/runtime_*.wbt` riêng cho từng lượt và lưu bản sao `world.wbt` trong output; không ghi đè world bạn đã chỉnh/lưu. Nếu chạy lại controller trong cùng thư mục output, kết quả cũ được giữ dưới `history/`. Tệp `startup.json` ghi điểm A, các hộp cũ đã dọn và mốc encoder/IMU để kiểm tra lỗi khởi động.
+
 ## Kiến trúc hiện tại
 
 ```mermaid

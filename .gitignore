@@ -11,3 +11,5 @@ controllers/stage1/runtime.ini
 experiments/runs/
 worlds/.wbproj
 worlds/.*.wbproj
+worlds/runtime_*.wbt
+worlds/.runtime_*.jpg

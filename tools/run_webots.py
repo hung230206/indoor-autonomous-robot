@@ -6,6 +6,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+from uuid import uuid4
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT / "src"))
@@ -13,6 +14,7 @@ from robot_nav.models import Config
 from robot_nav.simulation import scenarios, get_scenario
 from robot_nav.webots_world import generate_world
 from robot_nav.recording import write_batch
+from robot_nav.webots_episode import archive_previous_run
 
 
 def locate_webots():
@@ -33,9 +35,11 @@ def locate_webots():
 
 def run_one(binary,config,scenario,output,record=False,timeout=180,vision=False):
     output=output.resolve()
-    world=ROOT/"worlds"/(scenario["name"]+('_ego' if vision=='ego' else '_yolo' if vision else '')+".wbt")
+    world=ROOT/'worlds'/('runtime_'+scenario['name']+'_'+uuid4().hex+'.wbt')
     generate_world(config,scenario,world,vision=vision)
     output.mkdir(parents=True,exist_ok=True)
+    archive_previous_run(output)
+    (output/'world.wbt').write_bytes(world.read_bytes())
     # A failed run cannot be mistaken for a previous successful result.
     summary_path=output/"summary.json"
     if summary_path.exists():

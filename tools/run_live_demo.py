@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+from uuid import uuid4
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
@@ -25,8 +26,9 @@ def main():
     configure_camera_runtime('vision_camera' if args.overhead else 'stage1')
     output=ROOT/'experiments/runs'/('live_'+('overhead_' if args.overhead else 'ego_')+args.scenario+'_'+datetime.now().strftime('%Y%m%d_%H%M%S_%f'))
     output.mkdir(parents=True)
-    world=ROOT/'worlds'/(scenario['name']+('_yolo' if args.overhead else '_ego')+'.wbt')
+    world=ROOT/'worlds'/('runtime_'+scenario['name']+'_'+uuid4().hex+'.wbt')
     generate_world(Config.load(),scenario,world,vision=True if args.overhead else 'ego')
+    (output/'world.wbt').write_bytes(world.read_bytes())
     env=os.environ.copy()
     env.update(ROBOT_OUTPUT=str(output),ROBOT_LIVE='1',ROBOT_BATCH='0',ROBOT_RECORD='0',ROBOT_CAMERA_MODE='overhead' if args.overhead else 'ego',
         PYTHONIOENCODING='utf-8',YOLO_CONFIG_DIR=str(ROOT/'.cache/ultralytics'),MPLBACKEND='Agg')

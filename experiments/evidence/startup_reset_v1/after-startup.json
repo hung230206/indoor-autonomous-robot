@@ -1,0 +1,26 @@
+{
+  "known_start": [
+    0.35,
+    1.05,
+    0
+  ],
+  "removed_transient_nodes": [
+    "DYNAMIC_4",
+    "DYNAMIC_3",
+    "DYNAMIC_2",
+    "DYNAMIC_1",
+    "DYNAMIC_0",
+    "DYNAMIC_4",
+    "DYNAMIC_3",
+    "DYNAMIC_2",
+    "DYNAMIC_1",
+    "DYNAMIC_0"
+  ],
+  "policy": "reset_scripted_episode_to_A_before_sensor_baselines",
+  "initial_encoders_rad": [
+    78.86063507616504,
+    105.17980753643954
+  ],
+  "initial_imu_yaw_rad": 2.8060338548260863e-05,
+  "simulation_start_s": 0.512
+}

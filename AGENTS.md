@@ -1,5 +1,7 @@
 # Ngữ cảnh làm việc
 
+- Sửa lỗi Save/Reload world ngày 06/11/2026: `webots_episode.py` đặt lại điều kiện đầu tại A và dọn các DYNAMIC_i/CURRENT_ROUTE thuộc kịch bản trước khi lấy mốc encoder/IMU; không dùng GT để sửa pose đang chạy. Launcher sinh world runtime UUID riêng, không ghi đè world người dùng đã lưu. Kết quả cũ ở output được lưu history. Bằng chứng `experiments/evidence/startup_reset_v1/`: 31 test, 10 ca nền đúng kỳ vọng; exact saved-state fixture chạy 2 lần đều đến đích. Khi người dùng báo không chạy lại, phân biệt Play với Reload World và xem startup.json.
+
 - Kết quả ego cuối: `docs/ego-results.md`, `experiments/evidence/ego_v1/`; 29 test qua, 4 ca ego đúng kỳ vọng (3 đến đích, 1 SAFE_STOP), 10 ca Webots nền vẫn đúng kỳ vọng. Model ego test 60 ảnh/37 hộp, mAP50–95 94,93%. Có các lượt encoder-only bị SAFE_STOP ở development_failures; không xóa hoặc tính chúng là thành công. Heading cuối dùng IMU, encoder đo quãng đường; cấu hình hiệu chuẩn riêng `config/odometry_webots.json` dùng GT đo offline trên sàn trống, không lấy từ quỹ đạo test.
 
 - Yêu cầu mới nhất 06/11/2026: camera trước **gắn trên xe**, thay kiến trúc điện thoại trên cao. Xem `docs/ego-vision.md`. `tools/run_live_demo.py` mặc định ego; `--overhead` giữ bản cũ. `vision_ego.json`, `onboard.py`, `webots_ego.py` triển khai camera RGB trên thân xe, checkpoint riêng, phép chiếu mép chân bbox xuống sàn, fusion range và pose odometry encoder + IMU. Không dùng pose Supervisor để điều hướng ego; GT chỉ tạo nhãn và đánh giá. Pose đầu phải biết trước; chưa có SLAM hay relocalization.

@@ -8,6 +8,7 @@ from .navigation import Navigator, TERMINAL
 from .simulation import Frame, rect_distance
 from .recording import write_run
 from .webots_world import solid_box
+from .webots_episode import reset_episode, archive_previous_run
 
 
 class WebotsAdapter:
@@ -49,6 +50,7 @@ def run():
         return
     metadata = json.loads(robot.getCustomData())
     c, scenario = Config(**metadata["config"]), metadata["scenario"]
+    startup=reset_episode(robot,scenario)
     adapter = WebotsAdapter(robot,c)
     grid = Grid(c,scenario["obstacles"])
     nav = Navigator(grid,scenario["goal"])
@@ -77,6 +79,7 @@ def run():
     obstacles = list(scenario["obstacles"])
     output = Path(os.environ.get("ROBOT_OUTPUT", str(ROOT / "experiments/runs/webots" / scenario["name"])))
     output.mkdir(parents=True,exist_ok=True)
+    archive_previous_run(output)
     if encoders:
         from .webots_ego import EgoCamera
         ego=EgoCamera(robot,grid,output)
@@ -97,9 +100,13 @@ def run():
         if calibration:
             (output/'odometry-calibration.json').write_text(json.dumps(calibration,indent=2),encoding='utf-8')
         initial_imu_yaw=imu.getRollPitchYaw()[2]
+        startup.update({'initial_encoders_rad':[sensor.getValue() for sensor in encoders],
+                        'initial_imu_yaw_rad':initial_imu_yaw})
+    startup['simulation_start_s']=start
+    (output/'startup.json').write_text(json.dumps(startup,indent=2),encoding='utf-8')
     nav.start(0)
     distance = 0.0
-    previous = adapter.pose(0)
+    previous = Pose(*scenario['start'],0) if encoders else adapter.pose(0)
     shown_path_id = 0
     collision = violation = False
     max_pose_error=0.0

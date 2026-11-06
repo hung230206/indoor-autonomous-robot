@@ -1,0 +1,36 @@
+test_restart_preserves_completed_run_and_does_not_copy_history_recursively (test_episode.EpisodeHistoryTests.test_restart_preserves_completed_run_and_does_not_copy_history_recursively) ... ok
+test_astar_matches_independent_dijkstra_random_maps (test_navigation.PlanningTests.test_astar_matches_independent_dijkstra_random_maps) ... ok
+test_bounds_and_blocked_goal (test_navigation.PlanningTests.test_bounds_and_blocked_goal) ... ok
+test_empty_optimal_cost_and_endpoints (test_navigation.PlanningTests.test_empty_optimal_cost_and_endpoints) ... ok
+test_inflation_and_narrow_gap (test_navigation.PlanningTests.test_inflation_and_narrow_gap) ... ok
+test_no_diagonal_corner_cutting (test_navigation.PlanningTests.test_no_diagonal_corner_cutting) ... ok
+test_dynamic_confirmation_and_expiry (test_navigation.SafetyTests.test_dynamic_confirmation_and_expiry) ... ok
+test_emergency_and_user_stop_are_latched (test_navigation.SafetyTests.test_emergency_and_user_stop_are_latched) ... ok
+test_invalid_config (test_navigation.SafetyTests.test_invalid_config) ... ok
+test_missing_hit_resets_confirmation (test_navigation.SafetyTests.test_missing_hit_resets_confirmation) ... ok
+test_stale_and_invalid_data_stop (test_navigation.SafetyTests.test_stale_and_invalid_data_stop) ... ok
+test_all_ten_scenarios_and_replanning_stop (test_navigation.ScenarioTests.test_all_ten_scenarios_and_replanning_stop) ... ok
+test_new_obstacle_closes_only_door_and_stops_no_path (test_navigation.ScenarioTests.test_new_obstacle_closes_only_door_and_stops_no_path) ... ok
+test_sensor_raycast_geometry (test_navigation.ScenarioTests.test_sensor_raycast_geometry) ... ok
+test_bbox_uses_capture_pose_and_rejects_clipped_feet (test_onboard.OnboardTests.test_bbox_uses_capture_pose_and_rejects_clipped_feet) ... ok
+test_camera_right_is_vehicle_right_and_horizon_rejected (test_onboard.OnboardTests.test_camera_right_is_vehicle_right_and_horizon_rejected) ... ok
+test_ego_world_has_attached_camera_encoders_and_no_external_camera (test_onboard.OnboardTests.test_ego_world_has_attached_camera_encoders_and_no_external_camera) ... ok
+test_ground_projection_round_trip_at_multiple_ranges (test_onboard.OnboardTests.test_ground_projection_round_trip_at_multiple_ranges) ... ok
+test_imu_heading_corrects_turn_slip_and_invalid_imu_stops_pose (test_onboard.OnboardTests.test_imu_heading_corrects_turn_slip_and_invalid_imu_stops_pose) ... ok
+test_saved_encoder_offsets_do_not_count_as_travel (test_onboard.OnboardTests.test_saved_encoder_offsets_do_not_count_as_travel) ... ok
+test_wheel_odometry_straight_turn_and_independent_arc (test_onboard.OnboardTests.test_wheel_odometry_straight_turn_and_independent_arc) ... ok
+test_mouse_controls_goal_unknown_obstacle_and_stop (test_viewer.ViewerTests.test_mouse_controls_goal_unknown_obstacle_and_stop) ... ok
+test_invalid_bbox_rejected (test_vision.ProjectionTests.test_invalid_bbox_rejected) ... ok
+test_known_camera_bbox_coordinates (test_vision.ProjectionTests.test_known_camera_bbox_coordinates) ... ok
+test_roundtrip_ground_calibration (test_vision.ProjectionTests.test_roundtrip_ground_calibration) ... ok
+test_wrong_frame_size_rejected_before_inference (test_vision.ProjectionTests.test_wrong_frame_size_rejected_before_inference) ... ok
+test_confirmation_inflation_and_expiry (test_vision.VisualMapTests.test_confirmation_inflation_and_expiry) ... ok
+test_duplicate_detections_and_replayed_frame_do_not_confirm (test_vision.VisualMapTests.test_duplicate_detections_and_replayed_frame_do_not_confirm) ... ok
+test_empty_frame_resets_confirmation (test_vision.VisualMapTests.test_empty_frame_resets_confirmation) ... ok
+test_low_confidence_wrong_class_and_stale_images_ignored (test_vision.VisualMapTests.test_low_confidence_wrong_class_and_stale_images_ignored) ... ok
+test_range_updates_cannot_erase_visual_layer (test_vision.VisualMapTests.test_range_updates_cannot_erase_visual_layer) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 0.969s
+
+OK

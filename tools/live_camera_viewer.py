@@ -14,7 +14,7 @@ def main():
     parser.add_argument('output',type=Path)
     args=parser.parse_args()
     root=tk.Tk()
-    root.title('Robot vision - Camera RGB + YOLO live')
+    root.title('Robot vision - Camera RGB + YOLO live | '+args.output.name)
     root.geometry('1060x600')
     root.configure(bg='#111827')
     onboard=os.environ.get('ROBOT_CAMERA_MODE')=='ego'
