@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-12",
+  "baseline_commit": "1171c562099f3cdb77b6c6ebc43bce1d840b1a5b",
+  "status": "Prepared dataset/notebook; GPU Colab full training NOT executed; active model unchanged",
+  "dataset_zip_sha256": "ed4877d4ca019968d0f09a77e531aef36c72bf91ccd8ffbcd1717004592418f5",
+  "dataset_bytes": 13597250,
+  "validation": "1200 images, integrity/PNG checks, no identical cross-split images, standalone ZIP extraction passed",
+  "notebook_validation": "Python cells compiled and nbformat schema validated",
+  "smoke": "1 epoch on 42 train + 9 val images from separate 60-scene seed namespace; no production test evaluation; checkpoint NOT deployed",
+  "unit_tests": 45,
+  "baseline_2d": "10 expected outcomes: 8 arrivals and 2 NO_PATH",
+  "baseline_webots": "10 expected outcomes: 8 arrivals and 2 NO_PATH",
+  "source_sha256": {
+    "src/robot_nav/object_dataset.py": "113e459396f62060402975318e3241c1716006574c99f9b2a98d05912d57f10f",
+    "src/robot_nav/webots_adapter.py": "0248d5929bea2e7f4546acd4288487b5bd23cd0558761deb86a18c3636c6476a",
+    "tools/collect_object_dataset.py": "4178527f903edf9d85bf010bfca4095d976d2ef94b0efee1b9e500492c5351e9",
+    "tools/validate_object_dataset.py": "e3a36de3803f1b9811358e1ae15a84344f7e2246964049a158b51bdc619c105e",
+    "tools/build_colab_bundle.py": "2726298709077aa3cfcf4bdc8e538b353edc50c43af20bfd0a38c3fe5eae3826",
+    "training/train_objects.py": "156b8b8776d6eac2166e3bacd96bca51469a2e1ae4f54edcb2cf4bd2b3f3f090",
+    "notebooks/train_robot_objects.ipynb": "4474aec63d91cf15b76f06b91e0ff32d0aa9704c0e1cd81c5940e0160dd66d01",
+    "tests/test_object_dataset.py": "bbdcb7502b58f289823223d537b2884259f6e7dc68055e6be9856e4edc55c40b",
+    "config/vision_ego.json": "71542d6b48a58751a3c8cd17d332ec2cd32388c3bdcdaca6210947ae7405a949",
+    "models/yolo_ego/best.pt": "c9e087456d1b6afffadca4abab8be3636f0d019516c1615e4f0c7efbc48e5c26"
+  }
+}

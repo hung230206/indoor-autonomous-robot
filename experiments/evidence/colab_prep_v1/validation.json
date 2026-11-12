@@ -1,0 +1,57 @@
+{
+  "passed": true,
+  "total_images": 1200,
+  "classes": [
+    "box",
+    "furniture_leg",
+    "slipper"
+  ],
+  "splits": {
+    "train": {
+      "images": 840,
+      "negative_images": 93,
+      "instances": {
+        "box": 479,
+        "furniture_leg": 1633,
+        "slipper": 446
+      },
+      "class_images": {
+        "box": 394,
+        "furniture_leg": 394,
+        "slipper": 362
+      },
+      "bottom_clipped_instances": 136
+    },
+    "val": {
+      "images": 180,
+      "negative_images": 14,
+      "instances": {
+        "box": 112,
+        "furniture_leg": 330,
+        "slipper": 101
+      },
+      "class_images": {
+        "furniture_leg": 78,
+        "box": 91,
+        "slipper": 82
+      },
+      "bottom_clipped_instances": 26
+    },
+    "test": {
+      "images": 180,
+      "negative_images": 19,
+      "instances": {
+        "box": 114,
+        "slipper": 104,
+        "furniture_leg": 326
+      },
+      "class_images": {
+        "box": 94,
+        "slipper": 83,
+        "furniture_leg": 80
+      },
+      "bottom_clipped_instances": 30
+    }
+  },
+  "scope": "Integrity and annotation checks, not detector performance or real-world accuracy"
+}

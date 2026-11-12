@@ -1,0 +1,30 @@
+{
+  "scenario": "narrow_gap",
+  "mode": "webots",
+  "expected": "NO_PATH",
+  "state": "NO_PATH",
+  "passed": true,
+  "time_s": 0.03200000000000003,
+  "distance_m": 1.9827769166643222e-07,
+  "plans": 1,
+  "collision": false,
+  "inflated_grid_violation": false,
+  "goal_error_m": 2.2999618913701503,
+  "max_planning_ms": 2.2277999960351735,
+  "webots_version": "R2025a",
+  "goal_m": [
+    2.65,
+    1.05
+  ],
+  "goal_source": "GOAL_MARKER",
+  "goal_changes": [
+    {
+      "time_s": 0,
+      "goal_m": [
+        2.65,
+        1.05
+      ]
+    }
+  ],
+  "goal_elapsed_s": 0.03200000000000003
+}

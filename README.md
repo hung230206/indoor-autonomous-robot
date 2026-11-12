@@ -1,5 +1,7 @@
 # Robot tự hành trong nhà — giai đoạn 1
 
+**Train bản đa lớp trên Colab:** [mở notebook GPU](https://colab.research.google.com/github/hung230206/indoor-autonomous-robot/blob/main/notebooks/train_robot_objects.ipynb), chọn GPU rồi chạy các ô. Đã chuẩn bị 1.200 ảnh cho box/chân bàn-ghế/dép, ZIP tự tải từ repo. [Hướng dẫn và giới hạn](docs/colab-training.md). Đây là bộ train đã chuẩn bị, chưa có model GPU mới hoặc kết quả test mới; demo vẫn dùng model box cũ.
+
 **12/11/2026 — thêm bàn, ghế và dép 3D:** mở `demo_vat_the_da_dang.cmd` để xem phòng 5 vật và camera trước. [Kết quả bốn ca đa dạng vật thể](docs/diverse-objects.md): 2 đến đích, 2 thất bại, trong đó có va chạm chân ghế. Demo phòng dùng bản đồ biết trước; YOLO vẫn chỉ học lớp box.
 
 [Kết quả camera trên xe](docs/ego-results.md): 29 test qua, 4 ca ego đúng kỳ vọng (3 đến đích, 1 SAFE_STOP); kèm video góc nhìn trước có YOLO.

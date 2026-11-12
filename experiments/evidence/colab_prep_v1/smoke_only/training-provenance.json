@@ -1,0 +1,20 @@
+{
+  "classes": [
+    "box",
+    "furniture_leg",
+    "slipper"
+  ],
+  "dataset_manifest_sha256": "a664a549234eb614dfda9fd353b3e853388b2110e9a65d109aec90c2d98eac24",
+  "epochs_requested": 1,
+  "image_size": 320,
+  "batch": 8,
+  "device": "cpu",
+  "base_weights": "C:\\Users\\hungt\\Documents\\ChatGPT\\Ni\u00ean lu\u1eadn c\u01a1 s\u1edf\\models\\downloads\\yolo11n.pt",
+  "python": "3.14.4",
+  "torch": "2.14.0+cpu",
+  "ultralytics": "8.4.202",
+  "cuda": null,
+  "gpu": null,
+  "checkpoint_selection": "best validation fitness; test set not used for checkpoint selection",
+  "scope": "Synthetic onboard RGB; not real-world accuracy or navigation success"
+}

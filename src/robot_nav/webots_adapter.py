@@ -42,6 +42,10 @@ class WebotsAdapter:
 def run():
     from controller import Supervisor
     robot = Supervisor()
+    if os.environ.get('ROBOT_OBJECT_DATASET'):
+        from .object_dataset import collect
+        collect(robot)
+        return
     if os.environ.get('ROBOT_EGO_DATASET'):
         from .webots_ego import collect
         collect(robot)
