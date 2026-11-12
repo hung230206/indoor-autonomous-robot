@@ -15,7 +15,7 @@ def main():
     args=parser.parse_args()
     root=tk.Tk()
     root.title('Robot vision - Camera RGB + YOLO live | '+args.output.name)
-    root.geometry('1060x600')
+    root.geometry('1060x650')
     root.configure(bg='#111827')
     onboard=os.environ.get('ROBOT_CAMERA_MODE')=='ego'
     tk.Label(root,text='ROBOT VISION | '+('Camera trước trên xe' if onboard else 'Camera trên cao (bản cũ)'),fg='white',bg='#111827',font=('Segoe UI',17,'bold')).pack(pady=(12,2))
@@ -32,6 +32,15 @@ def main():
     tk.Label(root,textvariable=camera_text,fg='#67e8f9',bg='#111827',font=('Segoe UI',11)).pack(pady=3)
     tk.Label(root,textvariable=navigation_text,fg='white',bg='#111827',font=('Segoe UI',11)).pack()
     tk.Label(root,text='Dời chấm đỏ để đổi đích; nếu đang Pause, bấm Real-time. Reload World về A / xóa SAFE_STOP.',fg='#94a3b8',bg='#111827',font=('Segoe UI',10)).pack(pady=6)
+    # Explain detector scope before the first terminal summary exists.
+    try:
+        objects=json.loads((args.output/'scene-objects.json').read_text(encoding='utf-8'))
+        if objects:
+            known=sum(bool(o.get('map_known')) for o in objects)
+            tk.Label(root,text=f'YOLO chỉ học box; bàn/ghế/dép chưa được huấn luyện. {known}/{len(objects)} vật đã có trong bản đồ.',
+                     fg='#fbbf24',bg='#111827',font=('Segoe UI',10)).pack()
+    except (OSError,ValueError):
+        pass
     versions={}
 
     def refresh():

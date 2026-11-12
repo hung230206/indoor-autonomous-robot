@@ -10,6 +10,7 @@ from .recording import write_run
 from .webots_world import solid_box
 from .webots_episode import reset_episode, archive_previous_run
 from .webots_goal import SceneGoal
+from .scene_objects import prior_rectangles, object_contacts
 
 
 class WebotsAdapter:
@@ -60,7 +61,10 @@ def run():
     startup=reset_episode(robot,scenario)
     startup.update({'configured_goal_m':configured_goal,'scene_goal_m':scenario['goal'],'goal_source':marker.source})
     adapter = WebotsAdapter(robot,c)
-    grid = Grid(c,scenario["obstacles"])
+    scene_objects=scenario.get('objects',[])
+    grid = Grid(c,scenario["obstacles"]+prior_rectangles(scene_objects))
+    object_nodes=[(f'SCENE_OBJECT_{i}',robot.getFromDef(f'SCENE_OBJECT_{i}')) for i in range(len(scene_objects))]
+    contacts=[]
     nav = Navigator(grid,scenario["goal"])
     visual=None
     receiver=None
@@ -157,6 +161,11 @@ def run():
             (output/'pose-evaluation.json').write_text(json.dumps(evaluations),encoding='utf-8')
         summary.update({'goal_m':list(nav.goal),'goal_source':marker.source,'goal_changes':goal_changes,
                         'goal_elapsed_s':(frames[-1].time if frames else 0)-goal_started_s})
+        if scene_objects:
+            summary.update({'scene_object_count':len(scene_objects),
+                            'known_object_count':sum(bool(o.get('map_known')) for o in scene_objects),
+                            'detector_classes':['box'] if visual else [], 'object_contacts':contacts})
+            (output/'scene-objects.json').write_text(json.dumps(scene_objects,indent=2),encoding='utf-8')
         print('[NAV] state='+nav.state+' | task_passed='+str(summary['passed'])+' | goal_m='+str(list(nav.goal)),flush=True)
         print(json.dumps(summary),flush=True)
         if movie:
@@ -225,6 +234,11 @@ def run():
             # Conservative footprint check independent of the planner.
             collision |= min(truth.x,truth.y,c.width_m-truth.x,c.height_m-truth.y) < c.radius_m-0.002
             collision |= any(rect_distance(truth.x,truth.y,r) < c.radius_m-0.002 for r in obstacles)
+            if object_nodes:
+                current_contacts=object_contacts(object_nodes)
+                if current_contacts:
+                    contacts.extend(dict(contact,time_s=now) for contact in current_contacts)
+                    collision=True
             violation |= not grid.free(grid.cell(truth.x,truth.y))
             if visual and not visual.fresh(now):
                 cmd=Command()

@@ -3,6 +3,23 @@ import json
 import math
 from pathlib import Path
 from .models import ROOT, sensor_mounts
+from .scene_objects import object_solid
+
+
+def furniture_viewpoint():
+    """Oblique overview so legs and low slippers can be inspected in 3D."""
+    position=(3.5,-3.,3.4); target=(1.5,1.,.1)
+    forward=[b-a for a,b in zip(position,target)]
+    norm=math.sqrt(sum(v*v for v in forward)); forward=[v/norm for v in forward]
+    right=[forward[1],-forward[0],0.]
+    norm=math.hypot(*right[:2]); right=[v/norm for v in right]
+    up=[right[1]*forward[2],-right[0]*forward[2],right[0]*forward[1]-right[1]*forward[0]]
+    # Webots ENU Viewpoint looks along local +X, with +Z up and -Y right.
+    matrix=list(zip(forward,[-v for v in right],up))
+    angle=math.acos((sum(matrix[i][i] for i in range(3))-1)/2)
+    axis=[(matrix[2][1]-matrix[1][2]),(matrix[0][2]-matrix[2][0]),(matrix[1][0]-matrix[0][1])]
+    axis=[v/(2*math.sin(angle)) for v in axis]
+    return f"Viewpoint {{ orientation {' '.join(map(str,axis))} {angle} position {' '.join(map(str,position))} }}"
 
 
 def solid_box(name, rect, height=.28, color="0.22 0.29 0.37"):
@@ -46,6 +63,8 @@ Solid {{
         pieces.append(solid_box(f"WALL_{i}",rect))
     for i, rect in enumerate(scenario["obstacles"]):
         pieces.append(solid_box(f"STATIC_{i}",rect))
+    for i, obj in enumerate(scenario.get('objects',[])):
+        pieces.append(object_solid(f'SCENE_OBJECT_{i}',obj))
     gx, gy = scenario["goal"]
     pieces.append(f'''DEF GOAL_MARKER Transform {{ translation {gx} {gy} 0.002 children [ Shape {{ appearance PBRAppearance {{ baseColor 0.85 0.12 0.3 roughness 1 metalness 0 }} geometry Cylinder {{ radius 0.045 height 0.003 }} }} ] }}''')
     sx, sy, theta = scenario["start"]
@@ -119,4 +138,15 @@ Solid {{
   boundingObject Box {{ size {c.body_length_m} {c.body_width_m-.05} 0.035 }}
   physics Physics {{ density -1 mass 0.35 centerOfMass [ -0.01 0 0 ] }}
 }}''')
-    path.write_text('\n\n'.join(pieces)+'\n', encoding="utf-8")
+    text='\n\n'.join(pieces)+'\n'
+    if scenario.get('objects'):
+        original=f'Viewpoint {{ orientation -0.577350269 0.577350269 0.577350269 2.094395102 position {c.width_m/2} {c.height_m/2} 5.5 }}'
+        text=text.replace(original,furniture_viewpoint())
+    path.write_text(text,encoding='utf-8')
+    if scenario.get('objects') and ego:
+        perspective=path.with_name('.'+path.stem+'.wbproj')
+        if not perspective.exists():
+            # Separate RGB/YOLO monitor and recording already show the camera.
+            # Keep the native camera overlay from covering the furniture view.
+            perspective.write_text('Webots Project File version R2025a\n'
+                'renderingDevicePerspectives: mini_2wd:front_camera;0;1;0;0\n',encoding='utf-8')

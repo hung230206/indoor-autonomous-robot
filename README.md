@@ -1,5 +1,7 @@
 # Robot tự hành trong nhà — giai đoạn 1
 
+**12/11/2026 — thêm bàn, ghế và dép 3D:** mở `demo_vat_the_da_dang.cmd` để xem phòng 5 vật và camera trước. [Kết quả bốn ca đa dạng vật thể](docs/diverse-objects.md): 2 đến đích, 2 thất bại, trong đó có va chạm chân ghế. Demo phòng dùng bản đồ biết trước; YOLO vẫn chỉ học lớp box.
+
 [Kết quả camera trên xe](docs/ego-results.md): 29 test qua, 4 ca ego đúng kỳ vọng (3 đến đích, 1 SAFE_STOP); kèm video góc nhìn trước có YOLO.
 
 **Yêu cầu mới: camera trước trên xe.** Chạy `.\.venv-yolo\Scripts\python.exe tools/run_live_demo.py` để mở Webots 5 hộp và màn hình RGB/YOLO trực tiếp. Xem [kiến trúc camera trên xe](docs/ego-vision.md). Chế độ mới dùng odometry encoder + IMU mô phỏng, phép chiếu chân vật thể và cảm biến cự ly; phần cứng thực chưa có encoder/IMU. Chạy lại bằng cách mở `demo_camera_tren_xe.cmd`. Báo cáo Word và `yolo_v1` bên dưới là kết quả lịch sử của camera trên cao.

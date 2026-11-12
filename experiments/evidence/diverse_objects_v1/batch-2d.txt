@@ -1,0 +1,11 @@
+open               GOAL_REACHED   passed=True plans=1 t=25.9s
+box                GOAL_REACHED   passed=True plans=1 t=25.6s
+legs               GOAL_REACHED   passed=True plans=1 t=25.9s
+corridor           GOAL_REACHED   passed=True plans=1 t=21.6s
+s_curve            GOAL_REACHED   passed=True plans=2 t=40.6s
+replanning         GOAL_REACHED   passed=True plans=4 t=28.9s
+new_barrier        GOAL_REACHED   passed=True plans=6 t=32.0s
+reverse_heading    GOAL_REACHED   passed=True plans=1 t=29.0s
+no_path            NO_PATH        passed=True plans=1 t=0.0s
+narrow_gap         NO_PATH        passed=True plans=1 t=0.0s
+Expected outcomes: 10/10; arrivals: 8

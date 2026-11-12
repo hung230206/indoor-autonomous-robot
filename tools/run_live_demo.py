@@ -1,5 +1,6 @@
 """Launch a visible Webots demo and its read-only camera monitor."""
 import argparse
+import json
 from datetime import datetime
 import os
 from pathlib import Path
@@ -32,6 +33,8 @@ def main():
     world=ROOT/'worlds'/('runtime_'+scenario['name']+'_'+uuid4().hex+'.wbt')
     generate_world(Config.load(),scenario,world,vision=True if args.overhead else 'ego')
     (output/'world.wbt').write_bytes(world.read_bytes())
+    if scenario.get('objects'):
+        (output/'scene-objects.json').write_text(json.dumps(scenario['objects'],indent=2),encoding='utf-8')
     env=os.environ.copy()
     env.update(ROBOT_OUTPUT=str(output),ROBOT_LIVE='1',ROBOT_BATCH='0',ROBOT_RECORD='0',ROBOT_CAMERA_MODE='overhead' if args.overhead else 'ego',
         PYTHONIOENCODING='utf-8',YOLO_CONFIG_DIR=str(ROOT/'.cache/ultralytics'),MPLBACKEND='Agg')
@@ -44,7 +47,9 @@ def main():
     pythonw=Path(sys.executable).with_name('pythonw.exe')
     subprocess.Popen([str(pythonw if pythonw.exists() else sys.executable),str(ROOT/'tools/live_camera_viewer.py'),str(output)],cwd=ROOT,env=env)
     with (output/'launch.log').open('w',encoding='utf-8') as log:
-        subprocess.Popen([str(locate_webots()),'--mode='+('pause' if args.paused else 'realtime'),'--stdout','--stderr',str(world)],cwd=ROOT,env=env,stdout=log,stderr=subprocess.STDOUT)
+        # Suppress first-launch welcome/update dialogs; ROBOT_BATCH remains 0
+        # so the navigation controller still waits for interactive goal changes.
+        subprocess.Popen([str(locate_webots()),'--batch','--mode='+('pause' if args.paused else 'realtime'),'--stdout','--stderr',str(world)],cwd=ROOT,env=env,stdout=log,stderr=subprocess.STDOUT)
     (ROOT/'experiments/runs/live_yolo_latest.txt').write_text(str(output),encoding='utf-8')
     print('Output:',output)
 

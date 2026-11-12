@@ -51,6 +51,9 @@ class EgoCamera:
             if os.environ.get('ROBOT_RECORD')=='1':
                 target=self.output/'camera-frames'; target.mkdir(exist_ok=True)
                 save_image(target/f'frame-{self.packets-1:05d}.jpg',annotated)
+                if self.packets==1:
+                    save_image(self.output/'initial-camera-rgb.jpg',bgr)
+                    save_image(self.output/'initial-camera-yolo.jpg',annotated)
             if detections:
                 save_image(self.output/'latest-detection.jpg',annotated)
                 if not (self.output/'first-detection.jpg').exists():

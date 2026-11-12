@@ -1,5 +1,7 @@
 # Kết quả triển khai giai đoạn 1
 
+**Mở rộng 12/11/2026:** xem [thử bàn, ghế, dép 3D](diverse-objects.md). 41 test qua, bộ 10 ca nền vẫn đúng kỳ vọng; bốn ca vật mới có hai ca thất bại, không gộp vào số thành công bên dưới.
+
 Lần kiểm chứng ban đầu: **06/11/2026**. Phạm vi là mô phỏng; chưa kiểm chứng xe thật.
 
 Đã triển khai M1–M5: world Webots native với robot 2WD, occupancy grid và inflation, A* 8 hướng, bám waypoint, phát hiện cản bằng ba tia khoảng cách, dừng/lập lại đường, CSV/JSON và video demo.

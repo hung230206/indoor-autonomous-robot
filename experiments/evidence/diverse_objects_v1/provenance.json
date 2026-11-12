@@ -1,0 +1,234 @@
+{
+  "date": "2026-11-12",
+  "baseline_commit": "5e430fae9922f13037b62a26fd29bb5e3ab48c34",
+  "scope": "Webots R2025a RGB/encoder/IMU simulation; box-only detector; fixed synthetic scenes; failures retained",
+  "source_sha256": {
+    "src/robot_nav/scene_objects.py": "89d92ef6b365fd32de3c2c8263a54a4283eb34d379edd108db52aa47c4bce8d4",
+    "src/robot_nav/webots_world.py": "67a50dfcfea90aceffe8ca60af35bc72d21ada753e3ba3a65913f4754cd517ca",
+    "src/robot_nav/webots_adapter.py": "4b4a2ef95a9e0ffa37c982a74442aaf24db731b52ed489d7f738280069a82742",
+    "src/robot_nav/webots_ego.py": "4b8a9d90910949ded6b843902f6b8da7c0b749ce6736b37de47baed316a1cae3",
+    "src/robot_nav/simulation.py": "1d15739d19b577d6d92ea43feb99e2b4ff5a21ea23f1b87500e874fea6bab456",
+    "config/object_scenarios.json": "fe3085596824e95cea5cd9039faa6c959c9e26dc6000fcce88eb05f88ca8a363",
+    "config/robot.json": "836e4dbd426fa9643ffc51a4d484cd564894e8aa75301f333bbeb7640926235f",
+    "config/vision_ego.json": "71542d6b48a58751a3c8cd17d332ec2cd32388c3bdcdaca6210947ae7405a949",
+    "config/odometry_webots.json": "a5195600704c38a539b719dc005234262172ec29c0a68101968eb11c09732eda",
+    "models/yolo_ego/best.pt": "c9e087456d1b6afffadca4abab8be3636f0d019516c1615e4f0c7efbc48e5c26"
+  },
+  "outcomes": [
+    {
+      "scenario": "objects_room",
+      "mode": "webots_ego_yolo",
+      "expected": "GOAL_REACHED",
+      "state": "GOAL_REACHED",
+      "passed": true,
+      "time_s": 24.736,
+      "distance_m": 2.579344106202953,
+      "plans": 1,
+      "collision": false,
+      "inflated_grid_violation": false,
+      "goal_error_m": 0.043635404404727525,
+      "max_planning_ms": 1.2596000015037134,
+      "webots_version": "R2025a",
+      "vision_packets": 97,
+      "visual_occupied_cells": 0,
+      "range_mapping_enabled": true,
+      "pose_source": "encoder_imu_odometry",
+      "camera_mount": "onboard_front",
+      "max_odometry_error_m": 0.0052186702044337415,
+      "true_goal_error_m": 0.04049245967871408,
+      "goal_m": [
+        2.65,
+        0.45
+      ],
+      "goal_source": "GOAL_MARKER",
+      "goal_changes": [
+        {
+          "time_s": 0,
+          "goal_m": [
+            2.65,
+            0.45
+          ]
+        }
+      ],
+      "goal_elapsed_s": 24.736,
+      "scene_object_count": 5,
+      "known_object_count": 5,
+      "detector_classes": [
+        "box"
+      ],
+      "object_contacts": []
+    },
+    {
+      "scenario": "unknown_chair",
+      "mode": "webots_ego_yolo",
+      "expected": "GOAL_REACHED",
+      "state": "SAFE_STOP",
+      "passed": false,
+      "time_s": 10.144,
+      "distance_m": 0.8827155921183315,
+      "plans": 2,
+      "collision": true,
+      "inflated_grid_violation": false,
+      "goal_error_m": 1.4263131334973376,
+      "max_planning_ms": 0.4684000014094636,
+      "webots_version": "R2025a",
+      "vision_packets": 40,
+      "visual_occupied_cells": 6,
+      "range_mapping_enabled": true,
+      "pose_source": "encoder_imu_odometry",
+      "camera_mount": "onboard_front",
+      "max_odometry_error_m": 0.0017219311695052314,
+      "true_goal_error_m": 1.4247783733045132,
+      "goal_m": [
+        2.65,
+        0.87
+      ],
+      "goal_source": "GOAL_MARKER",
+      "goal_changes": [
+        {
+          "time_s": 0,
+          "goal_m": [
+            2.65,
+            0.87
+          ]
+        }
+      ],
+      "goal_elapsed_s": 10.144,
+      "scene_object_count": 1,
+      "known_object_count": 0,
+      "detector_classes": [
+        "box"
+      ],
+      "object_contacts": [
+        {
+          "object": "SCENE_OBJECT_0",
+          "point_m": [
+            1.3153898888272313,
+            0.895,
+            0.07226678125902708
+          ],
+          "time_s": 10.144
+        },
+        {
+          "object": "SCENE_OBJECT_0",
+          "point_m": [
+            1.3153893955135518,
+            0.865,
+            0.07226678147103627
+          ],
+          "time_s": 10.144
+        },
+        {
+          "object": "SCENE_OBJECT_0",
+          "point_m": [
+            1.3153571632796073,
+            0.895,
+            0.03726679655847992
+          ],
+          "time_s": 10.144
+        },
+        {
+          "object": "SCENE_OBJECT_0",
+          "point_m": [
+            1.315356669965928,
+            0.865,
+            0.03726679677048911
+          ],
+          "time_s": 10.144
+        }
+      ]
+    },
+    {
+      "scenario": "unknown_slipper",
+      "mode": "webots_ego_yolo",
+      "expected": "GOAL_REACHED",
+      "state": "GOAL_REACHED",
+      "passed": true,
+      "time_s": 29.28,
+      "distance_m": 2.6233300005504483,
+      "plans": 3,
+      "collision": false,
+      "inflated_grid_violation": false,
+      "goal_error_m": 0.04368645942088702,
+      "max_planning_ms": 2.7537999994819984,
+      "webots_version": "R2025a",
+      "vision_packets": 115,
+      "visual_occupied_cells": 6,
+      "range_mapping_enabled": true,
+      "pose_source": "encoder_imu_odometry",
+      "camera_mount": "onboard_front",
+      "max_odometry_error_m": 0.006065605477313301,
+      "true_goal_error_m": 0.039433988396939186,
+      "goal_m": [
+        2.65,
+        1.05
+      ],
+      "goal_source": "GOAL_MARKER",
+      "goal_changes": [
+        {
+          "time_s": 0,
+          "goal_m": [
+            2.65,
+            1.05
+          ]
+        }
+      ],
+      "goal_elapsed_s": 29.28,
+      "scene_object_count": 1,
+      "known_object_count": 0,
+      "detector_classes": [
+        "box"
+      ],
+      "object_contacts": []
+    },
+    {
+      "scenario": "unknown_table",
+      "mode": "webots_ego_yolo",
+      "expected": "GOAL_REACHED",
+      "state": "SAFE_STOP",
+      "passed": false,
+      "time_s": 7.904,
+      "distance_m": 0.8193125290890891,
+      "plans": 2,
+      "collision": false,
+      "inflated_grid_violation": true,
+      "goal_error_m": 1.4806874709109108,
+      "max_planning_ms": 1.7367000109516084,
+      "webots_version": "R2025a",
+      "vision_packets": 31,
+      "visual_occupied_cells": 0,
+      "range_mapping_enabled": true,
+      "pose_source": "encoder_imu_odometry",
+      "camera_mount": "onboard_front",
+      "max_odometry_error_m": 0.002534428090887354,
+      "true_goal_error_m": 1.4781530428200305,
+      "goal_m": [
+        2.65,
+        1.05
+      ],
+      "goal_source": "GOAL_MARKER",
+      "goal_changes": [
+        {
+          "time_s": 0,
+          "goal_m": [
+            2.65,
+            1.05
+          ]
+        }
+      ],
+      "goal_elapsed_s": 7.904,
+      "scene_object_count": 1,
+      "known_object_count": 0,
+      "detector_classes": [
+        "box"
+      ],
+      "object_contacts": []
+    }
+  ],
+  "launch_and_validation_sha256": {
+    "tools/run_live_demo.py": "cb020f7e4a0e13efae87da363c1356b0e4fd7b1ac8b3ef8d585f44d46bae8602",
+    "tools/live_camera_viewer.py": "321008b25c7607012c68baf20b3f313ca80e734c52186ef82eb858541aa5f743",
+    "tools/check_diverse_objects.py": "9ec8554f80d912c4fa4a6dd43c52db1d8a6e4a92c4c3df3310a1c9f59e711fd5",
+    "tests/test_scene_objects.py": "e722b9a2e79ecc0a2a33b1d22351bbf7275775dbe8fec4d0aa7e836039fa6ad1"
+  }
+}

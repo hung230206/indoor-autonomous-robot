@@ -1,0 +1,38 @@
+[
+  {
+    "name": "objects_room",
+    "description": "Known furniture legs and slippers in a furnished 3D room; YOLO remains box-only",
+    "start": [0.35, 0.45, 0],
+    "goal": [2.65, 0.45],
+    "obstacles": [],
+    "objects": [
+      {"kind":"table", "x_m":1.15, "y_m":1.45, "yaw_rad":0.15, "map_known":true},
+      {"kind":"chair", "x_m":2.25, "y_m":1.40, "yaw_rad":-0.25, "map_known":true},
+      {"kind":"chair", "x_m":0.45, "y_m":1.38, "yaw_rad":0.10, "map_known":true},
+      {"kind":"slipper", "x_m":1.30, "y_m":0.45, "yaw_rad":0.30, "map_known":true},
+      {"kind":"slipper", "x_m":1.68, "y_m":0.38, "yaw_rad":-0.15, "map_known":true}
+    ],
+    "expected": "GOAL_REACHED"
+  },
+  {
+    "name":"unknown_table",
+    "description":"Unmapped table: native legs, empty space beneath tabletop",
+    "start":[0.35,1.05,0], "goal":[2.65,1.05], "obstacles":[],
+    "objects":[{"kind":"table","x_m":1.50,"y_m":1.05,"yaw_rad":0}],
+    "expected":"GOAL_REACHED"
+  },
+  {
+    "name":"unknown_chair",
+    "description":"Unmapped chair: thin legs on the initial route",
+    "start":[0.35,0.87,0], "goal":[2.65,0.87], "obstacles":[],
+    "objects":[{"kind":"chair","x_m":1.50,"y_m":1.05,"yaw_rad":0}],
+    "expected":"GOAL_REACHED"
+  },
+  {
+    "name":"unknown_slipper",
+    "description":"Unmapped low slipper: deliberate blind-spot challenge, not a safety guarantee",
+    "start":[0.35,1.05,0], "goal":[2.65,1.05], "obstacles":[],
+    "objects":[{"kind":"slipper","x_m":1.50,"y_m":1.05,"yaw_rad":1.57079632679}],
+    "expected":"GOAL_REACHED"
+  }
+]

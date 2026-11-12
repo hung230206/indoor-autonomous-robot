@@ -14,6 +14,7 @@ def scenarios():
 def get_scenario(name):
     extra = json.loads((ROOT / "config/safety_scenarios.json").read_text(encoding="utf-8"))
     extra += json.loads((ROOT / "config/vision_scenarios.json").read_text(encoding="utf-8"))
+    extra += json.loads((ROOT / "config/object_scenarios.json").read_text(encoding="utf-8"))
     for item in scenarios() + extra:
         if item["name"] == name:
             return item
@@ -41,6 +42,8 @@ def ray_distance(x, y, yaw, rect, max_range):
 
 class KinematicWorld:
     def __init__(self, config, scenario):
+        if scenario.get('objects'):
+            raise ValueError('3D furniture/slipper scenes require Webots; 2D rays cannot model height')
         self.config, self.scenario = config, scenario
         self.x, self.y, self.theta = scenario["start"]
         self.obstacles = [tuple(r) for r in scenario["obstacles"]]

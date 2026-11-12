@@ -1,0 +1,43 @@
+{
+  "scenario": "objects_room",
+  "mode": "webots_ego_yolo",
+  "expected": "GOAL_REACHED",
+  "state": "GOAL_REACHED",
+  "passed": true,
+  "time_s": 24.736,
+  "distance_m": 2.579344106202953,
+  "plans": 1,
+  "collision": false,
+  "inflated_grid_violation": false,
+  "goal_error_m": 0.043635404404727525,
+  "max_planning_ms": 1.2596000015037134,
+  "webots_version": "R2025a",
+  "vision_packets": 97,
+  "visual_occupied_cells": 0,
+  "range_mapping_enabled": true,
+  "pose_source": "encoder_imu_odometry",
+  "camera_mount": "onboard_front",
+  "max_odometry_error_m": 0.0052186702044337415,
+  "true_goal_error_m": 0.04049245967871408,
+  "goal_m": [
+    2.65,
+    0.45
+  ],
+  "goal_source": "GOAL_MARKER",
+  "goal_changes": [
+    {
+      "time_s": 0,
+      "goal_m": [
+        2.65,
+        0.45
+      ]
+    }
+  ],
+  "goal_elapsed_s": 24.736,
+  "scene_object_count": 5,
+  "known_object_count": 5,
+  "detector_classes": [
+    "box"
+  ],
+  "object_contacts": []
+}

@@ -1,0 +1,19 @@
+{
+  "known_start": [
+    0.35,
+    0.35,
+    3.141592653589793
+  ],
+  "removed_transient_nodes": [],
+  "policy": "reset_scripted_episode_to_A_before_sensor_baselines",
+  "configured_goal_m": [
+    2.65,
+    1.65
+  ],
+  "scene_goal_m": [
+    2.65,
+    1.65
+  ],
+  "goal_source": "GOAL_MARKER",
+  "simulation_start_s": 0.512
+}

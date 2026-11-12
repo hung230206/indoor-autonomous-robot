@@ -1,0 +1,37 @@
+[
+  {
+    "time_s": 0,
+    "state": "LOCALIZING",
+    "reason": "start"
+  },
+  {
+    "time_s": 0.0,
+    "state": "PLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 0.0,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 15.072000000000012,
+    "state": "OBSTACLE_STOP",
+    "reason": "path_blocked"
+  },
+  {
+    "time_s": 15.104000000000012,
+    "state": "REPLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 15.104000000000012,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 40.54399999999908,
+    "state": "GOAL_REACHED",
+    "reason": "goal_tolerance"
+  }
+]
