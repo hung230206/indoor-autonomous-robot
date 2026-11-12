@@ -1,11 +1,15 @@
 """Onboard RGB ground-contact projection and encoder odometry; no object GT."""
 import json
 import math
+import os
+from pathlib import Path
 from .models import ROOT, Pose, wrap_angle
 
 
 def ego_config():
-    return json.loads((ROOT/'config/vision_ego.json').read_text(encoding='utf-8'))
+    path=Path(os.environ.get('ROBOT_EGO_CONFIG','config/vision_ego.json'))
+    if not path.is_absolute():path=ROOT/path
+    return json.loads(path.read_text(encoding='utf-8'))
 
 
 def camera_rotation(pitch):

@@ -1,0 +1,22 @@
+[
+  {
+    "time_s": 0,
+    "state": "LOCALIZING",
+    "reason": "start"
+  },
+  {
+    "time_s": 0.0,
+    "state": "PLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 0.0,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 21.536000000000016,
+    "state": "GOAL_REACHED",
+    "reason": "goal_tolerance"
+  }
+]

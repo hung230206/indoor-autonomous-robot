@@ -1,0 +1,52 @@
+[
+  {
+    "time_s": 0,
+    "state": "LOCALIZING",
+    "reason": "start"
+  },
+  {
+    "time_s": 0.03200000000000003,
+    "state": "PLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 0.03200000000000003,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 4.640000000000001,
+    "state": "OBSTACLE_STOP",
+    "reason": "path_blocked"
+  },
+  {
+    "time_s": 4.672000000000001,
+    "state": "REPLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 4.672000000000001,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 5.151999999999999,
+    "state": "OBSTACLE_STOP",
+    "reason": "path_blocked"
+  },
+  {
+    "time_s": 5.183999999999999,
+    "state": "REPLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 5.183999999999999,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 30.976,
+    "state": "GOAL_REACHED",
+    "reason": "goal_tolerance"
+  }
+]

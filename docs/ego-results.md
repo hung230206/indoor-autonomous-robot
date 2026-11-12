@@ -1,5 +1,7 @@
 # Kết quả camera trước trên xe — 06/11/2026
 
+Đây là báo cáo checkpoint box lịch sử. Xem [bản ba lớp từ Colab ngày 12/11/2026](multiclass-results.md) để biết kết quả mới trên chân bàn/ghế/dép; hai bộ mAP dùng tập test khác nhau.
+
 Đã thay camera trên cao bằng camera RGB gắn trước thân xe, train checkpoint YOLO11n riêng, chuyển tiếp xúc ảnh xuống sàn, ghép cự ly và odometry encoder + IMU. Không có camera trên cao trong world ego. Supervisor pose chỉ dùng đánh giá độc lập; pose điều hướng khởi tạo ở A đã biết rồi tích phân encoder với hướng IMU.
 
 ## Kết quả đã chạy bằng checkpoint cuối

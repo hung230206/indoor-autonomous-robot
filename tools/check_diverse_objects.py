@@ -1,6 +1,7 @@
 """Record all four 3D object challenges; keep failures as failures."""
 import argparse
 import json
+import os
 from pathlib import Path
 import sys
 from datetime import datetime
@@ -16,7 +17,9 @@ from run_webots import run_one, locate_webots
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--output',type=Path,default=ROOT/'experiments/runs'/('diverse_objects_'+datetime.now().strftime('%Y%m%d_%H%M%S')))
+    parser.add_argument('--vision-config',type=Path)
     args=parser.parse_args()
+    if args.vision_config:os.environ['ROBOT_EGO_CONFIG']=str(args.vision_config.resolve())
     results=[]
     for name in ('objects_room','unknown_table','unknown_chair','unknown_slipper'):
         results.append(run_one(locate_webots(),Config.load(),get_scenario(name),args.output/name,

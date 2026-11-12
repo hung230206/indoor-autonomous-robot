@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-12",
+  "baseline_commit": "178e32a57a09a344c49f87c29589d86c89025957",
+  "weights_sha256": "c5ec4cb950a6affcaa2c2bbe8b4c97eabcc4dfe42d18ccb8e6e76b39fd101d8d",
+  "colab_result_zip_sha256": "51585787997ee72f078ce061d47a6d4d00a5843a22993a8724eab999dc2dd1e1",
+  "source_sha256": {
+    "config/vision_ego.json": "3abb50722a3de32ad96728587cdd623798fd24466c4d24248a541ed20c9729ce",
+    "config/vision_objects.json": "3abb50722a3de32ad96728587cdd623798fd24466c4d24248a541ed20c9729ce",
+    "config/vision_ego_box_legacy.json": "71542d6b48a58751a3c8cd17d332ec2cd32388c3bdcdaca6210947ae7405a949",
+    "src/robot_nav/onboard.py": "6e9b300cdb60e9ef0829ce52f93aa942a3b0a354dafa0eeffa6b51271425dc4b",
+    "src/robot_nav/vision.py": "1a84039ac68d6076873df596704d150d76b4ea5b532219cbecda8de463d8895c",
+    "src/robot_nav/webots_adapter.py": "90aa3cb01e9f32cf8ca8c185170e7afa9baaf1d73acd654721348cab3fd1475f",
+    "src/robot_nav/webots_ego.py": "437b622670a4a60398b4a07b2e6129540f06dc0dee470bd733010f14f4278f65",
+    "tools/run_webots.py": "a7b98c2dc4586b1286011eaba72e64a0290011e5ed690217d5151936d70353a0",
+    "tools/check_diverse_objects.py": "ecb604a1f4c1c7022182e5923cea8f463304b5fea53313352d4dab2792cda306",
+    "tools/run_live_demo.py": "ebc9442443d00fd49b3059f6298a352f43d11867ab39e47f3ed05466d29823fd",
+    "tools/live_camera_viewer.py": "4697ca6237e974c0d585adc56c4fe6eac8b95113fc2bbae6d79fc09b72877045",
+    "tests/test_multiclass.py": "af59bce4c028a2b9de1a505970c22cd7a0c938a73dfba077aa520c52c7cf2a81"
+  },
+  "unit_tests": 49,
+  "objects": "4/4 GOAL_REACHED, no recorded collisions or grid violations; 3 unknown scenes and 1 known-map room",
+  "ego_regression": "3 GOAL_REACHED and 1 SAFE_STOP camera loss; all expected",
+  "baseline": "2D and Webots each 8 GOAL_REACHED + 2 NO_PATH",
+  "goal_sync": "Native marker changes passed with camera overlay excluded",
+  "cpu_test": "Same checkpoint and 180-image test split reproduced Colab metrics; no tuning or checkpoint selection",
+  "scope": "Synthetic Webots, encoder+IMU; no real-world or real-time assurance; model and input-rendering fix both changed from legacy baseline"
+}

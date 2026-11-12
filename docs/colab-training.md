@@ -1,6 +1,8 @@
 # Huấn luyện YOLO đa lớp trên Colab GPU
 
-Chuẩn bị ngày 12/11/2026 theo lựa chọn của người dùng. **Bộ dữ liệu và notebook đã sẵn sàng; chưa chạy lượt train đầy đủ trên GPU Colab, chưa có mAP test của model mới.** Model đang dùng trong demo vẫn là `models/yolo_ego/best.pt`, chỉ có lớp box.
+**Cập nhật:** đã nhận ZIP kết quả do người dùng train trên Tesla T4 đủ 60 epoch; mAP50–95 trên 180 ảnh test tổng hợp là 96,50%. Xem [model và kết quả tích hợp](multiclass-results.md). Các đoạn mô tả trạng thái "chuẩn bị/chưa train" bên dưới là lịch sử trước khi nhận kết quả.
+
+Giai đoạn chuẩn bị ngày 12/11/2026 theo lựa chọn của người dùng: khi đó bộ dữ liệu/notebook mới được kiểm tra và demo dùng model box. Sau khi người dùng gửi kết quả Colab, checkpoint mới nằm tại `models/yolo_objects_v1/best.pt`; xem cập nhật ở đầu trang.
 
 Các model box trước đây được train trực tiếp trên CPU laptop bằng Python, Ultralytics YOLO và PyTorch. Colab là môi trường máy ảo có thể cấp GPU; không phải một mô hình hoặc thuật toán train khác. Máy hiện tại có Intel UHD và Torch CPU, `torch.cuda.is_available() == False`. Ultralytics cho phép chọn [thiết bị train CPU/GPU](https://docs.ultralytics.com/modes/train/); GPU Colab có [quota và phụ thuộc tài nguyên](https://research.google.com/colaboratory/faq.html).
 

@@ -13,6 +13,8 @@ sys.path.insert(0,str(ROOT/'src'))
 from robot_nav.models import Config
 from robot_nav.simulation import get_scenario
 from robot_nav.vision import configure_camera_runtime
+from robot_nav.vision import obstacle_classes,vision_config
+from robot_nav.onboard import ego_config
 from robot_nav.webots_world import generate_world
 from run_webots import locate_webots
 
@@ -22,8 +24,12 @@ def main():
     parser.add_argument('--scenario',default='yolo_many_boxes')
     parser.add_argument('--paused',action='store_true')
     parser.add_argument('--overhead',action='store_true',help='Legacy overhead-camera experiment')
+    parser.add_argument('--vision-config',type=Path,help='Explicit onboard camera/model configuration')
     parser.add_argument('--goal',nargs=2,type=float,metavar=('X','Y'),help='Initial scene goal in metres')
     args=parser.parse_args()
+    if args.vision_config:
+        if args.overhead:parser.error('--vision-config is for the onboard camera')
+        os.environ['ROBOT_EGO_CONFIG']=str(args.vision_config.resolve())
     scenario=get_scenario(args.scenario)
     if args.goal is not None:
         scenario.update(goal=args.goal,expected='GOAL_REACHED',require_replan=False)
@@ -33,6 +39,9 @@ def main():
     world=ROOT/'worlds'/('runtime_'+scenario['name']+'_'+uuid4().hex+'.wbt')
     generate_world(Config.load(),scenario,world,vision=True if args.overhead else 'ego')
     (output/'world.wbt').write_bytes(world.read_bytes())
+    selected_vision=vision_config() if args.overhead else ego_config()
+    (output/'vision-info.json').write_text(json.dumps({'classes':obstacle_classes(selected_vision),
+        'model':selected_vision['model'],'image_size':selected_vision['image_size']}),encoding='utf-8')
     if scenario.get('objects'):
         (output/'scene-objects.json').write_text(json.dumps(scenario['objects'],indent=2),encoding='utf-8')
     env=os.environ.copy()

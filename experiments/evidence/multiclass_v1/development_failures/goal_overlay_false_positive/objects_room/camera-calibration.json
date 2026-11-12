@@ -1,0 +1,28 @@
+{
+  "mode": "onboard_rgb",
+  "pose_source": "encoder_imu_odometry",
+  "weights_sha256": "c5ec4cb950a6affcaa2c2bbe8b4c97eabcc4dfe42d18ccb8e6e76b39fd101d8d",
+  "model": "models/yolo_objects_v1/best.pt",
+  "class_names": [
+    "box",
+    "furniture_leg",
+    "slipper"
+  ],
+  "confidence": 0.5,
+  "image_size": 640,
+  "camera_width": 640,
+  "camera_height": 480,
+  "camera_height_m": 0.32,
+  "offset_x_m": 0.1,
+  "pitch_down_rad": 0.3,
+  "horizontal_fov_rad": 1.3,
+  "min_projection_m": 0.15,
+  "max_projection_m": 2.5,
+  "surface_depth_m": 0.08,
+  "sample_steps": 8,
+  "confirmation_frames": 2,
+  "obstacle_ttl_s": 120.0,
+  "frame_timeout_s": 0.65,
+  "startup_grace_s": 1.0,
+  "bbox_padding_m": 0.025
+}

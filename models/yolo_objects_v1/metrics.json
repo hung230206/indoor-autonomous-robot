@@ -1,0 +1,44 @@
+{
+  "split": "test",
+  "classes": [
+    "box",
+    "furniture_leg",
+    "slipper"
+  ],
+  "weights_sha256": "c5ec4cb950a6affcaa2c2bbe8b4c97eabcc4dfe42d18ccb8e6e76b39fd101d8d",
+  "dataset_manifest_sha256": "b42dd145bbddc21cec96974b870526c73cdba10dcb2e0f524ae1f3cefaf8d16e",
+  "overall": {
+    "metrics/precision(B)": 0.9875583931239906,
+    "metrics/recall(B)": 0.9768907392181108,
+    "metrics/mAP50(B)": 0.9924851326044845,
+    "metrics/mAP50-95(B)": 0.9650320994251593,
+    "fitness": 0.9650320994251593
+  },
+  "per_class": [
+    {
+      "class_id": 0,
+      "name": "box",
+      "precision": 0.9911235302386681,
+      "recall": 0.9824561403508771,
+      "map50": 0.9922572193758733,
+      "map50_95": 0.9812333360045475
+    },
+    {
+      "class_id": 1,
+      "name": "furniture_leg",
+      "precision": 0.9812789805545262,
+      "recall": 0.9693251533742331,
+      "map50": 0.9936160374053876,
+      "map50_95": 0.9524133851753221
+    },
+    {
+      "class_id": 2,
+      "name": "slipper",
+      "precision": 0.9902726685787777,
+      "recall": 0.9788909239292218,
+      "map50": 0.9915821410321922,
+      "map50_95": 0.9614495770956089
+    }
+  ],
+  "scope": "Synthetic detector evaluation only; not comparable to the older one-class test set; no robot success claim"
+}

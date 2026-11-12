@@ -115,9 +115,13 @@ def main():
     parser.add_argument("--record",action="store_true")
     parser.add_argument("--yolo",action="store_true",help="Use fixed RGB camera and trained YOLO box detector")
     parser.add_argument('--ego',action='store_true',help='Onboard front RGB + YOLO + wheel encoder odometry')
+    parser.add_argument('--vision-config',type=Path,help='Explicit onboard camera/model configuration')
     parser.add_argument("--timeout",type=int,default=180)
     parser.add_argument("--output",type=Path,default=ROOT/"experiments/runs/webots")
     args=parser.parse_args()
+    if args.vision_config:
+        if not args.ego:parser.error('--vision-config requires --ego')
+        os.environ['ROBOT_EGO_CONFIG']=str(args.vision_config.resolve())
     selected=scenarios() if args.all else [get_scenario(args.scenario)]
     results=[]
     for scenario in selected:

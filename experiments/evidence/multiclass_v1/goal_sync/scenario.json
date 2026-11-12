@@ -1,0 +1,16 @@
+{
+  "name": "open",
+  "description": "Open floor, diagonal goal",
+  "start": [
+    0.35,
+    0.35,
+    0
+  ],
+  "goal": [
+    1.55,
+    1.55
+  ],
+  "obstacles": [],
+  "expected": "GOAL_REACHED",
+  "require_replan": false
+}

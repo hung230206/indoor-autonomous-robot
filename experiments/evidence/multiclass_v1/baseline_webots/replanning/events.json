@@ -1,0 +1,67 @@
+[
+  {
+    "time_s": 0,
+    "state": "LOCALIZING",
+    "reason": "start"
+  },
+  {
+    "time_s": 0.03200000000000003,
+    "state": "PLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 0.03200000000000003,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 3.072,
+    "state": "OBSTACLE_STOP",
+    "reason": "path_blocked"
+  },
+  {
+    "time_s": 3.104,
+    "state": "REPLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 3.104,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 3.9360000000000004,
+    "state": "OBSTACLE_STOP",
+    "reason": "path_blocked"
+  },
+  {
+    "time_s": 3.9680000000000004,
+    "state": "REPLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 3.9680000000000004,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 8.416,
+    "state": "OBSTACLE_STOP",
+    "reason": "path_blocked"
+  },
+  {
+    "time_s": 8.448,
+    "state": "REPLANNING",
+    "reason": "plan"
+  },
+  {
+    "time_s": 8.448,
+    "state": "FOLLOWING",
+    "reason": "path_ready"
+  },
+  {
+    "time_s": 30.112000000000002,
+    "state": "GOAL_REACHED",
+    "reason": "goal_tolerance"
+  }
+]

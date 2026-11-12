@@ -1,0 +1,38 @@
+{
+  "split": "test",
+  "device": "cpu",
+  "torch": "2.14.0+cpu",
+  "weights_sha256": "c5ec4cb950a6affcaa2c2bbe8b4c97eabcc4dfe42d18ccb8e6e76b39fd101d8d",
+  "dataset_manifest_sha256": "b42dd145bbddc21cec96974b870526c73cdba10dcb2e0f524ae1f3cefaf8d16e",
+  "overall": {
+    "metrics/precision(B)": 0.9875583834754638,
+    "metrics/recall(B)": 0.9768907410586927,
+    "metrics/mAP50(B)": 0.9924851326044845,
+    "metrics/mAP50-95(B)": 0.9650321636264948,
+    "fitness": 0.9650321636264948
+  },
+  "per_class": [
+    {
+      "name": "box",
+      "precision": 0.9911235554897085,
+      "recall": 0.9824561403508771,
+      "map50": 0.9922572193758733,
+      "map50_95": 0.9812333360045475
+    },
+    {
+      "name": "furniture_leg",
+      "precision": 0.9812789263032445,
+      "recall": 0.9693251533742331,
+      "map50": 0.9936160374053876,
+      "map50_95": 0.9524135777793283
+    },
+    {
+      "name": "slipper",
+      "precision": 0.9902726686334381,
+      "recall": 0.9788909294509678,
+      "map50": 0.9915821410321922,
+      "map50_95": 0.9614495770956089
+    }
+  ],
+  "scope": "Reproduction on laptop CPU, unchanged checkpoint and test split; no checkpoint selection or tuning"
+}

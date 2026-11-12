@@ -1,0 +1,58 @@
+[
+  {
+    "scenario": "objects_room",
+    "warmup_excluded": 1,
+    "samples": 120,
+    "detect_p50_ms": 172.91115000261925,
+    "detect_p95_ms": 240.95640001178253
+  },
+  {
+    "scenario": "unknown_chair",
+    "warmup_excluded": 1,
+    "samples": 102,
+    "detect_p50_ms": 165.72280000400497,
+    "detect_p95_ms": 230.93499999959022
+  },
+  {
+    "scenario": "unknown_slipper",
+    "warmup_excluded": 1,
+    "samples": 114,
+    "detect_p50_ms": 172.03134998999303,
+    "detect_p95_ms": 237.52140000578947
+  },
+  {
+    "scenario": "unknown_table",
+    "warmup_excluded": 1,
+    "samples": 114,
+    "detect_p50_ms": 172.93880000215722,
+    "detect_p95_ms": 261.44010000280105
+  },
+  {
+    "scenario": "open",
+    "warmup_excluded": 1,
+    "samples": 101,
+    "detect_p50_ms": 155.5999999982305,
+    "detect_p95_ms": 204.53219999035355
+  },
+  {
+    "scenario": "yolo_camera_loss",
+    "warmup_excluded": 1,
+    "samples": 7,
+    "detect_p50_ms": 171.88270000042394,
+    "detect_p95_ms": 202.91029999498278
+  },
+  {
+    "scenario": "yolo_far_box",
+    "warmup_excluded": 1,
+    "samples": 132,
+    "detect_p50_ms": 154.23939999891445,
+    "detect_p95_ms": 214.4164999917848
+  },
+  {
+    "scenario": "yolo_many_boxes",
+    "warmup_excluded": 1,
+    "samples": 110,
+    "detect_p50_ms": 167.6900000020396,
+    "detect_p95_ms": 232.7965000004042
+  }
+]

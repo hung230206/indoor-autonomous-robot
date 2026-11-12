@@ -1,5 +1,6 @@
 """Read-only live RGB/YOLO monitor, separate from Webots and navigation."""
 import argparse
+from collections import Counter
 import io
 import json
 import os
@@ -22,7 +23,7 @@ def main():
     tk.Label(root,text='RGB trên xe → YOLO → chân vật thể + cự ly → A* / FSM. Pose: encoder + IMU mô phỏng.' if onboard else 'Camera cố định bên ngoài xe. Khung và confidence do YOLO dự đoán.',fg='#cbd5e1',bg='#111827',font=('Segoe UI',10)).pack()
     panels=tk.Frame(root,bg='#111827'); panels.pack(pady=8)
     images=[]
-    for col,title in enumerate(('CAMERA RGB | Anh goc','YOLO | Nhan dien box')):
+    for col,title in enumerate(('CAMERA RGB | Ảnh gốc','YOLO | Vật thể phát hiện')):
         frame=tk.Frame(panels,bg='#1e293b'); frame.grid(row=0,column=col,padx=6)
         tk.Label(frame,text=title,fg='white',bg='#1e293b',font=('Segoe UI',12,'bold')).pack(pady=5)
         label=tk.Label(frame,text='Dang cho camera / khoi dong YOLO...',bg='#0b1220',fg='white',width=68,height=23)
@@ -32,12 +33,15 @@ def main():
     tk.Label(root,textvariable=camera_text,fg='#67e8f9',bg='#111827',font=('Segoe UI',11)).pack(pady=3)
     tk.Label(root,textvariable=navigation_text,fg='white',bg='#111827',font=('Segoe UI',11)).pack()
     tk.Label(root,text='Dời chấm đỏ để đổi đích; nếu đang Pause, bấm Real-time. Reload World về A / xóa SAFE_STOP.',fg='#94a3b8',bg='#111827',font=('Segoe UI',10)).pack(pady=6)
-    # Explain detector scope before the first terminal summary exists.
+    # Show the actual selected model's scope before its first packet arrives.
+    classes=['box']
+    try:classes=json.loads((args.output/'vision-info.json').read_text(encoding='utf-8'))['classes']
+    except (OSError,ValueError,KeyError):pass
     try:
         objects=json.loads((args.output/'scene-objects.json').read_text(encoding='utf-8'))
         if objects:
             known=sum(bool(o.get('map_known')) for o in objects)
-            tk.Label(root,text=f'YOLO chỉ học box; bàn/ghế/dép chưa được huấn luyện. {known}/{len(objects)} vật đã có trong bản đồ.',
+            tk.Label(root,text=f"Lớp YOLO: {', '.join(classes)} | {known}/{len(objects)} vật đã có trong bản đồ.",
                      fg='#fbbf24',bg='#111827',font=('Segoe UI',10)).pack()
     except (OSError,ValueError):
         pass
@@ -60,8 +64,11 @@ def main():
             data=json.loads((args.output/'live-camera.json').read_text(encoding='utf-8'))
             age=time.time()-(args.output/'live-camera.json').stat().st_mtime
             suffix=' | Khung cu / mo phong tam dung' if age>3 else ' | LIVE'
-            confidences=', '.join(f"{d['confidence']:.2f}" for d in data['detections']) or '-'
-            camera_text.set(f"Camera t={data['timestamp']:.2f}s | {len(data['detections'])} box | confidence: {confidences} | inference {data['latency_ms']:.0f} ms{suffix}")
+            counts=Counter(d['label'] for d in data['detections'])
+            objects=', '.join(f'{name}: {count}' for name,count in counts.items()) or '0 vật'
+            scores=[d['confidence'] for d in data['detections']]
+            confidences=f'{min(scores):.2f}–{max(scores):.2f}' if scores else '-'
+            camera_text.set(f"Camera t={data['timestamp']:.2f}s | {objects} | conf: {confidences} | inference {data['latency_ms']:.0f} ms{suffix}")
         except (OSError,ValueError,KeyError):
             pass
         try:

@@ -1,0 +1,23 @@
+{
+  "name": "unknown_slipper",
+  "description": "Unmapped low slipper: deliberate blind-spot challenge, not a safety guarantee",
+  "start": [
+    0.35,
+    1.05,
+    0
+  ],
+  "goal": [
+    2.65,
+    1.05
+  ],
+  "obstacles": [],
+  "objects": [
+    {
+      "kind": "slipper",
+      "x_m": 1.5,
+      "y_m": 1.05,
+      "yaw_rad": 1.57079632679
+    }
+  ],
+  "expected": "GOAL_REACHED"
+}

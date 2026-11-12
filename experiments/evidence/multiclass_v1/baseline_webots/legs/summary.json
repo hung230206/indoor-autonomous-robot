@@ -1,0 +1,30 @@
+{
+  "scenario": "legs",
+  "mode": "webots",
+  "expected": "GOAL_REACHED",
+  "state": "GOAL_REACHED",
+  "passed": true,
+  "time_s": 26.080000000000002,
+  "distance_m": 2.7908447712607787,
+  "plans": 1,
+  "collision": false,
+  "inflated_grid_violation": false,
+  "goal_error_m": 0.04349582026835569,
+  "max_planning_ms": 0.6997000018600374,
+  "webots_version": "R2025a",
+  "goal_m": [
+    2.65,
+    1.65
+  ],
+  "goal_source": "GOAL_MARKER",
+  "goal_changes": [
+    {
+      "time_s": 0,
+      "goal_m": [
+        2.65,
+        1.65
+      ]
+    }
+  ],
+  "goal_elapsed_s": 26.080000000000002
+}

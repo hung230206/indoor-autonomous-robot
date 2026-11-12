@@ -1,5 +1,7 @@
 # Kết quả triển khai giai đoạn 1
 
+**Model Colab ba lớp 12/11/2026:** xem [báo cáo mới](multiclass-results.md). mAP50–95 96,50% trên 180 ảnh tổng hợp; 4/4 ca vật thể đến đích sau khi tách annotation đích khỏi ảnh RGB. Các số liệu ở những mục bên dưới là lịch sử của từng phiên bản.
+
 **Mở rộng 12/11/2026:** xem [thử bàn, ghế, dép 3D](diverse-objects.md). 41 test qua, bộ 10 ca nền vẫn đúng kỳ vọng; bốn ca vật mới có hai ca thất bại, không gộp vào số thành công bên dưới.
 
 Lần kiểm chứng ban đầu: **06/11/2026**. Phạm vi là mô phỏng; chưa kiểm chứng xe thật.

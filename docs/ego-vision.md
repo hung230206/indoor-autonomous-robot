@@ -1,5 +1,7 @@
 # Camera trước gắn trên xe
 
+**Model mặc định hiện là bản ba lớp từ Colab**: box, furniture_leg, slipper; xem [kết quả ngày 12/11/2026](multiclass-results.md). `vision_ego.json` chọn bản mới, `vision_ego_box_legacy.json` giữ cấu hình box lịch sử. Annotation đích chỉ hiện ở góc nhìn 3D, được loại khỏi ảnh cảm biến; đích vẫn lấy từ lệnh người dùng.
+
 [Kết quả đã chạy, lỗi đã gặp và video](ego-results.md).
 
 Yêu cầu mới ngày 06/11/2026 thay kiến trúc camera điện thoại cố định trên cao bằng camera đi cùng xe. Đây là phiên bản mô phỏng mới; bản Word và bằng chứng `yolo_v1` trước đó mô tả **camera trên cao**, không chứng minh kết quả của phiên bản này.
@@ -28,7 +30,7 @@ Launcher tạo `worlds/runtime_*.wbt` riêng cho từng lượt và lưu bản s
 
 ```mermaid
 flowchart LR
-  RGB[Camera RGB trước trên xe] --> YOLO[YOLO11n box, checkpoint ego]
+  RGB[Camera RGB trước trên xe] --> YOLO[YOLO11n hộp, chân bàn ghế, dép]
   YOLO --> CONTACT[Mép dưới bbox, chiếu xuống sàn]
   CAL[Chiều cao, pitch và intrinsics đã hiệu chuẩn] --> CONTACT
   ENC[Hai encoder bánh và IMU hướng] --> ODOM[Odometry từ pose đầu đã biết]
@@ -56,6 +58,8 @@ Không dùng SLAM/ROS 2. Odometry vẫn trôi khi bánh trượt hoặc thông s
 
 ## Dữ liệu và model
 
+Bản hiện tại fine-tune 60 epoch trên Colab T4 từ 1.200 cảnh, 840 train / 180 val / 180 test, ba lớp. Checkpoint `models/yolo_objects_v1/best.pt` giữ nguyên từ ZIP kết quả; số đo và các lượt tích hợp nằm trong [báo cáo đa lớp](multiclass-results.md). Các số liệu 360 cảnh và lệnh dưới đây mô tả thí nghiệm box ban đầu.
+
 Tạo bộ 360 cảnh độc lập, 240 train / 60 val / 60 test, seed và SHA ảnh được lưu. Camera đi cùng xe, pose xe và hộp đổi giữa các cảnh; có ảnh âm tính và vật bị che/cắt. Nhãn sinh bằng **mask segmentation ground truth trong bước tạo dữ liệu**, bbox chỉ bao pixel vật thể nhìn thấy. Đây là khả năng [Recognition dùng để tạo ground truth](https://github.com/cyberbotics/webots/blob/R2025a/docs/reference/recognition.md); nhận diện Webots không được bật khi chạy YOLO/điều hướng.
 
 Checkpoint `models/yolo_ego/best.pt` được fine-tune riêng từ YOLO11n COCO. Không dùng mAP 94,97% của bộ ảnh trên cao để báo cho bộ này. Chỉ số thực nằm trong `models/yolo_ego/metrics.json`; giới hạn vẫn là ảnh tổng hợp cùng miền render, chưa có ảnh camera thật.
@@ -66,7 +70,7 @@ Checkpoint `models/yolo_ego/best.pt` được fine-tune riêng từ YOLO11n COCO
 .\.venv-yolo\Scripts\python.exe tools/run_webots.py --ego --scenario yolo_many_boxes --record --output experiments/runs/ego_check
 ```
 
-Đổi model trong `vision_ego.json` khi dùng checkpoint mới. Các lệnh thu thập không ghi đè bộ đã có manifest. Không dùng tập test này để chọn checkpoint tiếp theo rồi gọi đó là kiểm tra chưa thấy.
+Khi chọn checkpoint mới cần đồng bộ cả `model` và `class_names`; với checkpoint một lớp dùng cấu hình box lịch sử. `--vision-config` chọn cấu hình riêng khi chạy demo/Webots. Các lệnh thu thập không ghi đè bộ đã có manifest. Không dùng tập test này để chọn checkpoint tiếp theo rồi gọi đó là kiểm tra chưa thấy.
 
 ## Ảnh hưởng đến xe thật
 

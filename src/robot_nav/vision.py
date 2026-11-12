@@ -1,4 +1,4 @@
-"""Image-only box detector and calibrated projection; no simulator object access."""
+"""Image-only object detector and calibrated projection; no simulator object access."""
 from dataclasses import dataclass
 import json
 import math
@@ -9,6 +9,16 @@ from .models import ROOT
 
 def vision_config():
     return json.loads((ROOT/'config/vision.json').read_text(encoding='utf-8'))
+
+
+def obstacle_classes(config):
+    """Explicit obstacle allowlist; retain legacy single-class configurations."""
+    names=config.get('class_names')
+    if names is None:names=[config.get('class_name')]
+    if (not isinstance(names,list) or not names or
+            any(not isinstance(name,str) or not name.strip() for name in names) or len(set(names))!=len(names)):
+        raise ValueError('Configure nonempty, unique obstacle class names')
+    return list(names)
 
 
 def configure_camera_runtime(controller='vision_camera'):
@@ -75,6 +85,9 @@ class YoloDetector:
         if not weights.is_file():
             raise FileNotFoundError(f'Model missing: {weights}; see docs/yolo.md')
         self.model=YOLO(str(weights))
+        self.class_names=list(self.model.names.values())
+        missing=set(obstacle_classes(self.config))-set(self.class_names)
+        if missing:raise ValueError('Configured classes absent from checkpoint: '+', '.join(sorted(missing)))
 
     def detect(self,bgr):
         if len(bgr.shape)!=3 or tuple(bgr.shape)!=(self.config['camera_height'],self.config['camera_width'],3):
@@ -91,6 +104,7 @@ class VisualObstacleLayer:
     def __init__(self,grid,projection,config=None):
         self.grid,self.projection=grid,projection
         self.config=config or vision_config()
+        self.classes=set(obstacle_classes(self.config))
         self.pending={}
         self.last_frame=None
         self.accepted_rects=[]
@@ -106,7 +120,7 @@ class VisualObstacleLayer:
         self.accepted_rects=[]
         pad=self.config['bbox_padding_m']
         for detection in detections:
-            if detection.label!=self.config['class_name'] or not math.isfinite(detection.confidence) or not self.config['confidence']<=detection.confidence<=1:
+            if detection.label not in self.classes or not math.isfinite(detection.confidence) or not self.config['confidence']<=detection.confidence<=1:
                 continue
             try:
                 x0,y0,x1,y1=self.projection.bbox_to_rect(detection.xyxy)

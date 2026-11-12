@@ -11,6 +11,7 @@ from .webots_world import solid_box
 from .webots_episode import reset_episode, archive_previous_run
 from .webots_goal import SceneGoal
 from .scene_objects import prior_rectangles, object_contacts
+from .vision import obstacle_classes
 
 
 class WebotsAdapter:
@@ -98,7 +99,7 @@ def run():
     archive_previous_run(output)
     if encoders:
         from .webots_ego import EgoCamera
-        ego=EgoCamera(robot,grid,output)
+        ego=EgoCamera(robot,grid,output,goal_marker=marker.node)
         visual=ego.layer
     movie = os.environ.get("ROBOT_RECORD") == "1"
     captured = 0
@@ -159,6 +160,9 @@ def run():
             summary.update({'mode':'webots_ego_yolo','range_mapping_enabled':True,
                 'pose_source':'encoder_imu_odometry','camera_mount':'onboard_front',
                 'max_odometry_error_m':max_pose_error,
+                'detector_classes':ego.detector.class_names,'mapped_classes':obstacle_classes(ego.config),
+                'weights_sha256':ego.weights_sha256,'detector_image_size':ego.config['image_size'],
+                'goal_overlay_excluded':ego.goal_overlay_excluded,
                 'true_goal_error_m':math.dist((truth.x,truth.y),nav.goal)})
             if nav.state=='GOAL_REACHED':
                 summary['passed']=passed and summary['true_goal_error_m']<=c.goal_tolerance_m
@@ -168,7 +172,8 @@ def run():
         if scene_objects:
             summary.update({'scene_object_count':len(scene_objects),
                             'known_object_count':sum(bool(o.get('map_known')) for o in scene_objects),
-                            'detector_classes':['box'] if visual else [], 'object_contacts':contacts})
+                            'detector_classes':ego.detector.class_names if ego else (obstacle_classes(v) if visual else []),
+                            'object_contacts':contacts})
             (output/'scene-objects.json').write_text(json.dumps(scene_objects,indent=2),encoding='utf-8')
         print('[NAV] state='+nav.state+' | task_passed='+str(summary['passed'])+' | goal_m='+str(list(nav.goal)),flush=True)
         print(json.dumps(summary),flush=True)

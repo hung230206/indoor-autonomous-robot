@@ -1,0 +1,21 @@
+{
+  "classes": [
+    "box",
+    "furniture_leg",
+    "slipper"
+  ],
+  "dataset_manifest_sha256": "b42dd145bbddc21cec96974b870526c73cdba10dcb2e0f524ae1f3cefaf8d16e",
+  "epochs_requested": 60,
+  "image_size": 640,
+  "batch": 16,
+  "device": "0",
+  "base_weights": "yolo11n.pt",
+  "python": "3.13.16",
+  "torch": "2.14.1+cu130",
+  "ultralytics": "8.4.202",
+  "cuda": "13.0",
+  "gpu": "Tesla T4",
+  "checkpoint_selection": "best validation fitness; test set not used for checkpoint selection",
+  "scope": "Synthetic onboard RGB; not real-world accuracy or navigation success",
+  "dataset_zip_sha256": "ed4877d4ca019968d0f09a77e531aef36c72bf91ccd8ffbcd1717004592418f5"
+}

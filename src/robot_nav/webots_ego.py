@@ -13,13 +13,24 @@ from .webots_vision import camera_bgr, save_image, publish_live_frame
 
 
 class EgoCamera:
-    def __init__(self,robot,grid,output):
+    def __init__(self,robot,grid,output,goal_marker=None):
         import torch
         torch.set_num_threads(4)
         self.robot,self.output=robot,output
         self.config=ego_config()
         self.camera=robot.getDevice('front_camera')
         self.camera.enable(round(robot.getBasicTimeStep()))
+        self.goal_overlay_excluded=False
+        if goal_marker is not None and self.config.get('exclude_goal_overlay',False):
+            # This node is a UI command annotation, never a physical obstacle.
+            # Only camera rendering is changed; its 3D display/goal command stay.
+            children=robot.getSelf().getField('children')
+            cameras=[children.getMFNode(i) for i in range(children.getCount())
+                     if children.getMFNode(i).getTypeName()=='Camera' and
+                     children.getMFNode(i).getField('name').getSFString()=='front_camera']
+            if len(cameras)!=1:raise RuntimeError('Expected exactly one onboard front_camera node')
+            goal_marker.setVisibility(cameras[0],False)
+            self.goal_overlay_excluded=True
         # Recognition is never enabled for inference or navigation.
         self.detector=YoloDetector(ROOT/self.config['model'],self.config)
         self.projection=OnboardProjection(self.config)
@@ -28,8 +39,10 @@ class EgoCamera:
         self.packets=0
         self.output.mkdir(parents=True,exist_ok=True)
         self.log=(output/'detections.jsonl').open('w',encoding='utf-8')
+        self.weights_sha256=hashlib.sha256((ROOT/self.config['model']).read_bytes()).hexdigest()
         (output/'camera-calibration.json').write_text(json.dumps({'mode':'onboard_rgb','pose_source':'encoder_imu_odometry',
-            'weights_sha256':hashlib.sha256((ROOT/self.config['model']).read_bytes()).hexdigest(),**self.config},indent=2),encoding='utf-8')
+            'weights_sha256':self.weights_sha256,'goal_overlay_excluded':self.goal_overlay_excluded,
+            **self.config},indent=2),encoding='utf-8')
 
     def update(self,pose,now):
         if self.index%self.config['sample_steps']==0 and now<float(os.environ.get('ROBOT_EGO_DROP_AFTER_S','inf')):
@@ -39,7 +52,8 @@ class EgoCamera:
             self.layer.update(detections,now,now)
             self.packets+=1
             packet={'timestamp':now,'detections':[asdict(d) for d in detections],
-                    'latency_ms':latency,'mode':'onboard_rgb','pose_source':'encoder_imu_odometry',
+                    'latency_ms':latency,'detector_classes':self.detector.class_names,
+                    'mode':'onboard_rgb','pose_source':'encoder_imu_odometry',
                     'capture_pose':asdict(pose),'mapped_rects':self.layer.accepted_rects}
             self.log.write(json.dumps(packet)+'\n'); self.log.flush()
             annotated=result.plot()

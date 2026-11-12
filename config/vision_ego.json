@@ -1,8 +1,9 @@
 {
-  "model": "models/yolo_ego/best.pt",
-  "class_name": "box",
+  "model": "models/yolo_objects_v1/best.pt",
+  "class_names": ["box", "furniture_leg", "slipper"],
   "confidence": 0.5,
-  "image_size": 320,
+  "image_size": 640,
+  "exclude_goal_overlay": true,
   "camera_width": 640,
   "camera_height": 480,
   "camera_height_m": 0.32,

@@ -1,10 +1,10 @@
 # Robot tự hành trong nhà — giai đoạn 1
 
-**Train bản đa lớp trên Colab:** [mở notebook GPU](https://colab.research.google.com/github/hung230206/indoor-autonomous-robot/blob/main/notebooks/train_robot_objects.ipynb), chọn GPU rồi chạy các ô. Đã chuẩn bị 1.200 ảnh cho box/chân bàn-ghế/dép, ZIP tự tải từ repo. [Hướng dẫn và giới hạn](docs/colab-training.md). Đây là bộ train đã chuẩn bị, chưa có model GPU mới hoặc kết quả test mới; demo vẫn dùng model box cũ.
+**12/11/2026 — đã tích hợp model Colab ba lớp:** hộp, chân bàn/ghế, dép. Test 180 ảnh Webots đạt mAP50–95 96,50%; bốn ca vật thể đến đích sau khi tách dấu đích giao diện khỏi ảnh cảm biến. Mở `demo_vat_the_da_dang.cmd`. [Kết quả và giới hạn](docs/multiclass-results.md), [notebook train lại trên GPU](https://colab.research.google.com/github/hung230206/indoor-autonomous-robot/blob/main/notebooks/train_robot_objects.ipynb).
 
-**12/11/2026 — thêm bàn, ghế và dép 3D:** mở `demo_vat_the_da_dang.cmd` để xem phòng 5 vật và camera trước. [Kết quả bốn ca đa dạng vật thể](docs/diverse-objects.md): 2 đến đích, 2 thất bại, trong đó có va chạm chân ghế. Demo phòng dùng bản đồ biết trước; YOLO vẫn chỉ học lớp box.
+**Lịch sử thử vật thể bằng model box:** [bốn ca đầu](docs/diverse-objects.md) có 2 đến đích, 2 thất bại, trong đó có va chạm chân ghế. Giữ nguyên bằng chứng này; demo phòng 5 vật vẫn có prior map, còn ba ca unknown trong báo cáo mới không có prior map vật thể.
 
-[Kết quả camera trên xe](docs/ego-results.md): 29 test qua, 4 ca ego đúng kỳ vọng (3 đến đích, 1 SAFE_STOP); kèm video góc nhìn trước có YOLO.
+[Kết quả checkpoint box trên xe ban đầu](docs/ego-results.md): 29 test qua, 4 ca ego đúng kỳ vọng (3 đến đích, 1 SAFE_STOP); kèm video góc nhìn trước có YOLO.
 
 **Yêu cầu mới: camera trước trên xe.** Chạy `.\.venv-yolo\Scripts\python.exe tools/run_live_demo.py` để mở Webots 5 hộp và màn hình RGB/YOLO trực tiếp. Xem [kiến trúc camera trên xe](docs/ego-vision.md). Chế độ mới dùng odometry encoder + IMU mô phỏng, phép chiếu chân vật thể và cảm biến cự ly; phần cứng thực chưa có encoder/IMU. Chạy lại bằng cách mở `demo_camera_tren_xe.cmd`. Báo cáo Word và `yolo_v1` bên dưới là kết quả lịch sử của camera trên cao.
 

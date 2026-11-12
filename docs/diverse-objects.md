@@ -1,5 +1,7 @@
 # Thử bàn, ghế và dép trong Webots
 
+**Báo cáo lượt đầu dùng model box.** Phiên bản ba lớp sau khi train Colab có [kết quả riêng](multiclass-results.md), giữ nguyên các thất bại lịch sử bên dưới. Shortcut hiện chọn model ba lớp.
+
 Ngày kiểm chứng: 12/11/2026. Chỉ là mô phỏng, chưa có xe thật.
 
 Chạy `demo_vat_the_da_dang.cmd` để mở phòng có **1 bàn, 2 ghế, 2 dép**, kèm màn hình RGB/YOLO từ camera trước trên xe. Cảnh này đánh dấu cả 5 vật là **đã có trong bản đồ**. Robot lập đường vòng qua dép bằng bản đồ đó; không coi đây là bằng chứng detector đã học dép.

@@ -1,0 +1,6 @@
+{
+  "observed": "No summary produced; run_webots raised RuntimeError after the 180-second timeout",
+  "diagnosis": "Source inspection found getFromDevice expects integer device tag; the first implementation passed a Camera object. Fixed by selecting the onboard Camera node from robot children.",
+  "controller_stderr": "Webots log is empty, so no controller traceback is claimed",
+  "passed": false
+}

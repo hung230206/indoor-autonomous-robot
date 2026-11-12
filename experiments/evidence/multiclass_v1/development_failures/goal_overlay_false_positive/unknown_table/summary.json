@@ -1,0 +1,52 @@
+{
+  "scenario": "unknown_table",
+  "mode": "webots_ego_yolo",
+  "expected": "GOAL_REACHED",
+  "state": "NO_PATH",
+  "passed": false,
+  "time_s": 21.312,
+  "distance_m": 1.9303178791891713,
+  "plans": 3,
+  "collision": false,
+  "inflated_grid_violation": false,
+  "goal_error_m": 0.9980179135781354,
+  "max_planning_ms": 4.041799998958595,
+  "webots_version": "R2025a",
+  "vision_packets": 84,
+  "visual_occupied_cells": 29,
+  "range_mapping_enabled": true,
+  "pose_source": "encoder_imu_odometry",
+  "camera_mount": "onboard_front",
+  "max_odometry_error_m": 0.0031795024307787203,
+  "detector_classes": [
+    "box",
+    "furniture_leg",
+    "slipper"
+  ],
+  "mapped_classes": [
+    "box",
+    "furniture_leg",
+    "slipper"
+  ],
+  "weights_sha256": "c5ec4cb950a6affcaa2c2bbe8b4c97eabcc4dfe42d18ccb8e6e76b39fd101d8d",
+  "detector_image_size": 640,
+  "true_goal_error_m": 0.9992311785180996,
+  "goal_m": [
+    2.65,
+    1.05
+  ],
+  "goal_source": "GOAL_MARKER",
+  "goal_changes": [
+    {
+      "time_s": 0,
+      "goal_m": [
+        2.65,
+        1.05
+      ]
+    }
+  ],
+  "goal_elapsed_s": 21.312,
+  "scene_object_count": 1,
+  "known_object_count": 0,
+  "object_contacts": []
+}

@@ -1,0 +1,8 @@
+path: C:\Users\hungt\Documents\ChatGPT\Niên luận cơ sở\experiments\runs\colab_portability_check\dataset
+train: images/train
+val: images/val
+test: images/test
+names:
+  0: box
+  1: furniture_leg
+  2: slipper

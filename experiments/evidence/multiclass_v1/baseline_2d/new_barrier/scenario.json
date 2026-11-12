@@ -1,0 +1,27 @@
+{
+  "name": "new_barrier",
+  "description": "Unknown longer barrier, discovered by local range rays",
+  "start": [
+    0.35,
+    1.05,
+    0
+  ],
+  "goal": [
+    2.65,
+    1.05
+  ],
+  "obstacles": [],
+  "spawn": [
+    {
+      "at_s": 2.0,
+      "rect": [
+        1.3,
+        0.65,
+        1.5,
+        1.35
+      ]
+    }
+  ],
+  "expected": "GOAL_REACHED",
+  "require_replan": true
+}

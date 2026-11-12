@@ -1,0 +1,52 @@
+{
+  "name": "objects_room",
+  "description": "Known furniture legs and slippers in a furnished 3D room; YOLO remains box-only",
+  "start": [
+    0.35,
+    0.45,
+    0
+  ],
+  "goal": [
+    2.65,
+    0.45
+  ],
+  "obstacles": [],
+  "objects": [
+    {
+      "kind": "table",
+      "x_m": 1.15,
+      "y_m": 1.45,
+      "yaw_rad": 0.15,
+      "map_known": true
+    },
+    {
+      "kind": "chair",
+      "x_m": 2.25,
+      "y_m": 1.4,
+      "yaw_rad": -0.25,
+      "map_known": true
+    },
+    {
+      "kind": "chair",
+      "x_m": 0.45,
+      "y_m": 1.38,
+      "yaw_rad": 0.1,
+      "map_known": true
+    },
+    {
+      "kind": "slipper",
+      "x_m": 1.3,
+      "y_m": 0.45,
+      "yaw_rad": 0.3,
+      "map_known": true
+    },
+    {
+      "kind": "slipper",
+      "x_m": 1.68,
+      "y_m": 0.38,
+      "yaw_rad": -0.15,
+      "map_known": true
+    }
+  ],
+  "expected": "GOAL_REACHED"
+}
